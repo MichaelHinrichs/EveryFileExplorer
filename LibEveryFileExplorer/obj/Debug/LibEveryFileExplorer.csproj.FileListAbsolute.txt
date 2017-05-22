@@ -1,0 +1,10 @@
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\bin\Debug\LibEveryFileExplorer.dll
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\bin\Debug\LibEveryFileExplorer.pdb
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csprojResolveAssemblyReference.cache
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.Resource.resources
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.FileBrowser.resources
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.GameDataSectionViewer.resources
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.GameDataSectionViewerBase.resources
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csproj.GenerateResource.Cache
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.dll
+C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.pdb

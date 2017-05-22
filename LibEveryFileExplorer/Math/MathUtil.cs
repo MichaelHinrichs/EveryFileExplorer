@@ -38,5 +38,5 @@ namespace LibEveryFileExplorer.Math
 		{
 			return (int)System.Math.Ceiling(System.Math.Log(Value, 2));
 		}
-	}
+    }
 }

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files;
-using System.Runtime.InteropServices;
 
 namespace LibEveryFileExplorer
 {
-	public class EveryFileExplorerUtil
+    public class EveryFileExplorerUtil
 	{
 		public static dynamic Program = ((dynamic)new LibEveryFileExplorer.StaticDynamic(System.Reflection.Assembly.GetEntryAssembly().GetType("EveryFileExplorer.Program")));
 

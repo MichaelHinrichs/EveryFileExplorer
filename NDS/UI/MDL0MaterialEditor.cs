@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using NDS.NitroSystem.G3D;
 using LibEveryFileExplorer.GFX;
 
 namespace NDS.UI
 {
-	public partial class MDL0MaterialEditor : UserControl
+    public partial class MDL0MaterialEditor : UserControl
 	{
 		MDL0.Model.MaterialSet.Material Material;
 		public MDL0MaterialEditor(MDL0.Model.MaterialSet.Material Material)

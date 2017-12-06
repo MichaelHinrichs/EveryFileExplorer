@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
@@ -11,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MarioKart.MK7
 {
-	public class CDAB : FileFormat<CDAB.CDABIdentifier>, IViewable
+    public class CDAB : FileFormat<CDAB.CDABIdentifier>, IViewable
 	{
 		public CDAB(byte[] Data)
 		{

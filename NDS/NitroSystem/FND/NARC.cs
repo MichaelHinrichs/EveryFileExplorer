@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -12,7 +11,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.FND
 {
-	public class NARC : FileFormat<NARC.NARCIdentifier>, IEmptyCreatable, IViewable, IWriteable
+    public class NARC : FileFormat<NARC.NARCIdentifier>, IEmptyCreatable, IViewable, IWriteable
 	{
 		public NARC()
 		{

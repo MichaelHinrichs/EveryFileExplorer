@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using LibEveryFileExplorer.Files;
@@ -14,7 +13,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.Nitro
 {
-	public class NDS : FileFormat<NDS.NDSIdentifier>, IViewable, IWriteable
+    public class NDS : FileFormat<NDS.NDSIdentifier>, IViewable, IWriteable
 	{
 		public NDS() { }
 		public NDS(byte[] data)

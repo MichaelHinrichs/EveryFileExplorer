@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using LibEveryFileExplorer.ComponentModel;
 
 namespace LibEveryFileExplorer.Collections
 {
-	[TypeConverter(typeof(ValueTypeTypeConverter))]
+    [TypeConverter(typeof(ValueTypeTypeConverter))]
 	public struct Vector4
 	{
 		public Vector4(float Value)

@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using _3DS.NintendoWare.SND;
 
 namespace _3DS.UI
 {
-	public partial class CSTMViewer : Form
+    public partial class CSTMViewer : Form
 	{
 		CSTM Stream;
 

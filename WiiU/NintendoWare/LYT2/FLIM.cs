@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
@@ -13,7 +10,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace WiiU.NintendoWare.LYT2
 {
-	public class FLIM : FileFormat<FLIM.FLIMIdentifier>, IConvertable, IViewable
+    public class FLIM : FileFormat<FLIM.FLIMIdentifier>, IConvertable, IViewable
 	{
 		public FLIM(byte[] Data)
 		{

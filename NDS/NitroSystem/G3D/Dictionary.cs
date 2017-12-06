@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using System.Runtime.InteropServices;
 using DictName = System.String;
 using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class Dictionary<T> where T : DictionaryData, new()
+    public class Dictionary<T> where T : DictionaryData, new()
 	{
 		public Dictionary(EndianBinaryReader er)
 		{

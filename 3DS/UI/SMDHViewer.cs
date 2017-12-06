@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
@@ -12,7 +7,7 @@ using LibEveryFileExplorer.GFX;
 
 namespace _3DS.UI
 {
-	public partial class SMDHViewer : Form
+    public partial class SMDHViewer : Form
 	{
 		private string[] Languages =
 		{

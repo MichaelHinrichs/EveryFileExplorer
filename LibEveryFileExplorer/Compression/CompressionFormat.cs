@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer.Compression
 {
-	public interface CompressionFormatBase
+    public interface CompressionFormatBase
 	{
 		byte[] Decompress(byte[] Data);
 	}

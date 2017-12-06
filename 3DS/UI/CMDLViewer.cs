@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Tao.OpenGl;
@@ -16,7 +13,7 @@ using System.IO;
 
 namespace _3DS.UI
 {
-	public partial class CMDLViewer : UserControl
+    public partial class CMDLViewer : UserControl
 	{
 		CGFX Resource;
 		CMDL Model;

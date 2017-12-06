@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Collections;
+﻿using LibEveryFileExplorer.Collections;
 using System.Drawing;
 
 namespace LibEveryFileExplorer._3D
 {
-	public class Polygon
+    public class Polygon
 	{
 		public PolygonType PolyType;
 		public Vector3[] Normals;

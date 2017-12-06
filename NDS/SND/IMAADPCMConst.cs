@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace NDS.SND
+﻿namespace NDS.SND
 {
-	public class IMAADPCMConst
+    public class IMAADPCMConst
 	{
 		public static readonly int[] IndexTable = 
 		{ 

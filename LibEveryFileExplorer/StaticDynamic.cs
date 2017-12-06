@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Dynamic;
 using System.Reflection;
 
 namespace LibEveryFileExplorer
 {
-	public class StaticDynamic : DynamicObject
+    public class StaticDynamic : DynamicObject
 	{
 		private Type _type;
 		public StaticDynamic(Type type) { _type = type; }

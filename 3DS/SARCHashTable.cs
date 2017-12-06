@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using LibEveryFileExplorer.Files;
@@ -11,7 +10,7 @@ using LibEveryFileExplorer.IO;
 
 namespace _3DS
 {
-	public class SARCHashTable : FileFormat<SARCHashTable.SAHTIdentifier>, IEmptyCreatable, IViewable, IWriteable
+    public class SARCHashTable : FileFormat<SARCHashTable.SAHTIdentifier>, IEmptyCreatable, IViewable, IWriteable
 	{
 		public static SARCHashTable DefaultHashTable;
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -12,7 +10,7 @@ using LibEveryFileExplorer.IO;
 
 namespace GCNWii.JSystem
 {
-	public class RARC : FileFormat<RARC.RARCIdentifier>, IViewable
+    public class RARC : FileFormat<RARC.RARCIdentifier>, IViewable
 	{
 		public RARC(byte[] Data)
 		{

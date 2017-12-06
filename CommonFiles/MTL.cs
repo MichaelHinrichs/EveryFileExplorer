@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -9,7 +8,7 @@ using System.Globalization;
 
 namespace CommonFiles
 {
-	public class MTL : FileFormat<MTL.MTLIdentifier>, IWriteable
+    public class MTL : FileFormat<MTL.MTLIdentifier>, IWriteable
 	{
 		public MTL()
 		{

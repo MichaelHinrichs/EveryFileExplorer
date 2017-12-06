@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.IO;
 using System.Drawing;
@@ -10,11 +8,10 @@ using LibEveryFileExplorer.Collections;
 using LibEveryFileExplorer.IO;
 using System.Drawing.Imaging;
 using LibEveryFileExplorer.GFX;
-using CommonFiles;
 
 namespace MarioKart.MK64
 {
-	public class MK64 : FileFormat<MK64.MK64Identifier>, IViewable
+    public class MK64 : FileFormat<MK64.MK64Identifier>, IViewable
 	{
 		private static readonly int TrackHeaderAddress = 0x122390;
 		private static readonly int TexBaseAddress = 0x641F70;

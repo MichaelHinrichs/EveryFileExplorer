@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using _3DS.NintendoWare.GFX;
 using System.Drawing.Imaging;
@@ -13,7 +8,7 @@ using _3DS.GPU;
 
 namespace _3DS.UI
 {
-	public partial class TXOBViewer : UserControl
+    public partial class TXOBViewer : UserControl
 	{
 		public ImageTextureCtr Texture;
 		public TXOBViewer(ImageTextureCtr Texture)

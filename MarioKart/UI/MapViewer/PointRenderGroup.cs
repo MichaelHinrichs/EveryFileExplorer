@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 using LibEveryFileExplorer.GameData;
 using System.Drawing;
@@ -10,7 +8,7 @@ using LibEveryFileExplorer.Collections;
 
 namespace MarioKart.UI.MapViewer
 {
-	public class PointRenderGroup<T> : RenderGroup where T : GameDataSectionEntry
+    public class PointRenderGroup<T> : RenderGroup where T : GameDataSectionEntry
 	{
 		private MemberInfo PositionMember;
 		private GameDataSection<T> GameDataSection;

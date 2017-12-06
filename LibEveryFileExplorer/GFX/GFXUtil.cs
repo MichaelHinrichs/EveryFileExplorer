@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace LibEveryFileExplorer.GFX
 {
-	public class GFXUtil
+    public class GFXUtil
 	{
 		public static Bitmap Resize(Bitmap Original, int Width, int Height)
 		{

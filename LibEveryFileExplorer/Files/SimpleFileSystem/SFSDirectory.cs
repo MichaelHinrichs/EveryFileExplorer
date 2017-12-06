@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
 namespace LibEveryFileExplorer.Files.SimpleFileSystem
 {
-	public class SFSDirectory
+    public class SFSDirectory
 	{
 		public SFSDirectory(string Name, bool Root)
 		{

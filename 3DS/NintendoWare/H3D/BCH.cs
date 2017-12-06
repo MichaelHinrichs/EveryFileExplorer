@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.IO;
@@ -11,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _3DS.NintendoWare.H3D
 {
-	public class BCH : FileFormat<BCH.BCHIdentifier>, IViewable
+    public class BCH : FileFormat<BCH.BCHIdentifier>, IViewable
 	{
 		public BCH(byte[] Data)
 		{

@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using EveryFileExplorer.Plugins;
 using EveryFileExplorer.Files;
 using System.Reflection;
 using System.IO;
 using System.Threading;
-using System.Runtime.InteropServices;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.Script;
 
 namespace EveryFileExplorer
 {
-	static class Program
+    static class Program
 	{
 		private static Mutex mutex = new Mutex(true, "{069E262C-2440-4AFA-87AA-5CDE18753101}");
 

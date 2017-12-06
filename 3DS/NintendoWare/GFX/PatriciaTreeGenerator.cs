@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace _3DS.NintendoWare.GFX
 {
-	internal class PatriciaTreeGenerator
+    internal class PatriciaTreeGenerator
 	{
 		List<PatTreeNode> Nodes = new List<PatTreeNode>();
 

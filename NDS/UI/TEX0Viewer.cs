@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using NDS.NitroSystem.G3D;
 using System.Drawing.Imaging;
 
 namespace NDS.UI
 {
-	public partial class TEX0Viewer : UserControl
+    public partial class TEX0Viewer : UserControl
 	{
 		TEX0 Textures;
 		public TEX0Viewer(TEX0 Textures)

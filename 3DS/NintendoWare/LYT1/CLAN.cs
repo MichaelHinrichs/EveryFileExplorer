@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Files;
+﻿using LibEveryFileExplorer.Files;
 using System.Drawing;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class CLAN : FileFormat<CLAN.CLANIdentifier>
+    public class CLAN : FileFormat<CLAN.CLANIdentifier>
 	{
 		public class CLANIdentifier : FileFormatIdentifier
 		{

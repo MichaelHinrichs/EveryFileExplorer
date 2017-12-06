@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
 using LibEveryFileExplorer;
 using System.ComponentModel;
-using LibEveryFileExplorer.ComponentModel;
-using LibEveryFileExplorer.Math;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class AREA : GameDataSection<AREA.AREAEntry>
+    public class AREA : GameDataSection<AREA.AREAEntry>
 	{
 		public AREA() { Signature = "AREA"; }
 		public AREA(EndianBinaryReaderEx er)

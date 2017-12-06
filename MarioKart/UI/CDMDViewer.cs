@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files;
 using Tao.OpenGl;
-using System.Drawing.Imaging;
 using LibEveryFileExplorer._3D;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.UI;
 using LibEveryFileExplorer.GameData;
 using MarioKart.MK7;
-using LibEveryFileExplorer.Collections;
 using MarioKart.MK7.KMP;
 
 namespace MarioKart.UI
 {
-	public partial class CDMDViewer : Form, IUseOtherFiles
+    public partial class CDMDViewer : Form, IUseOtherFiles
 	{
 		List<IGameDataSectionViewer> SectionViewers = new List<IGameDataSectionViewer>();
 

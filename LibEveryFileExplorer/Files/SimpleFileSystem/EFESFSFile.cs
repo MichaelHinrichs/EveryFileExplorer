@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEveryFileExplorer.Files.SimpleFileSystem
+﻿namespace LibEveryFileExplorer.Files.SimpleFileSystem
 {
-	public class EFESFSFile : EFEFile
+    public class EFESFSFile : EFEFile
 	{
 		public EFESFSFile(SFSFile File)
 		{

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Drawing;
+﻿using System.Drawing;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS
 {
-	public static class Extensions
+    public static class Extensions
 	{
 		public static Color ReadColor8(this EndianBinaryReader er)
 		{

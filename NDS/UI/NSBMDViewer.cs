@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Tao.OpenGl;
-using LibEveryFileExplorer._3D;
 using System.Drawing.Imaging;
 using NDS.NitroSystem.G3D;
 using NDS.GPU;
 using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer;
-using System.Runtime.InteropServices;
 
 namespace NDS.UI
 {
-	public partial class NSBMDViewer : Form, IUseOtherFiles
+    public partial class NSBMDViewer : Form, IUseOtherFiles
 	{
 		ImageList ImageL;
 		MDL0Viewer ModViewer = null;

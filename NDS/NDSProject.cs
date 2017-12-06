@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Projects;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using NDS.UI;
 using System.IO;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 
 namespace NDS
 {
-	public class NDSProject : Project<NDSProject.NDSProjectIdentifier, NDSProject.NDSProjectFile>
+    public class NDSProject : Project<NDSProject.NDSProjectIdentifier, NDSProject.NDSProjectFile>
 	{
 		public NDSProject() { }
 

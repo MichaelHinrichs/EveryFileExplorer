@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEveryFileExplorer.Files
+﻿namespace LibEveryFileExplorer.Files
 {
-	public interface IEmptyCreatable
+    public interface IEmptyCreatable
 	{
 	}
 }

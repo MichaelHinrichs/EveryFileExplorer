@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace NDS.Nitro
+﻿namespace NDS.Nitro
 {
-	public class CRC16
+    public class CRC16
 	{
 		private readonly static ushort[] CRC16Table = 
 		{

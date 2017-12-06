@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using LibEveryFileExplorer.Files;
-using System.Xml.Schema;
 using System.Xml;
 using System.IO;
 
 namespace LibEveryFileExplorer.Projects
 {
-	public interface ProjectBase
+    public interface ProjectBase
 	{
 		bool CreateNew();
 		void Save();

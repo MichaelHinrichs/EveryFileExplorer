@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using EveryFileExplorer.Plugins;
 using System.Windows.Forms;
@@ -9,7 +8,7 @@ using LibEveryFileExplorer;
 
 namespace EveryFileExplorer.Files
 {
-	public class FileManager
+    public class FileManager
 	{
 		private List<ViewableFile> ViewedFiles = new List<ViewableFile>();
 

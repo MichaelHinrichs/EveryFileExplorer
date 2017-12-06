@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Compression;
-using System.Runtime.InteropServices;
 
 namespace CommonCompressors
 {
-	public unsafe class LZ11 : CompressionFormat<LZ11.LZ11Identifier>
+    public unsafe class LZ11 : CompressionFormat<LZ11.LZ11Identifier>
 	{
 		public override byte[] Decompress(byte[] Data)
 		{

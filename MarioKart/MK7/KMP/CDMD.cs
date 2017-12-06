@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
-using LibEveryFileExplorer.GameData;
 using System.IO;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
 using MarioKart.UI;
-using LibEveryFileExplorer;
 using LibEveryFileExplorer.Math;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MK7.KMP
 {
-	public class CDMD : FileFormat<CDMD.CDMDIdentifier>, IConvertable, IViewable
+    public class CDMD : FileFormat<CDMD.CDMDIdentifier>, IConvertable, IViewable
 	{
 		public CDMD(byte[] Data)
 		{

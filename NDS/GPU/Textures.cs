@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using LibEveryFileExplorer.GFX;
@@ -10,7 +6,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.GPU
 {
-	public class Textures
+    public class Textures
 	{
 		public enum ImageFormat : uint
 		{

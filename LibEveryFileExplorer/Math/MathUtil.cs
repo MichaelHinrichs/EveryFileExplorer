@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEveryFileExplorer.Math
+﻿namespace LibEveryFileExplorer.Math
 {
-	public class MathUtil
+    public class MathUtil
 	{
 		public static int Clamp(int value, int min, int max)
 		{

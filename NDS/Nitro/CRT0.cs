@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.IO;
-using System.IO;
 
 namespace NDS.Nitro
 {
-	public class CRT0
+    public class CRT0
 	{
 		public class ModuleParams
 		{

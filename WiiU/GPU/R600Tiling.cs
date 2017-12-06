@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WiiU.GPU
+﻿namespace WiiU.GPU
 {
-	public class R600Tiling
+    public class R600Tiling
 	{
 		private static readonly uint[] bankSwapOrder = { 0, 1, 3, 2, 6, 7, 5, 4 };
 

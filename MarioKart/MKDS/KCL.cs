@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
@@ -12,7 +10,7 @@ using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MKDS
 {
-	public class KCL : FileFormat<KCL.KCLIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
+    public class KCL : FileFormat<KCL.KCLIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
 	{
 		public KCL()
 		{

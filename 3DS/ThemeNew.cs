@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.IO.Serialization;
@@ -11,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _3DS
 {
-	public class ThemeNew : FileFormat<ThemeNew.ThemeIdentifier>//, IViewable
+    public class ThemeNew : FileFormat<ThemeNew.ThemeIdentifier>//, IViewable
 	{
 		public ThemeNew(byte[] Data)
 		{

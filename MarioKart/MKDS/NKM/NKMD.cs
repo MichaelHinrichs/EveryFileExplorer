@@ -1,26 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
-using LibEveryFileExplorer.GameData;
 using System.Windows.Forms;
-using LibEveryFileExplorer.Collections;
-using Tao.OpenGl;
 using MarioKart.UI;
-using LibEveryFileExplorer.GFX;
-using LibEveryFileExplorer.Math;
-using System.ComponentModel;
-using LibEveryFileExplorer.ComponentModel;
-using LibEveryFileExplorer;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class NKMD : FileFormat<NKMD.NKMDIdentifier>, IViewable, IWriteable
+    public class NKMD : FileFormat<NKMD.NKMDIdentifier>, IViewable, IWriteable
 	{
 		public NKMD()
 		{

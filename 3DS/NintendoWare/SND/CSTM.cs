@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -12,7 +11,7 @@ using _3DS.UI;
 
 namespace _3DS.NintendoWare.SND
 {
-	public class CSTM : FileFormat<CSTM.CSTMIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
+    public class CSTM : FileFormat<CSTM.CSTMIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
 	{
 		public CSTM()
 		{

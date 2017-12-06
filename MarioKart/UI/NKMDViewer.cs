@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files;
 using Tao.OpenGl;
@@ -19,7 +16,7 @@ using LibEveryFileExplorer.Collections;
 
 namespace MarioKart.UI
 {
-	public partial class NKMDViewer : Form, IUseOtherFiles
+    public partial class NKMDViewer : Form, IUseOtherFiles
 	{
 		List<IGameDataSectionViewer> SectionViewers = new List<IGameDataSectionViewer>();
 

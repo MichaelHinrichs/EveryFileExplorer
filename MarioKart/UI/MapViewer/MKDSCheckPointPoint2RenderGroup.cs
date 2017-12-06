@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MarioKart.MKDS.NKM;
+﻿using MarioKart.MKDS.NKM;
 using LibEveryFileExplorer.Collections;
 using System.Drawing;
 using Tao.OpenGl;
 
 namespace MarioKart.UI.MapViewer
 {
-	public class MKDSCheckPointPoint2RenderGroup : RenderGroup
+    public class MKDSCheckPointPoint2RenderGroup : RenderGroup
 	{
 		CPOI Checkpoints;
 

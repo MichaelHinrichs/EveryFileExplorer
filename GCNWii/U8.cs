@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.IO.Serialization;
 using LibEveryFileExplorer.IO;
@@ -13,7 +12,7 @@ using GCNWii.UI;
 
 namespace GCNWii
 {
-	public class U8 : FileFormat<U8.U8Identifier>, IViewable
+    public class U8 : FileFormat<U8.U8Identifier>, IViewable
 	{
 		public U8(byte[] Data)
 		{

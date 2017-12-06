@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace LibEveryFileExplorer
 {
-	public class Win32Util
+    public class Win32Util
 	{
 		public const int HWND_BROADCAST = 0xffff;
 		public const int WM_COPYDATA = 0x004A;

@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEveryFileExplorer.GameData;
 using LibEveryFileExplorer.Collections;
 using Tao.OpenGl;
-using System.Reflection;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Math;
 
 namespace MarioKart.UI.MapViewer
 {
-	public partial class MapViewer : UserControl
+    public partial class MapViewer : UserControl
 	{
 		public List<RenderGroup> Groups { get; private set; }
 

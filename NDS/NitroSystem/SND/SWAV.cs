@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 using LibEveryFileExplorer.Files;
 
 namespace NDS.NitroSystem.SND
 {
-	public class SWAV : FileFormat<SWAR.SWARIdentifier>//, IViewable
+    public class SWAV : FileFormat<SWAR.SWARIdentifier>//, IViewable
 	{
 		public SWAVHeader Header;
 		public class SWAVHeader

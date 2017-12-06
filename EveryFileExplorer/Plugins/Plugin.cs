@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
-using LibEveryFileExplorer.Files;
-using LibEveryFileExplorer.Compression;
 using LibEveryFileExplorer;
 
 namespace EveryFileExplorer.Plugins
 {
-	public class Plugin
+    public class Plugin
 	{
 		public EFEPlugin Initializer;
 

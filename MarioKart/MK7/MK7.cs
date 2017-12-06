@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MarioKart.MK7
 {
-	public class MK7
+    public class MK7
 	{
 		public static readonly String[] ObjectNames = new String[]
 		{

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Tao.OpenGl;
 using System.Drawing;
@@ -9,7 +7,7 @@ using _3DS.GPU.PICA;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CGFXShader
+    public class CGFXShader
 	{
 		public int[] Textures;
 		private CMDL.MTOB Material;

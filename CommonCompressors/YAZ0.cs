@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Compression;
 using System.Runtime.InteropServices;
 
 namespace CommonCompressors
 {
-	public unsafe class YAZ0 : CompressionFormat<YAZ0.YAZ0Identifier>, ICompressable
+    public unsafe class YAZ0 : CompressionFormat<YAZ0.YAZ0Identifier>, ICompressable
 	{
 		//Compression could be optimized by using look-ahead.
 		public unsafe byte[] Compress(byte[] Data)

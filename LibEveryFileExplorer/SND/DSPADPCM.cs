@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Math;
 
 namespace LibEveryFileExplorer.SND
 {
-	public class DSPADPCM
+    public class DSPADPCM
 	{
 		Int16[] Table;
 		double Last1 = 0;

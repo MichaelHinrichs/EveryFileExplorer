@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MarioKart.MKDS.NKM;
+﻿using MarioKart.MKDS.NKM;
 using System.Drawing;
 using Tao.OpenGl;
 
 namespace MarioKart.UI.MapViewer
 {
-	public class MKDSMiniGameEnemyPointLineRenderGroup : RenderGroup
+    public class MKDSMiniGameEnemyPointLineRenderGroup : RenderGroup
 	{
 		MEPO MiniGameEnemyPoints;
 		MEPA MiniGameEnemyPointPaths;

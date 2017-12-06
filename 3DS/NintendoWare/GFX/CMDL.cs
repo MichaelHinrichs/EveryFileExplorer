@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using System.Drawing;
 using Tao.OpenGl;
 using LibEveryFileExplorer.IO;
@@ -13,7 +11,7 @@ using CommonFiles;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CMDL
+    public class CMDL
 	{
 		public CMDL(String Name)
 		{

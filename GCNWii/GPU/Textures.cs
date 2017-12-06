@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.GFX;
 
 namespace GCNWii.GPU
 {
-	public class Textures
+    public class Textures
 	{
 		public enum ImageFormat : uint
 		{

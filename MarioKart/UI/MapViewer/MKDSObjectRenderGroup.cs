@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
 using Tao.OpenGl;
 
 namespace MarioKart.UI.MapViewer
 {
-	public class MKDSObjectRenderGroup : RenderGroup
+    public class MKDSObjectRenderGroup : RenderGroup
 	{
 		MKDS.NKM.OBJI Objects;
 

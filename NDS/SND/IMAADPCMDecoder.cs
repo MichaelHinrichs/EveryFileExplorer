@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Math;
 
 namespace NDS.SND
 {
-	public class IMAADPCMDecoder
+    public class IMAADPCMDecoder
 	{
 		private bool IsInit = false;
 		private int Last;

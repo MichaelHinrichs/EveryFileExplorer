@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Globalization;
 
 namespace LibEveryFileExplorer.ComponentModel
 {
-	public class HexTypeConverter : TypeConverter
+    public class HexTypeConverter : TypeConverter
 	{
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 		{

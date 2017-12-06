@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NDS.GPU;
 using Tao.OpenGl;
-using LibEveryFileExplorer.GFX;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Collections;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class SBC
+    public class SBC
 	{
 		private byte[] Data;
 		private MDL0.Model Model;

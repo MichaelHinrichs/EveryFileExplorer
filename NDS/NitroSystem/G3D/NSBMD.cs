@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -10,7 +8,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class NSBMD : FileFormat<NSBMD.NSBMDIdentifier>, IViewable//, IWriteable
+    public class NSBMD : FileFormat<NSBMD.NSBMDIdentifier>, IViewable//, IWriteable
 	{
 		public NSBMD(byte[] Data)
 		{

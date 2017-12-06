@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -10,7 +8,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace NDS.NitroSystem.SND
 {
-	public class SDAT : FileFormat<SDAT.SDATIdentifier>, IViewable
+    public class SDAT : FileFormat<SDAT.SDATIdentifier>, IViewable
 	{
 		public SDAT(byte[] Data)
 		{

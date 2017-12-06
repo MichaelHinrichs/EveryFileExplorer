@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.UI;
 using MarioKart.MKDS.NKM;
 
 namespace MarioKart.UI
 {
-	public partial class MKDSRouteViewer : UserControl, IGameDataSectionViewer
+    public partial class MKDSRouteViewer : UserControl, IGameDataSectionViewer
 	{
 		PATH Routes;
 		POIT Points;

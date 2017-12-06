@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
-using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using LibEveryFileExplorer;
 using System.ComponentModel;
 using LibEveryFileExplorer.ComponentModel;
 using LibEveryFileExplorer.IO;
@@ -15,7 +9,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class CPAT : GameDataSection<CPAT.CPATEntry>
+    public class CPAT : GameDataSection<CPAT.CPATEntry>
 	{
 		public CPAT() { Signature = "CPAT"; }
 		public CPAT(EndianBinaryReaderEx er)

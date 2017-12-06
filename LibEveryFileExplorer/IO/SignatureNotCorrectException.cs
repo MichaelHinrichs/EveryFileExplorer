@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer.IO
 {
-	[Serializable]
+    [Serializable]
 	public class SignatureNotCorrectException : Exception
 	{
 		public string BadSignature { get; private set; }

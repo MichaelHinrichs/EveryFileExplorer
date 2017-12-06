@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MarioKart.MKDS
 {
-	public class ARM9
+    public class ARM9
 	{
 		public static readonly ARM9Table[] Tables =
 		{

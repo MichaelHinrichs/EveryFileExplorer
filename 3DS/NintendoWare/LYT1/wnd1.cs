@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
 using Tao.OpenGl;
@@ -10,7 +6,7 @@ using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class wnd1 : pan1
+    public class wnd1 : pan1
 	{
 		public enum WindowKind
 		{

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer.SND
 {
-	public class SNDUtil
+    public class SNDUtil
 	{
 		public static byte[] InterleaveChannels(params Int16[][] Channels)
 		{

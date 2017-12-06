@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using LibEveryFileExplorer.Files;
@@ -9,7 +8,7 @@ using System.Drawing;
 
 namespace LegoPirates
 {
-	public class FMV : FileFormat<FMV.FMVIdentifier>, IViewable
+    public class FMV : FileFormat<FMV.FMVIdentifier>, IViewable
 	{
 		private readonly static byte[] QuantizationGenerationTable1 = {
 			0x10, 0x10, 0x10, 0x10, 0x11, 0x12, 0x15, 0x18, 0x10, 0x10, 0x10, 0x10,

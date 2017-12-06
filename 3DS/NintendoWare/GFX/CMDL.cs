@@ -274,10 +274,10 @@ namespace _3DS.NintendoWare.GFX
 			if (Skeleton != null)
 			{
 				throw new NotImplementedException();
-				long curpos = er.BaseStream.Position;
-				er.BaseStream.Position = skeletonoffs;
-				er.Write((uint)(curpos - skeletonoffs));
-				er.BaseStream.Position = curpos;
+				//long curpos = er.BaseStream.Position;
+				//er.BaseStream.Position = skeletonoffs;
+				//er.Write((uint)(curpos - skeletonoffs));
+				//er.BaseStream.Position = curpos;
 				//Skeleton.Write(er, c);
 			}
 

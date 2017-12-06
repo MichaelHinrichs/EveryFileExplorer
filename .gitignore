@@ -30,3 +30,4 @@ _ReSharper*/
 *.vssscc
 $tf*/
 TestPlugin*/
+.vs/

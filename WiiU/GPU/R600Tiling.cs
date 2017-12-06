@@ -9,16 +9,16 @@ namespace WiiU.GPU
 	{
 		private static readonly uint[] bankSwapOrder = { 0, 1, 3, 2, 6, 7, 5, 4 };
 
-		uint m_class = 6;
-		uint m_chipFamily = 0;
-		uint m_chipRevision = 0;
-		uint m_version = 502;
-		uint m_pElemLib = 0;
+		//uint m_class = 6;
+		//uint m_chipFamily = 0;
+		//uint m_chipRevision = 0;
+		//uint m_version = 502;
+		//uint m_pElemLib = 0;
 		uint m_pipes = 2;//0;
 		uint m_banks = 8;//0;
 		uint m_pipeInterleaveBytes = 256;
 		uint m_rowSize = 2048;//0;
-		uint m_backendDisables = 0;
+		//uint m_backendDisables = 0;
 		uint m_configFlags = 0;
 
 		uint m_swapSize = 256;//0;
@@ -66,7 +66,7 @@ namespace WiiU.GPU
 			/* _AddrTileMode*/
 			int v3; // ecx@4
 			ulong v4 = 0; // qax@5
-			ulong result; // qax@9
+			//ulong result; // qax@9
 			/*_AddrTileMode*/
 			int v6; // [sp+4h] [bp-4Ch]@1
 			uint v7; // [sp+8h] [bp-48h]@2
@@ -203,7 +203,7 @@ namespace WiiU.GPU
 			/*_AddrTileType*/
 			int v16; // eax@1
 			ulong v17; // qax@24
-			ulong result; // qax@24
+			//ulong result; // qax@24
 			int v19; // [sp+8h] [bp-C8h]@1
 			uint swapIndex; // [sp+Ch] [bp-C4h]@23
 			uint bankSwapWidth; // [sp+10h] [bp-C0h]@23

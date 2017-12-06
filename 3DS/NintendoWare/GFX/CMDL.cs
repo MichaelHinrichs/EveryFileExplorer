@@ -3645,7 +3645,6 @@ namespace _3DS.NintendoWare.GFX
 			o.Content.library_effects = new DAE.library_effects();
 			if (Resource.Data.Textures != null && Resource.Data.Textures.Length > 0) o.Content.library_images = new DAE.library_images();
 			int id = 2;
-			int i = 0;
 			foreach (var matt in m.Materials)
 			{
 				var mat2 = new DAE.material();
@@ -4001,7 +4000,6 @@ namespace _3DS.NintendoWare.GFX
 					{
 						er.WriteArgument("-s", cnt * 3);
 						er.WriteArgument("\".ed[0:" + ((cnt * 3) - 1) + "]\"");
-						int idx = 0;
 						foreach (var q in vv.PrimitiveSets[0].Primitives[0].IndexStreams)
 						{
 							Vector3[] defs = q.GetFaceData();

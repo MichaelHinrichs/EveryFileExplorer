@@ -14,7 +14,6 @@ namespace GCNWii.UI
 {
 	public partial class U8Viewer : Form
 	{
-		U8 Archive;
 		SFSDirectory Root;
 		public U8Viewer(U8 Archive)
 		{

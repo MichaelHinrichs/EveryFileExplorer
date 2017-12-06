@@ -15,7 +15,6 @@ namespace _3DS.UI
 {
 	public partial class DARCViewer : Form
 	{
-		DARC Archive;
 		SFSDirectory Root;
 		public DARCViewer(DARC Archive)
 		{

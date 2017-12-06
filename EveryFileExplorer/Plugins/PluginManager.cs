@@ -30,7 +30,7 @@ namespace EveryFileExplorer.Plugins
 				{
 					ass = Assembly.LoadFile(s);
 				}
-				catch (NotSupportedException e)
+				catch (NotSupportedException)
 				{
 					MessageBox.Show("Unblock " + AssemblyName.GetAssemblyName(s) + " from external sources!");
 				}

@@ -175,7 +175,7 @@ namespace EveryFileExplorer
 				{
 					result = c.Decompress(File.ReadAllBytes(openFileDialog1.FileName));
 				}
-				catch (Exception ee)
+				catch (Exception)
 				{
 					MessageBox.Show("An error occured while trying to decompress! The file might not be in this compression type or not compressed at all!");
 					return;

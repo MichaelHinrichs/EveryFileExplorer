@@ -3,7 +3,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using _3DS.GPU;
-using CommonCompressors;
 using Jupiter.Citrus.Windows.Forms;
 using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.IO;

@@ -137,7 +137,7 @@ namespace Jupiter.Citrus.Drawing
         public bool Convert(int FilterIndex, string Path)
         {
             bool result = false;
-            DialogResult dialogResult = MessageBox.Show("This texture has to possible size. The native size you see here and a cropped size to use ingame. Would you like to save the cropped one?", "", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("This texture has to possible size. The native size you see here and a cropped size to use ingame. Would you like to save the cropped one?", "Size Choice", MessageBoxButtons.YesNo);
             Bitmap bitmap = dialogResult == DialogResult.Yes ? GetCroppedBitmap() : GetBitmap();
             if (FilterIndex == 0)
             {
@@ -184,7 +184,7 @@ namespace Jupiter.Citrus.Drawing
             /// Analyzes the content of the file to see if it matches with an instance of <see cref="Texture"/>.
             /// </summary>
             /// <param name="File">File to analyze.</param>
-            /// <returns><c><see cref="FormatMatch.Content"/></c> if the file starts with <c>80 00 00 00</c> and is longer than 0x80 bytes.</returns>
+            /// <returns><see cref="FormatMatch.Content"/> if the file starts with <c>80 00 00 00</c> and is longer than 0x80 bytes.</returns>
             public override FormatMatch IsFormat(EFEFile File)
             {
                 if (File.Data[0] == 0x80 && File.Data[1] == 0x00 && File.Data[2] == 0x00 && File.Data[3] == 0x00 && File.Data.Length > 0x80)

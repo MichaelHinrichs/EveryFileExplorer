@@ -22,7 +22,7 @@ namespace MarioKart
 		public UInt32 YShift;
 		public UInt32 ZShift;
 		public Single Unknown2;
-        public UInt32 ModelCount;
+                public UInt32 ModelCount;
 
     }
 }

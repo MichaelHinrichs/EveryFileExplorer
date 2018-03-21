@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +14,7 @@ namespace MarioKart
 		public UInt32 OctreeOffset;
 		public Single Unknown1;
 		public Vector3 OctreeOrigin;
+		public Vector3 OctreeMax;
 		public UInt32 XMask;
 		public UInt32 YMask;
 		public UInt32 ZMask;
@@ -21,5 +22,7 @@ namespace MarioKart
 		public UInt32 YShift;
 		public UInt32 ZShift;
 		public Single Unknown2;
-	}
+        public UInt32 ModelCount;
+
+    }
 }

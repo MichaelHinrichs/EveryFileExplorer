@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -396,8 +396,8 @@ namespace MarioKart
 
 			//Assume the same is done for max:
 			max += new Vector3(25, 25, 25);
-			//TODO: +30
-			Header.OctreeOrigin = min;
+            //TODO: +30
+            Header.OctreeOrigin = min;
             Header.OctreeMax = max;
             Vector3 size = max - min;
 			float mincomp = Math.Min(Math.Min(size.X, size.Y), size.Z);

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +23,7 @@ namespace MarioKart.MK7
 
         public KCL(byte[] Data)
 		{
-            EndianBinaryReader er = new EndianBinaryReader(new MemoryStream(Data), Endianness.BigEndian);
+            EndianBinaryReader er = new EndianBinaryReader(new MemoryStream(Data), Endianness.LittleEndian);
 			try
 			{
 				Header = new MK7KCLHeader(er);
@@ -68,7 +68,7 @@ namespace MarioKart.MK7
 		public byte[] Write()
 		{
 			MemoryStream m = new MemoryStream();
-			EndianBinaryWriter er = new EndianBinaryWriter(m, Endianness.BigEndian);
+			EndianBinaryWriter er = new EndianBinaryWriter(m, Endianness.LittleEndian);
 			Header.Write(er);
 			long curpos = er.BaseStream.Position;
 			er.BaseStream.Position = 0;
@@ -101,76 +101,27 @@ namespace MarioKart.MK7
             byte[] result = m.ToArray();
             er.Close();
 
-            //Header of KCL
-
-            Header.ModelCount = 1;
-
             EndianBinaryWriter bw = new EndianBinaryWriter(File.Create("test.kcl"));
             bw.BaseStream.Seek(0, 0);
-            bw.Write(0x02020000); //Signature
-            bw.Write((UInt32)0x38); //Octree Offset Array
-            bw.Write((UInt32)0x58); //Model Offset Array
-            bw.Write((UInt32)Header.ModelCount); 
-            bw.WriteVector3(Header.OctreeOrigin); //Min Coordinates
-            bw.WriteVector3(Header.OctreeMax); //Max Coordinates
-            bw.Write((UInt32)Header.CoordShift); 
+            bw.Endianness = Endianness.BigEndian;
+            bw.Write(0x02020000);
+            bw.Endianness = Endianness.LittleEndian;
+            bw.Write((UInt32)0x38);
+            bw.Write((UInt32)0x58);
+            bw.Write((UInt32)1);
+            bw.WriteVector3(Header.OctreeOrigin);
+            bw.WriteVector3(Header.OctreeMax);
+            bw.Write((UInt32)Header.CoordShift);
             bw.Write((UInt32)Header.YShift);
             bw.Write((UInt32)Header.ZShift);
             bw.Write((UInt32)8);
-
-            //Global Octree Array. These need to index models!!!
-
-            switch (Header.ModelCount)  
-            {
-                case 0x1: for (int i = 0; i < 8; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x2: for (int i = 0; i < 2; i++) bw.Write((UInt32)(0x80000000 + i)); //This will add each model and fill the rest with 0s
-                          for (int i = 0; i < 6; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x3:
-                    for (int i = 0; i < 3; i++) bw.Write((UInt32)(0x80000000 + i));
-                    for (int i = 0; i < 7; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x4:
-                    for (int i = 0; i < 4; i++) bw.Write((UInt32)(0x80000000 + i));
-                    for (int i = 0; i < 4; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x5:
-                    for (int i = 0; i < 5; i++) bw.Write((UInt32)(0x80000000 + i));
-                    for (int i = 0; i < 4; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x6:
-                    for (int i = 0; i < 6; i++) bw.Write((UInt32)(0x80000000 + i));
-                    for (int i = 0; i < 2; i++) bw.Write((UInt32)0x80000000); break;
-                case 0x7:
-                    for (int i = 0; i < 7; i++) bw.Write((UInt32)(0x80000000 + i));
-                    for (int i = 0; i < 1; i++) bw.Write((UInt32)0x80000000); break;
-
-
-                //When it reaches 7 models we need to use a child node offset and divide into more sub cubes
-                case 0x8:
-                    bw.Write((UInt32)0x8); //Cbild node offset
-                    for (int i = 0; i < 8; i++) bw.Write((UInt32)0x80000000);
-                    for (int i = 0; i < 8; i++) bw.Write((UInt32)(0x80000000 + i)); break;
-
-
-                    //Todo more models and test up to 8 models
-            }
-
-            //The model offset would be to the end of the file before it's added in
-            bw.BaseStream.Seek(0, SeekOrigin.End);
-            long ModelOffset = bw.BaseStream.Position;
-
-            switch (Header.ModelCount)
-            {
-                case 0x1: bw.Write((UInt32)ModelOffset + 4); break;
-                case 0x2: bw.Write((UInt32)(0x5C + 4)); bw.Write((UInt32)0x5C); break;
-            }
-
-
+            for (int i = 0; i < 8; i++) bw.Write((UInt32)0x80000000);
+            bw.Write((UInt32)0x5C);
             bw.BaseStream.Write(result, 0, (int)result.Length);
             bw.BaseStream.Seek(0, 0);
             byte[] newFile = new byte[bw.BaseStream.Length];
             bw.BaseStream.Read(newFile, 0, (int)bw.BaseStream.Length);
             result = newFile.ToArray();
-
-
-
             bw.Close();
             File.Delete("test.kcl");
 
@@ -324,7 +275,7 @@ namespace MarioKart.MK7
 			public KCLPlane() { }
 			public KCLPlane(EndianBinaryReader er)
 			{
-				Length = er.ReadSingle();
+                Length = er.ReadSingle();
 				VertexIndex = er.ReadUInt16();
 				NormalIndex = er.ReadUInt16();
 				NormalAIndex = er.ReadUInt16();

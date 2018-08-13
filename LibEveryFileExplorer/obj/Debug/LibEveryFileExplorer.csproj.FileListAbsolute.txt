@@ -8,3 +8,14 @@ C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\Li
 C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csproj.GenerateResource.Cache
 C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.dll
 C:\Users\ronal\Documents\Visual Studio 2015\Projects\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.pdb
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\bin\Debug\LibEveryFileExplorer.dll
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\bin\Debug\LibEveryFileExplorer.pdb
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csprojAssemblyReference.cache
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.Resource.resources
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.FileBrowser.resources
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.GameDataSectionViewer.resources
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.UI.GameDataSectionViewerBase.resources
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csproj.GenerateResource.cache
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.csproj.CoreCompileInputs.cache
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.dll
+G:\Games\0 - NSW\Crash_Bandicoot_N._Sane_Trilogy_NSW-HR\Odyssey\EveryFileExplorer-master\LibEveryFileExplorer\obj\Debug\LibEveryFileExplorer.pdb

@@ -103,7 +103,7 @@ namespace MarioKart.MK7
 
             EndianBinaryWriter bw = new EndianBinaryWriter(File.Create("test.kcl"));
             bw.BaseStream.Seek(0, 0);
-            bw.Endianness = Endianness.BigEndian;
+            bw.Endianness = Endianness.BigEndian; //Write sig in right order
             bw.Write(0x02020000);
             bw.Endianness = Endianness.LittleEndian;
             bw.Write((UInt32)0x38);
@@ -111,9 +111,9 @@ namespace MarioKart.MK7
             bw.Write((UInt32)1);
             bw.WriteVector3(Header.OctreeOrigin);
             bw.WriteVector3(Header.OctreeMax);
-            bw.Write((UInt32)Header.CoordShift);
-            bw.Write((UInt32)Header.YShift);
-            bw.Write((UInt32)Header.ZShift);
+            bw.Write((UInt32)Header.n_x);
+            bw.Write((UInt32)Header.n_y);
+            bw.Write((UInt32)Header.n_z);
             bw.Write((UInt32)8);
             for (int i = 0; i < 8; i++) bw.Write((UInt32)0x80000000);
             bw.Write((UInt32)0x5C);
@@ -275,7 +275,7 @@ namespace MarioKart.MK7
 			public KCLPlane() { }
 			public KCLPlane(EndianBinaryReader er)
 			{
-                Length = er.ReadSingle();
+				Length = er.ReadSingle();
 				VertexIndex = er.ReadUInt16();
 				NormalIndex = er.ReadUInt16();
 				NormalAIndex = er.ReadUInt16();

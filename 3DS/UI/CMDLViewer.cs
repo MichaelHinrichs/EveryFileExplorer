@@ -46,29 +46,29 @@ namespace _3DS.UI
 		private void MDL0Viewer_Load(object sender, EventArgs e)
 		{
 			simpleOpenGlControl1.InitializeContexts();
-			//Gl.glEnable(Gl.GL_LIGHTING);
+			//GL.Enable(GL.GL_LIGHTING);
 			GL.Enable(EnableCap.RescaleNormal);
-			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			Gl.glEnable(Gl.GL_NORMALIZE);
-			Gl.glDisable(Gl.GL_CULL_FACE);
-			Gl.glFrontFace(Gl.GL_CCW);
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			Gl.glClearDepth(1);
-			Gl.glEnable(Gl.GL_ALPHA_TEST);
-			Gl.glAlphaFunc(Gl.GL_GREATER, 0f);
-			Gl.glEnable(Gl.GL_BLEND);
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+            GL.Enable(EnableCap.ColorMaterial);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.Normalize);
+            GL.Disable(EnableCap.CullFace);
+            GL.FrontFace(FrontFaceDirection.Ccw);
+            GL.Enable(EnableCap.Texture2D);
+            GL.ClearDepth(1);
+            GL.Enable(EnableCap.AlphaTest);
+            GL.AlphaFunc(AlphaFunction.Greater, 0f);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-			//Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_BLEND);
+			//GL.glTexEnvf(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_BLEND);
 
-			Gl.glShadeModel(Gl.GL_SMOOTH);
+			GL.ShadeModel(ShadingModel.Smooth);
 
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			GL.DepthFunc(DepthFunction.Lequal);
 
 
 
-			Gl.glClearColor(51f / 255f, 51f / 255f, 51f / 255f, 0f);
+			GL.ClearColor(51f / 255f, 51f / 255f, 51f / 255f, 0f);
 
 			if (Resource.Data.Textures != null && Model != null)
 			{
@@ -85,7 +85,7 @@ namespace _3DS.UI
 			if (Model != null) Shaders = new CGFXShader[Model.Materials.Length];
 			//GlNitro.glNitroBindTextures(file, 1);
 
-			glversion = Gl.glGetString(Gl.GL_VERSION);
+			glversion = GL.GetString(StringName.Version);
 
 			init = true;
 			Render();
@@ -98,37 +98,37 @@ namespace _3DS.UI
 			var tex = Resource.Data.Textures[Resource.Data.Dictionaries[1].IndexOf(((ReferenceTexture)TextureMapper.TextureObject).LinkedTextureName)] as ImageTextureCtr;
 			if (tex == null)
 				return;
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Id);
-			Gl.glColor3f(1, 1, 1);
+			GL.BindTexture(TextureTarget.Texture2D, Id);
+			GL.Color3(1, 1, 1);
 			Bitmap b = tex.GetBitmap();
 			b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-			Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA8, b.Width, b.Height, 0, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, d.Scan0);
+			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, b.Width, b.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, d.Scan0);
 			b.UnlockBits(d);
 
-			if (((TextureMapper.Unknown12 >> 1) & 1) == 1) Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-			else Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
-			//if (((TextureMapper.Unknown12 >> 2) & 1) == 1) Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-			//else Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
+			if (((TextureMapper.Unknown12 >> 1) & 1) == 1) GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+			else GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+			//if (((TextureMapper.Unknown12 >> 2) & 1) == 1) GL.glTexParameteri(TextureTarget.Texture2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR);
+			//else GL.glTexParameteri(TextureTarget.Texture2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
 			//A bit confusing, so using this for now:
-			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
 
 			switch ((TextureMapper.Unknown12 >> 12) & 0xF)
 			{
-				case 0: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_CLAMP_TO_EDGE); break;
-				case 1: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_CLAMP_TO_BORDER); break;
-				case 2: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT); break;
-				case 3: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_MIRRORED_REPEAT); break;
-				default: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT); break;
+				case 0: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge); break;
+				case 1: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder); break;
+				case 2: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat); break;
+				case 3: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat); break;
+				default: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat); break;
 			}
 
 			switch ((TextureMapper.Unknown12 >> 8) & 0xF)
 			{
-				case 0: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_CLAMP_TO_EDGE); break;
-				case 1: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_CLAMP_TO_BORDER); break;
-				case 2: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT); break;
-				case 3: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_MIRRORED_REPEAT); break;
-				default: Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT); break;
+				case 0: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge); break;
+				case 1: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder); break;
+				case 2: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat); break;
+				case 3: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat); break;
+				default: GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat); break;
 			}
 		}
 
@@ -140,41 +140,41 @@ namespace _3DS.UI
 			//G3D_Binary_File_Format.Shaders.Shader s = new G3D_Binary_File_Format.Shaders.Shader();
 			//s.Compile();
 			//s.Enable();
-			//Gl.glViewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
+			//GL.Viewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
 			float aspect = (float)simpleOpenGlControl1.Width / (float)simpleOpenGlControl1.Height;
 			//float fov = 60.0f; // in degrees
 			//float znear = 0.02f;
 			//float zfar = 1000.0f * file.modelSet.models[SelMdl].info.posScale;
-			//Gl.glMatrixMode(Gl.GL_PROJECTION);
-			//Gl.glLoadMatrixf(BuildPerspProjMat(fov, aspect, znear, zfar));
-			Gl.glMatrixMode(Gl.GL_PROJECTION);
-			Gl.glLoadIdentity();
-			Gl.glViewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
-			//Gl.glOrtho(-simpleOpenGlControl1.Width / 2.0f, simpleOpenGlControl1.Width / 2.0f, -simpleOpenGlControl1.Height / 2.0f, simpleOpenGlControl1.Height / 2.0f, 0.02f, 1000f * file.modelSet.models[SelMdl].info.posScale);
-			//Gl.glMatrixMode(Gl.GL_PROJECTION);
-			//Gl.glLoadIdentity();
-			//Gl.glFrustum(-simpleOpenGlControl1.Width / 2f, simpleOpenGlControl1.Width / 2f, -simpleOpenGlControl1.Height / 2f, simpleOpenGlControl1.Height / 2f, 1000, -1000);
+			//GL.MatrixMode(GL.GL_PROJECTION);
+			//GL.LoadMatrix(BuildPerspProjMat(fov, aspect, znear, zfar));
+			GL.MatrixMode(MatrixMode.Projection);
+			GL.LoadIdentity();
+			GL.Viewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
+			//GL.glOrtho(-simpleOpenGlControl1.Width / 2.0f, simpleOpenGlControl1.Width / 2.0f, -simpleOpenGlControl1.Height / 2.0f, simpleOpenGlControl1.Height / 2.0f, 0.02f, 1000f * file.modelSet.models[SelMdl].info.posScale);
+			//GL.MatrixMode(GL.GL_PROJECTION);
+			//GL.LoadIdentity();
+			//GL.glFrustum(-simpleOpenGlControl1.Width / 2f, simpleOpenGlControl1.Width / 2f, -simpleOpenGlControl1.Height / 2f, simpleOpenGlControl1.Height / 2f, 1000, -1000);
 			Glu.gluPerspective(30, aspect, 0.1f, 20480000f);//0.02f, 32.0f);
 
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glLoadIdentity();
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0);
-			Gl.glColor3f(1.0f, 1.0f, 1.0f);
-			//Gl.glEnable(Gl.GL_DEPTH_TEST);
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			GL.MatrixMode(MatrixMode.Modelview);
+			GL.LoadIdentity();
+			GL.BindTexture(TextureTarget.Texture2D, 0);
+			GL.Color3(1.0f, 1.0f, 1.0f);
+			//GL.Enable(GL.GL_DEPTH_TEST);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-			/*Gl.glRotatef(elev, 1, 0, 0);
-			Gl.glFogfv(Gl.GL_FOG_COLOR, new float[] { 0, 0, 0, 1 });
-			Gl.glFogf(Gl.GL_FOG_DENSITY, 1);
-			Gl.glRotatef(-elev, 1, 0, 0);*/
+			/*GL.Rotate(elev, 1, 0, 0);
+			GL.glFogfv(GL.GL_FOG_COLOR, new float[] { 0, 0, 0, 1 });
+			GL.glFogf(GL.GL_FOG_DENSITY, 1);
+			GL.Rotate(-elev, 1, 0, 0);*/
 
-			Gl.glTranslatef(X, Y, -dist);
-			Gl.glRotatef(elev, 1, 0, 0);
-			Gl.glRotatef(ang, 0, 1, 0);
+			GL.Translate(X, Y, -dist);
+			GL.Rotate(elev, 1, 0, 0);
+			GL.Rotate(ang, 0, 1, 0);
 
-			Gl.glPushMatrix();
+			GL.PushMatrix();
 			RenderModel();
-			Gl.glPopMatrix();
+			GL.PopMatrix();
 			simpleOpenGlControl1.Refresh();
 		}
 
@@ -193,13 +193,13 @@ namespace _3DS.UI
 				mat.FragShader.AlphaTest.GlApply();
 				mat.FragmentOperation.BlendOperation.GlApply();
 
-				Gl.glMatrixMode(Gl.GL_TEXTURE);
+				GL.MatrixMode(MatrixMode.Texture);
 				if (mat.Tex0 != null)
 				{
-					Gl.glActiveTexture(Gl.GL_TEXTURE0);
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, mm.MaterialIndex * 4 + 0 + 1);
-					Gl.glEnable(Gl.GL_TEXTURE_2D);
-					Gl.glLoadIdentity();
+					GL.ActiveTexture(TextureUnit.Texture0);
+					GL.BindTexture(TextureTarget.Texture2D, mm.MaterialIndex * 4 + 0 + 1);
+					GL.Enable(EnableCap.Texture2D);
+					GL.LoadIdentity();
 					float[] mtx = new float[16];
 					Array.Copy(mat.TextureCoordiators[0].Matrix, mtx, 4 * 3);
 					mtx[15] = 1;
@@ -209,22 +209,22 @@ namespace _3DS.UI
 					mtx[3] = 0;
 					mtx[7] = 0;
 					mtx[11] = 0;
-					Gl.glLoadMatrixf(mtx);
+					GL.LoadMatrix(mtx);
 					//if (mat.TextureCoordiators[0].MappingMethod == 2)
 					//{
-					//	Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
-					//	Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_S, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_T, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
 					//}
-					//Gl.glTranslatef(mat.TextureCoordiators[0].Scale.X / mat.TextureCoordiators[0].Translate.X, mat.TextureCoordiators[0].Translate.Y * mat.TextureCoordiators[0].Scale.Y, 0);
-					//Gl.glRotatef(mat.TextureCoordiators[0].Rotate, 0, 1, 0);
-					//Gl.glScalef(mat.TextureCoordiators[0].Scale.X, mat.TextureCoordiators[0].Scale.Y, 1);
+					//GL.Translate(mat.TextureCoordiators[0].Scale.X / mat.TextureCoordiators[0].Translate.X, mat.TextureCoordiators[0].Translate.Y * mat.TextureCoordiators[0].Scale.Y, 0);
+					//GL.Rotate(mat.TextureCoordiators[0].Rotate, 0, 1, 0);
+					//GL.glScalef(mat.TextureCoordiators[0].Scale.X, mat.TextureCoordiators[0].Scale.Y, 1);
 				}
 				if (mat.Tex1 != null)
 				{
-					Gl.glActiveTexture(Gl.GL_TEXTURE1);
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, mm.MaterialIndex * 4 + 1 + 1);
-					Gl.glEnable(Gl.GL_TEXTURE_2D);
-					Gl.glLoadIdentity();
+					GL.ActiveTexture(TextureUnit.Texture1);
+					GL.BindTexture(TextureTarget.Texture2D, mm.MaterialIndex * 4 + 1 + 1);
+					GL.Enable(EnableCap.Texture2D);
+					GL.LoadIdentity();
 					float[] mtx = new float[16];
 					Array.Copy(mat.TextureCoordiators[1].Matrix, mtx, 4 * 3);
 					mtx[15] = 1;
@@ -234,19 +234,19 @@ namespace _3DS.UI
 					mtx[3] = 0;
 					mtx[7] = 0;
 					mtx[11] = 0;
-					Gl.glLoadMatrixf(mtx);
+					GL.LoadMatrix(mtx);
 					//if (mat.TextureCoordiators[1].MappingMethod == 2)
 					//{
-					//	Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
-					//	Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_S, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_T, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
 					//}
 				}
 				if (mat.Tex2 != null)
 				{
-					Gl.glActiveTexture(Gl.GL_TEXTURE2);
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, mm.MaterialIndex * 4 + 2 + 1);
-					Gl.glEnable(Gl.GL_TEXTURE_2D);
-					Gl.glLoadIdentity();
+					GL.ActiveTexture(TextureUnit.Texture2);
+					GL.BindTexture(TextureTarget.Texture2D, mm.MaterialIndex * 4 + 2 + 1);
+					GL.Enable(EnableCap.Texture2D);
+					GL.LoadIdentity();
 					float[] mtx = new float[16];
 					Array.Copy(mat.TextureCoordiators[2].Matrix, mtx, 4 * 3);
 					mtx[15] = 1;
@@ -256,24 +256,24 @@ namespace _3DS.UI
 					mtx[3] = 0;
 					mtx[7] = 0;
 					mtx[11] = 0;
-					Gl.glLoadMatrixf(mtx);
+					GL.LoadMatrix(mtx);
 					//if (mat.TextureCoordiators[2].MappingMethod == 2)
 					//{
-					//	Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
-					//	Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_S, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
+					//	GL.glTexGeni(GL.GL_T, GL.GL_TEXTURE_GEN_MODE, GL.GL_SPHERE_MAP);
 					//}
 				}
 				/*if (mat.Tex3 != null)
 				{
 					MessageBox.Show("Tex3!!!!!!!!!!!");
-					Gl.glActiveTexture(Gl.GL_TEXTURE3);
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, mm.MaterialIndex * 4 + 3 + 1);
-					Gl.glEnable(Gl.GL_TEXTURE_2D);
-					Gl.glLoadIdentity();
+					GL.glActiveTexture(GL.GL_TEXTURE3);
+					GL.BindTexture(TextureTarget.Texture2D, mm.MaterialIndex * 4 + 3 + 1);
+					GL.Enable(EnableCap.Texture2D);
+					GL.LoadIdentity();
 				}*/
-				Gl.glMatrixMode(Gl.GL_MODELVIEW);
-				Gl.glPushMatrix();
-				Gl.glTranslatef(vv.PositionOffset.X, vv.PositionOffset.Y, vv.PositionOffset.Z);
+				GL.MatrixMode(MatrixMode.Modelview);
+				GL.PushMatrix();
+				GL.Translate(vv.PositionOffset.X, vv.PositionOffset.Y, vv.PositionOffset.Z);
 
 				if (glversion.StartsWith("2.") && Shaders[mm.MaterialIndex] == null)
 				{
@@ -293,46 +293,46 @@ namespace _3DS.UI
 				}
 				if (glversion.StartsWith("2.")) Shaders[mm.MaterialIndex].Enable();
 
-				//Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION, new float[] { mat.Emission_2.R / 255f, mat.Emission_2.G / 255f, mat.Emission_2.B / 255f, mat.Emission_2.A / 255f });
-				//Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_AMBIENT, new float[] { mat.Ambient_1.R / 255f, mat.Ambient_1.G / 255f, mat.Ambient_1.B / 255f, mat.Ambient_1.A / 255f });
-				//Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_DIFFUSE, new float[] { mat.Diffuse_2.R / 255f, mat.Diffuse_2.G / 255f, mat.Diffuse_2.B / 255f, mat.Diffuse_2.A / 255f });
-				//Gl.glColorMaterial(Gl.GL_FRONT_AND_BACK, Gl.GL_DIFFUSE);
-				//Gl.glEnable(Gl.GL_COLOR_MATERIAL);
+				//GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_EMISSION, new float[] { mat.Emission_2.R / 255f, mat.Emission_2.G / 255f, mat.Emission_2.B / 255f, mat.Emission_2.A / 255f });
+				//GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT, new float[] { mat.Ambient_1.R / 255f, mat.Ambient_1.G / 255f, mat.Ambient_1.B / 255f, mat.Ambient_1.A / 255f });
+				//GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_DIFFUSE, new float[] { mat.Diffuse_2.R / 255f, mat.Diffuse_2.G / 255f, mat.Diffuse_2.B / 255f, mat.Diffuse_2.A / 255f });
+				//GL.glColorMaterial(GL.GL_FRONT_AND_BACK, GL.GL_DIFFUSE);
+				//GL.Enable(GL.GL_COLOR_MATERIAL);
 
 				foreach (var q in vv.PrimitiveSets[0].Primitives[0].IndexStreams)
 				{
 					Vector3[] defs = q.GetFaceData();
 
-					Gl.glBegin(Gl.GL_TRIANGLES);
+					GL.Begin(PrimitiveType.Triangles);
 					foreach (Vector3 d in defs)
 					{
-						if (p.Normals != null) Gl.glNormal3f(p.Normals[(int)d.X].X, p.Normals[(int)d.X].Y, p.Normals[(int)d.X].Z);
-						if (p.Colors != null) Gl.glColor4f(p.Colors[(int)d.X].R / 255f, p.Colors[(int)d.X].G / 255f, p.Colors[(int)d.X].B / 255f, p.Colors[(int)d.X].A / 255f);
-						else Gl.glColor4f(1, 1, 1, 1);
-						if (p.TexCoords != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, p.TexCoords[(int)d.X].X, p.TexCoords[(int)d.X].Y);
-						if (p.TexCoords2 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE1, p.TexCoords2[(int)d.X].X, p.TexCoords2[(int)d.X].Y);
-						if (p.TexCoords3 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE2, p.TexCoords3[(int)d.X].X, p.TexCoords3[(int)d.X].Y);
-						Gl.glVertex3f(p.Vertex[(int)d.X].X, p.Vertex[(int)d.X].Y, p.Vertex[(int)d.X].Z);
+						if (p.Normals != null) GL.Normal3(p.Normals[(int)d.X].X, p.Normals[(int)d.X].Y, p.Normals[(int)d.X].Z);
+						if (p.Colors != null) GL.Color4(p.Colors[(int)d.X].R / 255f, p.Colors[(int)d.X].G / 255f, p.Colors[(int)d.X].B / 255f, p.Colors[(int)d.X].A / 255f);
+						else GL.Color4(1, 1, 1, 1);
+						if (p.TexCoords != null) GL.MultiTexCoord2(TextureUnit.Texture0, p.TexCoords[(int)d.X].X, p.TexCoords[(int)d.X].Y);
+						if (p.TexCoords2 != null) GL.MultiTexCoord2(TextureUnit.Texture1, p.TexCoords2[(int)d.X].X, p.TexCoords2[(int)d.X].Y);
+						if (p.TexCoords3 != null) GL.MultiTexCoord2(TextureUnit.Texture2, p.TexCoords3[(int)d.X].X, p.TexCoords3[(int)d.X].Y);
+						GL.Vertex3(p.Vertex[(int)d.X].X, p.Vertex[(int)d.X].Y, p.Vertex[(int)d.X].Z);
 
-						if (p.Normals != null) Gl.glNormal3f(p.Normals[(int)d.Y].X, p.Normals[(int)d.Y].Y, p.Normals[(int)d.Y].Z);
-						if (p.Colors != null) Gl.glColor4f(p.Colors[(int)d.Y].R / 255f, p.Colors[(int)d.Y].G / 255f, p.Colors[(int)d.Y].B / 255f, p.Colors[(int)d.Y].A / 255f);
-						else Gl.glColor4f(1, 1, 1, 1);
-						if (p.TexCoords != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, p.TexCoords[(int)d.Y].X, p.TexCoords[(int)d.Y].Y);
-						if (p.TexCoords2 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE1, p.TexCoords2[(int)d.Y].X, p.TexCoords2[(int)d.Y].Y);
-						if (p.TexCoords3 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE2, p.TexCoords3[(int)d.Y].X, p.TexCoords3[(int)d.Y].Y);
-						Gl.glVertex3f(p.Vertex[(int)d.Y].X, p.Vertex[(int)d.Y].Y, p.Vertex[(int)d.Y].Z);
+						if (p.Normals != null) GL.Normal3(p.Normals[(int)d.Y].X, p.Normals[(int)d.Y].Y, p.Normals[(int)d.Y].Z);
+						if (p.Colors != null) GL.Color4(p.Colors[(int)d.Y].R / 255f, p.Colors[(int)d.Y].G / 255f, p.Colors[(int)d.Y].B / 255f, p.Colors[(int)d.Y].A / 255f);
+						else GL.Color4(1, 1, 1, 1);
+						if (p.TexCoords != null) GL.MultiTexCoord2(TextureUnit.Texture0, p.TexCoords[(int)d.Y].X, p.TexCoords[(int)d.Y].Y);
+						if (p.TexCoords2 != null) GL.MultiTexCoord2(TextureUnit.Texture1, p.TexCoords2[(int)d.Y].X, p.TexCoords2[(int)d.Y].Y);
+						if (p.TexCoords3 != null) GL.MultiTexCoord2(TextureUnit.Texture2, p.TexCoords3[(int)d.Y].X, p.TexCoords3[(int)d.Y].Y);
+						GL.Vertex3(p.Vertex[(int)d.Y].X, p.Vertex[(int)d.Y].Y, p.Vertex[(int)d.Y].Z);
 
-						if (p.Normals != null) Gl.glNormal3f(p.Normals[(int)d.Z].X, p.Normals[(int)d.Z].Y, p.Normals[(int)d.Z].Z);
-						if (p.Colors != null) Gl.glColor4f(p.Colors[(int)d.Z].R / 255f, p.Colors[(int)d.Z].G / 255f, p.Colors[(int)d.Z].B / 255f, p.Colors[(int)d.Z].A / 255f);
-						else Gl.glColor4f(1, 1, 1, 1);
-						if (p.TexCoords != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, p.TexCoords[(int)d.Z].X, p.TexCoords[(int)d.Z].Y);
-						if (p.TexCoords2 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE1, p.TexCoords2[(int)d.Z].X, p.TexCoords2[(int)d.Z].Y);
-						if (p.TexCoords3 != null) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE2, p.TexCoords3[(int)d.Z].X, p.TexCoords3[(int)d.Z].Y);
-						Gl.glVertex3f(p.Vertex[(int)d.Z].X, p.Vertex[(int)d.Z].Y, p.Vertex[(int)d.Z].Z);
+						if (p.Normals != null) GL.Normal3(p.Normals[(int)d.Z].X, p.Normals[(int)d.Z].Y, p.Normals[(int)d.Z].Z);
+						if (p.Colors != null) GL.Color4(p.Colors[(int)d.Z].R / 255f, p.Colors[(int)d.Z].G / 255f, p.Colors[(int)d.Z].B / 255f, p.Colors[(int)d.Z].A / 255f);
+						else GL.Color4(1, 1, 1, 1);
+						if (p.TexCoords != null) GL.MultiTexCoord2(TextureUnit.Texture0, p.TexCoords[(int)d.Z].X, p.TexCoords[(int)d.Z].Y);
+						if (p.TexCoords2 != null) GL.MultiTexCoord2(TextureUnit.Texture1, p.TexCoords2[(int)d.Z].X, p.TexCoords2[(int)d.Z].Y);
+						if (p.TexCoords3 != null) GL.MultiTexCoord2(TextureUnit.Texture2, p.TexCoords3[(int)d.Z].X, p.TexCoords3[(int)d.Z].Y);
+						GL.Vertex3(p.Vertex[(int)d.Z].X, p.Vertex[(int)d.Z].Y, p.Vertex[(int)d.Z].Z);
 					}
-					Gl.glEnd();
+					GL.End();
 				}
-				Gl.glPopMatrix();
+				GL.PopMatrix();
 			}
 		}
 
@@ -376,8 +376,8 @@ namespace _3DS.UI
 					return true;
 				case Keys.W:
 					wire = !wire;
-					if (wire) { Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_LINE); Render(); }
-					else { Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL); Render(); }
+					if (wire) { GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line); Render(); }
+					else { GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill); Render(); }
 					return true;
 				case Keys.Escape:
 					X = 0.0f;

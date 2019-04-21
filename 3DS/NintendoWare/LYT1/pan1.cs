@@ -5,7 +5,7 @@ using System.Text;
 using LibEveryFileExplorer.Collections;
 using System.IO;
 using LibEveryFileExplorer.Files;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using System.Windows.Forms;
 using LibEveryFileExplorer.IO;
 
@@ -72,23 +72,23 @@ namespace _3DS.NintendoWare.LYT1
 		}
 		public XOrigin HAlignment { get { return (XOrigin)(Origin % 3); } }
 		public YOrigin VAlignment { get { return (YOrigin)(Origin / 3); } }
-		public Boolean InfluencedAlpha { get { return (Flags & PaneFlags.IsInfluencedAlpha) != 0; } }
+		public bool InfluencedAlpha { get { return (Flags & PaneFlags.IsInfluencedAlpha) != 0; } }
 
 		public virtual void Render(CLYT Layout, CLIM[] Textures, int InfluenceAlpha)
 		{
-			Gl.glPushMatrix();
+            GL.PushMatrix();
 			{
-				Gl.glTranslatef(Translation.X, Translation.Y, Translation.Z);
-				Gl.glRotatef(Rotation.X, 1, 0, 0);
-				Gl.glRotatef(Rotation.Y, 0, 1, 0);
-				Gl.glRotatef(Rotation.Z, 0, 0, 1);
-				Gl.glScalef(Scale.X, Scale.Y, 1);
+				GL.Translate(Translation.X, Translation.Y, Translation.Z);
+				GL.Rotate(Rotation.X, 1, 0, 0);
+				GL.Rotate(Rotation.Y, 0, 1, 0);
+				GL.Rotate(Rotation.Z, 0, 0, 1);
+				GL.Scale(Scale.X, Scale.Y, 1);
 				foreach (pan1 p in Children)
 				{
 					p.Render(Layout, Textures, InfluencedAlpha ? (int)((float)(Alpha * InfluenceAlpha) / 255f) : Alpha);
 				}
 			}
-			Gl.glPopMatrix();
+			GL.PopMatrix();
 		}
 
 		protected float[,] SetupRect()
@@ -129,37 +129,37 @@ namespace _3DS.NintendoWare.LYT1
 
 			for (int o = 0; o < mat.TexMaps.Length; o++)
 			{
-				Gl.glActiveTexture(Gl.GL_TEXTURE0 + o);
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, MatId * 4 + o + 1);
-				Gl.glEnable(Gl.GL_TEXTURE_2D);
-			}
+                GL.ActiveTexture(TextureUnit.Texture0 + o);
+				GL.BindTexture(TextureTarget.Texture2D, MatId * 4 + o + 1);
+                GL.Enable(EnableCap.Texture2D);
+            }
 			if (mat.TexMaps.Length == 0)
 			{
-				Gl.glActiveTexture(Gl.GL_TEXTURE0);
-				Gl.glColor4f(1, 1, 1, 1);
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, MatId * 4 + 1);
-				Gl.glEnable(Gl.GL_TEXTURE_2D);
+				GL.ActiveTexture(TextureUnit.Texture0);
+				GL.Color4(1, 1, 1, 1);
+				GL.BindTexture(TextureTarget.Texture2D, MatId * 4 + 1);
+				GL.Enable(EnableCap.Texture2D);
 			}
 
-			Gl.glMatrixMode(Gl.GL_TEXTURE);
+			GL.MatrixMode(MatrixMode.Texture);
 			for (int o = 0; o < mat.TexCoordGens.Length; o++)
 			{
-				Gl.glActiveTexture(Gl.GL_TEXTURE0 + o);
-				Gl.glLoadIdentity();
+				GL.ActiveTexture(TextureUnit.Texture0 + o);
+				GL.LoadIdentity();
 				//if ((int)mat.TexCoordGens[o].Source < 4)
 				//{
 				mat1.MaterialEntry.TexMatrix srt = mat.TexMatrices[o];//(int)mat.TexCoordGens[o].Source];
-				Gl.glTranslatef(0.5f, 0.5f, 0.0f);
-				Gl.glRotatef(srt.Rotation, 0.0f, 0.0f, 1.0f);
-				Gl.glScalef(srt.Scale.X, srt.Scale.Y, 1.0f);
-				Gl.glTranslatef(srt.Translation.X / srt.Scale.X - 0.5f, srt.Translation.Y / srt.Scale.Y - 0.5f, 0.0f);
+				GL.Translate(0.5f, 0.5f, 0.0f);
+				GL.Rotate(srt.Rotation, 0.0f, 0.0f, 1.0f);
+				GL.Scale(srt.Scale.X, srt.Scale.Y, 1.0f);
+				GL.Translate(srt.Translation.X / srt.Scale.X - 0.5f, srt.Translation.Y / srt.Scale.Y - 0.5f, 0.0f);
 				//}
 				//else
 				//{
 
 				//}
 			}
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			GL.MatrixMode(MatrixMode.Modelview);
 			mat.GlShader.Enable();
 		}
 

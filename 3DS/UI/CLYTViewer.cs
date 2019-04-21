@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.Files;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -39,18 +39,17 @@ namespace _3DS.UI
 			simpleOpenGlControl1.InitializeContexts();
 			simpleOpenGlControl1.Width = (int)NWLayout.Layout.LayoutSize.X;
 			simpleOpenGlControl1.Height = (int)NWLayout.Layout.LayoutSize.Y;
-			Gl.ReloadFunctions();
-			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
-			Gl.glDisable(Gl.GL_DEPTH_TEST);
-			//Gl.glDepthFunc(Gl.GL_ALWAYS);
-			Gl.glEnable(Gl.GL_LOGIC_OP);
-			Gl.glDisable(Gl.GL_CULL_FACE);
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			GL.Enable(EnableCap.ColorMaterial);
+			GL.Disable(EnableCap.DepthTest);
+			//GL.glDepthFunc(GL.GL_ALWAYS);
+			GL.Enable(EnableCap.IndexLogicOp); // From Tao.OpenGL.GL => public const Int32 GL_LOGIC_OP = 0x0BF1; => 3057 => GL_INDEX_LOGIC_OP
+            GL.Disable(EnableCap.CullFace);
+			GL.Enable(EnableCap.Texture2D);
 
-			//Gl.glEnable(Gl.GL_LINE_SMOOTH);
-			Gl.glEnable(Gl.GL_BLEND);
+			//GL.Enable(GL.GL_LINE_SMOOTH);
+			GL.Enable(EnableCap.Blend);
 
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
 			if (NWLayout.TextureList != null)
 			{
@@ -144,46 +143,46 @@ namespace _3DS.UI
 
 		private void UploadTex(mat1.MaterialEntry.TexMap TexMap, CLIM Texture, int Id)
 		{
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Id);
-			Gl.glColor3f(1, 1, 1);
+			GL.BindTexture(TextureTarget.Texture2D, Id);
+			GL.Color3(1, 1, 1);
 			Bitmap b = Texture.ToBitmap();
 			//b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-			Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA8, b.Width, b.Height, 0, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, d.Scan0);
+			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, b.Width, b.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, d.Scan0);
 			b.UnlockBits(d);
 
-			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (TexMap.MagFilter == mat1.MaterialEntry.TexMap.FilterMode.Linear) ? Gl.GL_LINEAR : Gl.GL_NEAREST);
-			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (TexMap.MinFilter == mat1.MaterialEntry.TexMap.FilterMode.Linear) ? Gl.GL_LINEAR : Gl.GL_NEAREST);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (TexMap.MagFilter == mat1.MaterialEntry.TexMap.FilterMode.Linear) ? (int)TextureMagFilter.Linear : (int)TextureMagFilter.Nearest);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (TexMap.MinFilter == mat1.MaterialEntry.TexMap.FilterMode.Linear) ? (int)TextureMinFilter.Linear : (int)TextureMinFilter.Nearest);
 
 			switch (TexMap.WrapS)
 			{
 				case mat1.MaterialEntry.TexMap.WrapMode.Clamp:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_CLAMP_TO_EDGE);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
 					break;
 				case mat1.MaterialEntry.TexMap.WrapMode.Repeat:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
 					break;
 				case mat1.MaterialEntry.TexMap.WrapMode.Mirror:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_MIRRORED_REPEAT);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
 					break;
-				default:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
+                default:
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
 					break;
 			}
 
 			switch (TexMap.WrapT)
 			{
 				case mat1.MaterialEntry.TexMap.WrapMode.Clamp:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_CLAMP_TO_EDGE);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
 					break;
 				case mat1.MaterialEntry.TexMap.WrapMode.Repeat:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
 					break;
 				case mat1.MaterialEntry.TexMap.WrapMode.Mirror:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_MIRRORED_REPEAT);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
 					break;
 				default:
-					Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT);
+					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
 					break;
 			}
 		}
@@ -191,49 +190,49 @@ namespace _3DS.UI
 		public void Render()
 		{
 			if (!init) return;
-			Gl.glMatrixMode(Gl.GL_PROJECTION);
-			Gl.glLoadIdentity();
-			Gl.glViewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
+			GL.MatrixMode(MatrixMode.Projection);
+			GL.LoadIdentity();
+			GL.Viewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
 
-			Gl.glOrtho(-NWLayout.Layout.LayoutSize.X / 2.0f, NWLayout.Layout.LayoutSize.X / 2.0f, -NWLayout.Layout.LayoutSize.Y / 2.0f, NWLayout.Layout.LayoutSize.Y / 2.0f, -1000, 1000);
+			GL.Ortho(-NWLayout.Layout.LayoutSize.X / 2.0f, NWLayout.Layout.LayoutSize.X / 2.0f, -NWLayout.Layout.LayoutSize.Y / 2.0f, NWLayout.Layout.LayoutSize.Y / 2.0f, -1000, 1000);
 			//Glu.gluPerspective(90, aspect, 0.02f, 1000.0f);//0.02f, 32.0f);
-			//Gl.glTranslatef(0, 0, -100);
+			//GL.glTranslatef(0, 0, -100);
 
 
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glLoadIdentity();
+			GL.MatrixMode(MatrixMode.Modelview);
+			GL.LoadIdentity();
 
 			/*if (!picking)*/
-			Gl.glClearColor(1, 1, 1, 1);//BGColor.R / 255f, BGColor.G / 255f, BGColor.B / 255f, 1f);
-			//else Gl.glClearColor(0, 0, 0, 1);
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			GL.ClearColor(1, 1, 1, 1);//BGColor.R / 255f, BGColor.G / 255f, BGColor.B / 255f, 1f);
+			//else GL.glClearColor(0, 0, 0, 1);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-			Gl.glColor4f(1, 1, 1, 1);
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0);
-			Gl.glColor4f(1, 1, 1, 1);
-			Gl.glDisable(Gl.GL_CULL_FACE);
-			Gl.glEnable(Gl.GL_ALPHA_TEST);
-			Gl.glEnable(Gl.GL_BLEND);
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+			GL.Color4(1, 1, 1, 1);
+			GL.Enable(EnableCap.Texture2D);
+			GL.BindTexture(TextureTarget.Texture2D, 0);
+			GL.Color4(1, 1, 1, 1);
+			GL.Disable(EnableCap.CullFace);
+			GL.Enable(EnableCap.AlphaTest);
+			GL.Enable(EnableCap.Blend);
+			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-			Gl.glAlphaFunc(Gl.GL_ALWAYS, 0f);
+			GL.AlphaFunc(AlphaFunction.Always, 0f);
 
-			Gl.glLoadIdentity();
+			GL.LoadIdentity();
 
 
 			//if (!picking)
 			{
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0);
+				GL.BindTexture(TextureTarget.Texture2D, 0);
 				BShader.Enable();
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0);
-				Gl.glColor4f(204 / 255f, 204 / 255f, 204 / 255f, 1);
+				GL.BindTexture(TextureTarget.Texture2D, 0);
+				GL.Color4(204 / 255f, 204 / 255f, 204 / 255f, 1);
 				int xbase = 0;
 				for (int y = 0; y < simpleOpenGlControl1.Height; y += 8)
 				{
 					for (int x = xbase; x < simpleOpenGlControl1.Width; x += 16)
 					{
-						Gl.glRectf(x - simpleOpenGlControl1.Width / 2f, y - simpleOpenGlControl1.Height / 2f, x - simpleOpenGlControl1.Width / 2f + 8, y - simpleOpenGlControl1.Height / 2f + 8);
+						GL.Rect(x - simpleOpenGlControl1.Width / 2f, y - simpleOpenGlControl1.Height / 2f, x - simpleOpenGlControl1.Width / 2f + 8, y - simpleOpenGlControl1.Height / 2f + 8);
 					}
 					if (xbase == 0) xbase = 8;
 					else xbase = 0;
@@ -246,8 +245,8 @@ namespace _3DS.UI
 				Layout.PAN1.Render(Layout, ref idx, 255, picking);
 				pic = new byte[4];
 				Bitmap b = IO.Util.ScreenShot(simpleOpenGlControl1);
-				Gl.glReadPixels(MousePoint.X, (int)simpleOpenGlControl1.Height - MousePoint.Y, 1, 1, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, pic);
-				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+				GL.glReadPixels(MousePoint.X, (int)simpleOpenGlControl1.Height - MousePoint.Y, 1, 1, GL.GL_BGRA, GL.GL_UNSIGNED_BYTE, pic);
+				GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 				Render();
 				//simpleOpenGlControl1.Refresh();
 				//Render();

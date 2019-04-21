@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 
 namespace _3DS.NintendoWare.LYT1
 {
@@ -10,7 +10,7 @@ namespace _3DS.NintendoWare.LYT1
 	{
 		public void Enable()
 		{
-			Gl.glUseProgram(program);
+			GL.UseProgram(program);
 		}
 		public void Compile(bool texture)
 		{
@@ -40,17 +40,17 @@ namespace _3DS.NintendoWare.LYT1
 			vert_ss.AppendLine("}");
 
 			// create/compile vertex shader
-			vertex_shader = Gl.glCreateShader(Gl.GL_VERTEX_SHADER);
+			vertex_shader = GL.CreateShader(ShaderType.VertexShader);
 
 			{
 				var vert_src_str = vert_ss.ToString();
 				//const GLchar* vert_src = vert_src_str.c_str();
-				Gl.glShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
+				GL.ShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
 			}
 
 			//}	// done generating vertex shader
 
-			Gl.glCompileShader(vertex_shader);
+			GL.CompileShader(vertex_shader);
 
 			// generate fragment shader code
 			//{
@@ -76,24 +76,24 @@ namespace _3DS.NintendoWare.LYT1
 			//std::cout << frag_ss.str() << '\n';
 
 			// create/compile fragment shader
-			fragment_shader = Gl.glCreateShader(Gl.GL_FRAGMENT_SHADER);
+			fragment_shader = GL.CreateShader(ShaderType.FragmentShader);
 
 			{
 				var frag_src_str = frag_ss.ToString();
-				Gl.glShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
+                GL.ShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
 			}
 
-			//}	// done generating fragment shader
+            //}	// done generating fragment shader
 
-			Gl.glCompileShader(fragment_shader);
+            GL.CompileShader(fragment_shader);
 
 			// check compile status of both shaders
 			//{
 			int vert_compiled = 0;
 			int frag_compiled = 0;
 
-			Gl.glGetShaderiv(vertex_shader, Gl.GL_COMPILE_STATUS, out vert_compiled);
-			Gl.glGetShaderiv(fragment_shader, Gl.GL_COMPILE_STATUS, out frag_compiled);
+			GL.GetShader(vertex_shader, ShaderParameter.CompileStatus, out vert_compiled);
+            GL.GetShader(fragment_shader, ShaderParameter.CompileStatus, out frag_compiled);
 
 			if (vert_compiled == 0)
 			{
@@ -106,26 +106,28 @@ namespace _3DS.NintendoWare.LYT1
 			}
 
 			// create program, attach shaders
-			program = Gl.glCreateProgram();
-			Gl.glAttachShader(program, vertex_shader);
-			Gl.glAttachShader(program, fragment_shader);
+			program = GL.CreateProgram();
+			GL.AttachShader(program, vertex_shader);
+            GL.AttachShader(program, fragment_shader);
 
 			// link program, check link status
-			Gl.glLinkProgram(program);
+			GL.LinkProgram(program);
 			int link_status;
-			Gl.glGetProgramiv(program, Gl.GL_LINK_STATUS, out link_status);
+			GL.GetProgram(program, GetProgramParameterName.LinkStatus, out link_status);
 
 			if (link_status == 0)
 			{
 				//std::cout << "Failed to link program!\n";
 			}
 
-			Gl.glUseProgram(program);
+			GL.UseProgram(program);
 
-			// print log
-			//{
-			StringBuilder infolog = new StringBuilder();
-			Gl.glGetProgramInfoLog(program, 10240, null, infolog);
+            // print log
+            //{
+            //StringBuilder infolog = new StringBuilder();
+            string infolog = "";
+            int length = 0;
+			GL.GetProgramInfoLog(program, 10240, out length, out infolog);
 			//std::cout << infolog;
 			//}
 

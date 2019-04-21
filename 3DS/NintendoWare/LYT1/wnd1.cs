@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
@@ -64,13 +64,13 @@ namespace _3DS.NintendoWare.LYT1
 		public Byte NrFrames;
 		//Flags:
 		//0:
-		public Boolean UseLTMaterial;
+		public bool UseLTMaterial;
 		//1:
-		public Boolean UseVtxColorForAllWindow;
+		public bool UseVtxColorForAllWindow;
 		//2-3:
 		public WindowKind Kind;
 		//4:
-		public Boolean DontDrawContent;
+		public bool DontDrawContent;
 		//End Flags;
 		public UInt16 Padding;
 		public UInt32 ContentOffset;
@@ -140,18 +140,18 @@ namespace _3DS.NintendoWare.LYT1
 
 		public override void Render(CLYT Layout, CLIM[] Textures, int InfluenceAlpha)
 		{
-			Gl.glPushMatrix();
+			GL.PushMatrix();
 			{
-				Gl.glMatrixMode(Gl.GL_MODELVIEW);
-				Gl.glTranslatef(Translation.X, Translation.Y, Translation.Z);
-				Gl.glRotatef(Rotation.X, 1, 0, 0);
-				Gl.glRotatef(Rotation.Y, 0, 1, 0);
-				Gl.glRotatef(Rotation.Z, 0, 0, 1);
-				Gl.glScalef(Scale.X, Scale.Y, 1);
-				Gl.glPushMatrix();
+				GL.MatrixMode(MatrixMode.Modelview);
+				GL.Translate(Translation.X, Translation.Y, Translation.Z);
+				GL.Rotate(Rotation.X, 1, 0, 0);
+				GL.Rotate(Rotation.Y, 0, 1, 0);
+				GL.Rotate(Rotation.Z, 0, 0, 1);
+				GL.Scale(Scale.X, Scale.Y, 1);
+				GL.PushMatrix();
 				{
 					//Translate to origin
-					Gl.glTranslatef(-0.5f * Size.X * (float)HAlignment, -0.5f * Size.Y * (-(float)VAlignment), 0);
+					GL.Translate(-0.5f * Size.X * (float)HAlignment, -0.5f * Size.Y * (-(float)VAlignment), 0);
 					switch (Kind)
 					{
 						case WindowKind.Around:
@@ -163,12 +163,12 @@ namespace _3DS.NintendoWare.LYT1
 								{
 									var t = Textures[m.TexMaps[0].TexIndex];
 									if (t == null) break;
-									Gl.glPushMatrix();
+									GL.PushMatrix();
 									{
-										Gl.glTranslatef(t.Image.Width, -t.Image.Height, 0);
+										GL.Translate(t.Image.Width, -t.Image.Height, 0);
 										RenderContent(Layout, InfluenceAlpha, Size.X - t.Image.Width * 2, Size.Y - t.Image.Height * 2);
 									}
-									Gl.glPopMatrix();
+									GL.PopMatrix();
 									// _________
 									//|______|  |
 									//|  |   |  |
@@ -177,87 +177,87 @@ namespace _3DS.NintendoWare.LYT1
 									//Top Left
 									SetupMaterial(Layout, WindowFrames[0].MaterialId);
 									float[,] Vertex2 = SetupRect(Size.X - t.Image.Width, t.Image.Height);
-									Gl.glBegin(Gl.GL_QUADS);
-									Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+									GL.Begin(PrimitiveType.Quads);
+									GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-									Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+									GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t.Image.Width) / t.Image.Width, 0);
-									Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t.Image.Width) / t.Image.Width, 0);
+									GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t.Image.Width) / t.Image.Width, 1);
-									Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t.Image.Width) / t.Image.Width, 1);
+									GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-									Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-									Gl.glEnd();
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+									GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+									GL.End();
 									//Top Right
-									Gl.glPushMatrix();
+									GL.PushMatrix();
 									{
-										Gl.glTranslatef(Size.X - t.Image.Width, 0, 0);
+										GL.Translate(Size.X - t.Image.Width, 0, 0);
 										Vertex2 = SetupRect(t.Image.Width, Size.Y - t.Image.Height);
-										Gl.glBegin(Gl.GL_QUADS);
-										Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+										GL.Begin(PrimitiveType.Quads);
+										GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 0);
-										Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 1, 0);
+										GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-										Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+										GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, (Size.Y - t.Image.Height) / t.Image.Height);
-										Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, (Size.Y - t.Image.Height) / t.Image.Height);
+										GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, (Size.Y - t.Image.Height) / t.Image.Height);
-										Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-										Gl.glEnd();
+										GL.MultiTexCoord2(TextureUnit.Texture0, 1, (Size.Y - t.Image.Height) / t.Image.Height);
+										GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+										GL.End();
 									}
-									Gl.glPopMatrix();
+									GL.PopMatrix();
 									//Bottom Right
-									Gl.glPushMatrix();
+									GL.PushMatrix();
 									{
-										Gl.glTranslatef(t.Image.Width, -(Size.Y - t.Image.Height), 0);
+										GL.Translate(t.Image.Width, -(Size.Y - t.Image.Height), 0);
 										Vertex2 = SetupRect(Size.X - t.Image.Width, t.Image.Height);
-										Gl.glBegin(Gl.GL_QUADS);
-										Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+										GL.Begin(PrimitiveType.Quads);
+										GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t.Image.Width) / t.Image.Width, 1);
-										Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t.Image.Width) / t.Image.Width, 1);
+										GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-										Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+										GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-										Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+										GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t.Image.Width) / t.Image.Width, 0);
-										Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-										Gl.glEnd();
+										GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t.Image.Width) / t.Image.Width, 0);
+										GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+										GL.End();
 									}
-									Gl.glPopMatrix();
+									GL.PopMatrix();
 									//Bottom Left
-									Gl.glPushMatrix();
+									GL.PushMatrix();
 									{
-										Gl.glTranslatef(0, -t.Image.Height, 0);
+										GL.Translate(0, -t.Image.Height, 0);
 										Vertex2 = SetupRect(t.Image.Width, Size.Y - t.Image.Height);
-										Gl.glBegin(Gl.GL_QUADS);
-										Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+										GL.Begin(PrimitiveType.Quads);
+										GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, (Size.Y - t.Image.Height) / t.Image.Height);
-										Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, (Size.Y - t.Image.Height) / t.Image.Height);
+										GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, (Size.Y - t.Image.Height) / t.Image.Height);
-										Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 1, (Size.Y - t.Image.Height) / t.Image.Height);
+										GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 0);
-										Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+										GL.MultiTexCoord2(TextureUnit.Texture0, 1, 0);
+										GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-										Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-										Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-										Gl.glEnd();
+										GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+										GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+										GL.End();
 									}
-									Gl.glPopMatrix();
+									GL.PopMatrix();
 								}
 							}
 							else if (NrFrames == 4)//Corners
@@ -267,12 +267,12 @@ namespace _3DS.NintendoWare.LYT1
 								var t3 = Textures[Layout.Materials.Materials[WindowFrames[2].MaterialId].TexMaps[0].TexIndex];
 								var t4 = Textures[Layout.Materials.Materials[WindowFrames[3].MaterialId].TexMaps[0].TexIndex];
 								if (t1 == null || t2 == null || t3 == null || t4 == null) break;
-								Gl.glPushMatrix();
+								GL.PushMatrix();
 								{
-									Gl.glTranslatef(t4.Image.Width, -t1.Image.Height, 0);
+									GL.Translate(t4.Image.Width, -t1.Image.Height, 0);
 									RenderContent(Layout, InfluenceAlpha, Size.X - (t4.Image.Width + t2.Image.Width), Size.Y - (t1.Image.Height + t3.Image.Height));
 								}
-								Gl.glPopMatrix();
+								GL.PopMatrix();
 								// _________
 								//|______|  |
 								//|  |   |  |
@@ -281,90 +281,90 @@ namespace _3DS.NintendoWare.LYT1
 								//Top Left
 								SetupMaterial(Layout, WindowFrames[0].MaterialId);
 								float[,] Vertex2 = SetupRect(Size.X - t2.Image.Width, t1.Image.Height);
-								Gl.glBegin(Gl.GL_QUADS);
-								Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+								GL.Begin(PrimitiveType.Quads);
+								GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-								Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-								Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+								GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+								GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-								Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t2.Image.Width) / t1.Image.Width, 0);
-								Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+								GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t2.Image.Width) / t1.Image.Width, 0);
+								GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-								Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t2.Image.Width) / t1.Image.Width, 1);
-								Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+								GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t2.Image.Width) / t1.Image.Width, 1);
+								GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-								Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-								Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-								Gl.glEnd();
+								GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+								GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+								GL.End();
 								//Top Right
-								Gl.glPushMatrix();
+								GL.PushMatrix();
 								{
-									Gl.glTranslatef(Size.X - t2.Image.Width, 0, 0);
+									GL.Translate(Size.X - t2.Image.Width, 0, 0);
 									SetupMaterial(Layout, WindowFrames[1].MaterialId);
 									Vertex2 = SetupRect(t2.Image.Width, Size.Y - t3.Image.Height);
-									Gl.glBegin(Gl.GL_QUADS);
-									Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+									GL.Begin(PrimitiveType.Quads);
+									GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-									Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+									GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 0);
-									Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 1, 0);
+									GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, (Size.Y - t3.Image.Height) / t2.Image.Height);
-									Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 1, (Size.Y - t3.Image.Height) / t2.Image.Height);
+									GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, (Size.Y - t3.Image.Height) / t2.Image.Height);
-									Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-									Gl.glEnd();
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, (Size.Y - t3.Image.Height) / t2.Image.Height);
+									GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+									GL.End();
 								}
-								Gl.glPopMatrix();
+								GL.PopMatrix();
 								//Bottom Right
-								Gl.glPushMatrix();
+								GL.PushMatrix();
 								{
-									Gl.glTranslatef(t4.Image.Width, -(Size.Y - t3.Image.Height), 0);
+									GL.Translate(t4.Image.Width, -(Size.Y - t3.Image.Height), 0);
 									SetupMaterial(Layout, WindowFrames[2].MaterialId);
 									Vertex2 = SetupRect(Size.X - t4.Image.Width, t3.Image.Height);
-									Gl.glBegin(Gl.GL_QUADS);
-									Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+									GL.Begin(PrimitiveType.Quads);
+									GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t2.Image.Width) / t3.Image.Width, 0);
-									Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t2.Image.Width) / t3.Image.Width, 0);
+									GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-									Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+									GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-									Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+									GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, (Size.X - t2.Image.Width) / t3.Image.Width, 1);
-									Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-									Gl.glEnd();
+									GL.MultiTexCoord2(TextureUnit.Texture0, (Size.X - t2.Image.Width) / t3.Image.Width, 1);
+									GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+									GL.End();
 								}
-								Gl.glPopMatrix();
+								GL.PopMatrix();
 								//Bottom Left
-								Gl.glPushMatrix();
+								GL.PushMatrix();
 								{
-									Gl.glTranslatef(0, -t1.Image.Height, 0);
+									GL.Translate(0, -t1.Image.Height, 0);
 									SetupMaterial(Layout, WindowFrames[3].MaterialId);
 									Vertex2 = SetupRect(t4.Image.Width, Size.Y - t1.Image.Height);
-									Gl.glBegin(Gl.GL_QUADS);
-									Gl.glColor4f(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
+									GL.Begin(PrimitiveType.Quads);
+									GL.Color4(1, 1, 1, (InfluencedAlpha ? (byte)(((float)Alpha * (float)InfluenceAlpha) / 255f) : this.Alpha) / 255f);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, -(Size.Y - t1.Image.Height) / t4.Image.Height); 
-									Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 1, -(Size.Y - t1.Image.Height) / t4.Image.Height); 
+									GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, -(Size.Y - t1.Image.Height) / t4.Image.Height);
-									Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, -(Size.Y - t1.Image.Height) / t4.Image.Height);
+									GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-									Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+									GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+									GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 
-									Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 1); 
-									Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-									Gl.glEnd();
+									GL.MultiTexCoord2(TextureUnit.Texture0, 1, 1); 
+									GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+									GL.End();
 								}
-								Gl.glPopMatrix();
+								GL.PopMatrix();
 							}
 							else if (NrFrames == 8)//all
 							{
@@ -380,13 +380,13 @@ namespace _3DS.NintendoWare.LYT1
 							break;
 					}
 				}
-				Gl.glPopMatrix();
+				GL.PopMatrix();
 				foreach (pan1 p in Children)
 				{
 					p.Render(Layout, Textures, InfluencedAlpha ? (int)((float)(Alpha * InfluenceAlpha) / 255f) : Alpha);
 				}
 			}
-			Gl.glPopMatrix();
+			GL.PopMatrix();
 		}
 		private float[][] SetupVtxColors(int InfluenceAlpha)
 		{
@@ -431,41 +431,41 @@ namespace _3DS.NintendoWare.LYT1
 
 			float[,] Vertex2 = SetupRect(Width, Height);
 			float[][] VtxColor = SetupVtxColors(InfluenceAlpha);
-			Gl.glBegin(Gl.GL_QUADS);
+			GL.Begin(PrimitiveType.Quads);
 
 			for (int o = 0; o < Content.TexCoordEntries.Length; o++)
 			{
-				Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0 + o,
+				GL.MultiTexCoord2(TextureUnit.Texture0 + o,
 					Content.TexCoordEntries[o].TexCoordLT.X, Content.TexCoordEntries[o].TexCoordLT.Y);
 			}
-			if (Content.TexCoordEntries.Length == 0) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 0);
-			Gl.glColor4f(VtxColor[0][0], VtxColor[0][1], VtxColor[0][2], VtxColor[0][3]);
-			Gl.glVertex3f(Vertex2[0, 0], Vertex2[0, 1], 0);
+			if (Content.TexCoordEntries.Length == 0) GL.MultiTexCoord2(TextureUnit.Texture0, 0, 0);
+			GL.Color4(VtxColor[0][0], VtxColor[0][1], VtxColor[0][2], VtxColor[0][3]);
+			GL.Vertex3(Vertex2[0, 0], Vertex2[0, 1], 0);
 			for (int o = 0; o < Content.TexCoordEntries.Length; o++)
 			{
-				Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0 + o,
+				GL.MultiTexCoord2(TextureUnit.Texture0 + o,
 					Content.TexCoordEntries[o].TexCoordRT.X, Content.TexCoordEntries[o].TexCoordRT.Y);
 			}
-			if (Content.TexCoordEntries.Length == 0) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 0);
-			Gl.glColor4f(VtxColor[1][0], VtxColor[1][1], VtxColor[1][2], VtxColor[1][3]);
-			Gl.glVertex3f(Vertex2[1, 0], Vertex2[1, 1], 0);
+			if (Content.TexCoordEntries.Length == 0) GL.MultiTexCoord2(TextureUnit.Texture0, 1, 0);
+			GL.Color4(VtxColor[1][0], VtxColor[1][1], VtxColor[1][2], VtxColor[1][3]);
+			GL.Vertex3(Vertex2[1, 0], Vertex2[1, 1], 0);
 			for (int o = 0; o < Content.TexCoordEntries.Length; o++)
 			{
-				Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0 + o,
+				GL.MultiTexCoord2(TextureUnit.Texture0 + o,
 					Content.TexCoordEntries[o].TexCoordRB.X, Content.TexCoordEntries[o].TexCoordRB.Y);
 			}
-			if (Content.TexCoordEntries.Length == 0) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 1, 1);
-			Gl.glColor4f(VtxColor[2][0], VtxColor[2][1], VtxColor[2][2], VtxColor[2][3]);
-			Gl.glVertex3f(Vertex2[2, 0], Vertex2[2, 1], 0);
+			if (Content.TexCoordEntries.Length == 0) GL.MultiTexCoord2(TextureUnit.Texture0, 1, 1);
+			GL.Color4(VtxColor[2][0], VtxColor[2][1], VtxColor[2][2], VtxColor[2][3]);
+			GL.Vertex3(Vertex2[2, 0], Vertex2[2, 1], 0);
 			for (int o = 0; o < Content.TexCoordEntries.Length; o++)
 			{
-				Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0 + o,
+				GL.MultiTexCoord2(TextureUnit.Texture0 + o,
 					Content.TexCoordEntries[o].TexCoordLB.X, Content.TexCoordEntries[o].TexCoordLB.Y);
 			}
-			if (Content.TexCoordEntries.Length == 0) Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0, 1);
-			Gl.glColor4f(VtxColor[3][0], VtxColor[3][1], VtxColor[3][2], VtxColor[3][3]);
-			Gl.glVertex3f(Vertex2[3, 0], Vertex2[3, 1], 0);
-			Gl.glEnd();
+			if (Content.TexCoordEntries.Length == 0) GL.MultiTexCoord2(TextureUnit.Texture0, 0, 1);
+			GL.Color4(VtxColor[3][0], VtxColor[3][1], VtxColor[3][2], VtxColor[3][3]);
+			GL.Vertex3(Vertex2[3, 0], Vertex2[3, 1], 0);
+			GL.End();
 		}
 	}
 }

@@ -54,6 +54,7 @@
     <Compile Include="3D\GLControl.Designer.cs">
       <DependentUpon>GLControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="3D\Glu.cs" />
     <Compile Include="3D\Polygon.cs" />
     <Compile Include="3D\SimpleOpenGlControl.cs">
       <SubType>UserControl</SubType>

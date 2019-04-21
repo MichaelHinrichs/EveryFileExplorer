@@ -62,23 +62,6 @@ namespace NDS.UI
 			Render();
         }
 
-        /// <summary>
-         /// Replaces gluPerspective. Sets the frustum to perspective mode.
-         /// http://nehe.gamedev.net/article/replacement_for_gluperspective/21002/
-         /// </summary>
-         /// <param name="fovY">Field of vision in degrees in the y direction</param>
-         /// <param name="aspect">Aspect ratio of the viewport</param>
-         /// <param name="zNear">The near clipping distance</param>
-         /// <param name="zFar">The far clipping distance</param>
-        private void perspectiveGL(float fovY, float aspect, float zNear, float zFar)
-        {
-            float fW, fH;
-            fH = Convert.ToSingle(Math.Tan((fovY / 2) / 180 * Math.PI)) * zNear;
-            fH = Convert.ToSingle(Math.Tan(fovY / 360 * Math.PI)) * zNear;
-            fW = fH * aspect;
-            GL.Frustum(-fW, fW, -fH, fH, zNear, zFar);
-        }
-
         public void Render()
 		{
 			if (!init) return;
@@ -87,9 +70,8 @@ namespace NDS.UI
             GL.LoadIdentity();
             GL.Viewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
 
-            //Glu.gluPerspective(30, aspect, 0.1f, 20480000f);//0.02f, 32.0f);
+            Glu.gluPerspective(30, aspect, 0.1f, 20480000f);//0.02f, 32.0f);
             //OpenTK.Matrix4 prespectiveMatrix = OpenTK.Matrix4.CreatePerspectiveFieldOfView(30.0f, aspect, 0.1f, 20480000f);
-            perspectiveGL(30.0f, aspect, 0.1f, 20480000f);
 
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
@@ -98,10 +80,10 @@ namespace NDS.UI
             //Gl.glEnable(Gl.GL_DEPTH_TEST);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            /*Gl.glRotatef(elev, 1, 0, 0);
+            /*Gl.Rotate(elev, 1, 0, 0);
 			Gl.glFogfv(Gl.GL_FOG_COLOR, new float[] { 0, 0, 0, 1 });
 			Gl.glFogf(Gl.GL_FOG_DENSITY, 1);
-			Gl.glRotatef(-elev, 1, 0, 0);*/
+			Gl.Rotate(-elev, 1, 0, 0);*/
 
             GL.Translate(X, Y, -dist);
 			GL.Rotate(elev, 1, 0, 0);

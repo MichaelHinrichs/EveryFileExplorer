@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 
 namespace _3DS.NintendoWare.LYT1
 {
@@ -19,14 +19,14 @@ namespace _3DS.NintendoWare.LYT1
 
 		public void Enable()
 		{
-			Gl.glUseProgram(program);
+			GL.UseProgram(program);
 			//setup uniforms
 
-			Gl.glUniform4f(Gl.glGetUniformLocation(program, "colorreg"), Material.BufferColor.R / 255f, Material.BufferColor.G / 255f, Material.BufferColor.B / 255f, Material.BufferColor.A / 255f);
+			GL.Uniform4(GL.GetUniformLocation(program, "colorreg"), Material.BufferColor.R / 255f, Material.BufferColor.G / 255f, Material.BufferColor.B / 255f, Material.BufferColor.A / 255f);
 
 			for (int i = 0; i < 6; i++)
 			{
-				Gl.glUniform4f(Gl.glGetUniformLocation(program, "const" + i), Material.ConstColors[i].R / 255f, Material.ConstColors[i].G / 255f, Material.ConstColors[i].B / 255f, Material.ConstColors[i].A / 255f);
+                GL.Uniform4(GL.GetUniformLocation(program, "const" + i), Material.ConstColors[i].R / 255f, Material.ConstColors[i].G / 255f, Material.ConstColors[i].B / 255f, Material.ConstColors[i].A / 255f);
 			}
 		}
 		public void Disable()
@@ -83,17 +83,17 @@ namespace _3DS.NintendoWare.LYT1
 			vert_ss.AppendLine("}");
 
 			// create/compile vertex shader
-			vertex_shader = Gl.glCreateShader(Gl.GL_VERTEX_SHADER);
+			vertex_shader = GL.CreateShader(ShaderType.VertexShader);
 
 			{
 				var vert_src_str = vert_ss.ToString();
-				//const GLchar* vert_src = vert_src_str.c_str();
-				Gl.glShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
+                //const GLchar* vert_src = vert_src_str.c_str();
+                GL.ShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
 			}
 
-			//}	// done generating vertex shader
+            //}	// done generating vertex shader
 
-			Gl.glCompileShader(vertex_shader);
+            GL.CompileShader(vertex_shader);
 
 			string[] p0 =
 			{
@@ -214,23 +214,23 @@ namespace _3DS.NintendoWare.LYT1
 			//std::cout << frag_ss.str() << '\n';
 
 			// create/compile fragment shader
-			fragment_shader = Gl.glCreateShader(Gl.GL_FRAGMENT_SHADER);
+			fragment_shader = GL.CreateShader(ShaderType.FragmentShader);
 			{
 				var frag_src_str = frag_ss.ToString();
-				Gl.glShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
+                GL.ShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
 			}
 
-			//}	// done generating fragment shader
+            //}	// done generating fragment shader
 
-			Gl.glCompileShader(fragment_shader);
+            GL.CompileShader(fragment_shader);
 
 			// check compile status of both shaders
 			//{
 			int vert_compiled = 0;
 			int frag_compiled = 0;
 
-			Gl.glGetShaderiv(vertex_shader, Gl.GL_COMPILE_STATUS, out vert_compiled);
-			Gl.glGetShaderiv(fragment_shader, Gl.GL_COMPILE_STATUS, out frag_compiled);
+            GL.GetShader(vertex_shader, ShaderParameter.CompileStatus, out vert_compiled);
+            GL.GetShader(fragment_shader, ShaderParameter.CompileStatus, out frag_compiled);
 
 			if (vert_compiled == 0)
 			{
@@ -243,34 +243,34 @@ namespace _3DS.NintendoWare.LYT1
 			}
 
 			// create program, attach shaders
-			program = Gl.glCreateProgram();
-			Gl.glAttachShader(program, vertex_shader);
-			Gl.glAttachShader(program, fragment_shader);
+			program = GL.CreateProgram();
+            GL.AttachShader(program, vertex_shader);
+            GL.AttachShader(program, fragment_shader);
 
-			// link program, check link status
-			Gl.glLinkProgram(program);
+            // link program, check link status
+            GL.LinkProgram(program);
 			int link_status;
-			Gl.glGetProgramiv(program, Gl.GL_LINK_STATUS, out link_status);
+            GL.GetProgram(program, GetProgramParameterName.LinkStatus, out link_status);
 
 			if (link_status == 0)
 			{
 				//std::cout << "Failed to link program!\n";
 			}
 
-			Gl.glUseProgram(program);
+            GL.UseProgram(program);
 
 			// set uniforms
 			for (uint i = 0; i != sampler_count; ++i)
 			{
 				String ss = "textures" + i;
-				Gl.glUniform1i(Gl.glGetUniformLocation(program, ss), (int)i);
+                GL.Uniform1(GL.GetUniformLocation(program, ss), (int)i);
 			}
 
-			Gl.glUniform4f(Gl.glGetUniformLocation(program, "colorreg"), Material.BufferColor.R / 255f, Material.BufferColor.G / 255f, Material.BufferColor.B / 255f, Material.BufferColor.A / 255f);
+            GL.Uniform4(GL.GetUniformLocation(program, "colorreg"), Material.BufferColor.R / 255f, Material.BufferColor.G / 255f, Material.BufferColor.B / 255f, Material.BufferColor.A / 255f);
 
 			for (int i = 0; i < 6; i++)
 			{
-				Gl.glUniform4f(Gl.glGetUniformLocation(program, "const" + i), Material.ConstColors[i].R / 255f, Material.ConstColors[i].G / 255f, Material.ConstColors[i].B / 255f, Material.ConstColors[i].A / 255f);
+                GL.Uniform4(GL.GetUniformLocation(program, "const" + i), Material.ConstColors[i].R / 255f, Material.ConstColors[i].G / 255f, Material.ConstColors[i].B / 255f, Material.ConstColors[i].A / 255f);
 			}
 		}
 

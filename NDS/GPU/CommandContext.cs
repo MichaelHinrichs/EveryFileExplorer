@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.GFX;
 using LibEveryFileExplorer.Collections;
 using LibEveryFileExplorer.IO;
@@ -298,7 +296,7 @@ namespace NDS.GPU
 		}
 		public void Color(Color color)
 		{
-			Gl.glColor4f(color.R / 255f, color.G / 255f, color.B / 255f, Alpha / 31f);
+			GL.Color4(color.R / 255f, color.G / 255f, color.B / 255f, Alpha / 31f);
 		}
 		public void Normal(uint normal)
 		{
@@ -353,7 +351,7 @@ namespace NDS.GPU
 			VertexColor.Y = Math.Min(1, VertexColor.Y);
 			VertexColor.Z = Math.Min(1, VertexColor.Z);
 
-			Gl.glColor4f(VertexColor.X, VertexColor.Y, VertexColor.Z, Alpha / 31f);
+			GL.Color4(VertexColor.X, VertexColor.Y, VertexColor.Z, Alpha / 31f);
 		}
 		public void TexCoord(uint texcoord)
 		{
@@ -361,7 +359,7 @@ namespace NDS.GPU
 		}
 		public void TexCoord(Vector2 texcoord)
 		{
-			Gl.glTexCoord2f(texcoord.X, texcoord.Y);
+			GL.TexCoord2(texcoord.X, texcoord.Y);
 		}
 		public void Vertex(uint cmd1, uint cmd2)
 		{
@@ -374,7 +372,7 @@ namespace NDS.GPU
 		{
 			LastSetVtx = vtx;
 			Vector3 result = vtx * CurPosMtx;
-			Gl.glVertex3f(result.X, result.Y, result.Z);
+			GL.Vertex3(result.X, result.Y, result.Z);
 		}
 		public void Vertex10(uint vtx)
 		{
@@ -428,35 +426,35 @@ namespace NDS.GPU
 			LightEnabled[3] = ((cmd >> 3) & 0x1) == 1;
 			switch ((cmd >> 4) & 0x3)
 			{
-				case 0: Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE); break;
-				case 1: Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL); break;
+				case 0: GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate); break;
+				case 1: GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Decal); break;
 				case 2:
-					//Toon/highlight shading. For debugging look at player files from zelda spirit tracks!
-					//There's no toon table in a nsbmd, so use default shading
-					//TODO: Implement a default toon table
-					Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE);
+                    //Toon/highlight shading. For debugging look at player files from zelda spirit tracks!
+                    //There's no toon table in a nsbmd, so use default shading
+                    //TODO: Implement a default toon table
+                    GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
 					break;
 				case 3:
-					//System.Windows.MessageBox.Show("SHADOW!");
-					Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE);
+                    //System.Windows.MessageBox.Show("SHADOW!");
+                    GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
 					break;
 			}
 			//Don't enable, but let the user choose to use it or not
 			switch ((cmd >> 6) & 0x03)
 			{
-				case 0x03: Gl.glCullFace(Gl.GL_NONE); break;
-				case 0x02: Gl.glCullFace(Gl.GL_BACK); break;
-				case 0x01: Gl.glCullFace(Gl.GL_FRONT); break;
-				case 0x00: Gl.glCullFace(Gl.GL_FRONT_AND_BACK); break;
+				case 0x03: GL.CullFace((CullFaceMode)ActiveAttribType.None); break;
+				case 0x02: GL.CullFace(CullFaceMode.Back); break;
+				case 0x01: GL.CullFace(CullFaceMode.Front); break;
+				case 0x00: GL.CullFace(CullFaceMode.FrontAndBack); break;
 			}
 			switch ((cmd >> 14) & 0x1)
 			{
-				case 0: Gl.glDepthFunc(Gl.GL_LESS); break;
+				case 0: GL.DepthFunc(DepthFunction.Less); break;
 				case 1:
-					//System.Windows.MessageBox.Show("EQUALS!");
-					//Gl.glDepthFunc(Gl.GL_EQUAL);
-					Gl.glDepthFunc(Gl.GL_LESS);
-					break;
+                    //System.Windows.MessageBox.Show("EQUALS!");
+                    //Gl.glDepthFunc(Gl.GL_EQUAL);
+                    GL.DepthFunc(DepthFunction.Less);
+                    break;
 			}
 
 			Alpha = (int)((cmd >> 16) & 31);
@@ -516,22 +514,22 @@ namespace NDS.GPU
 			switch (type)
 			{
 				case NDSPrimitiveType.Triangle:
-					Gl.glBegin(Gl.GL_TRIANGLES);
+                    GL.Begin(PrimitiveType.Triangles);
 					break;
 				case NDSPrimitiveType.Quadrilateral:
-					Gl.glBegin(Gl.GL_QUADS);
+                    GL.Begin(PrimitiveType.Quads);
 					break;
 				case NDSPrimitiveType.TriangleStrips:
-					Gl.glBegin(Gl.GL_TRIANGLE_STRIP);
+                    GL.Begin(PrimitiveType.TriangleStrip);
 					break;
 				case NDSPrimitiveType.QuadrilateralStrips:
-					Gl.glBegin(Gl.GL_QUAD_STRIP);
+                    GL.Begin(PrimitiveType.QuadStrip);
 					break;
 			}
 		}
 		public void End()
 		{
-			Gl.glEnd();
+            GL.End();
 		}
 		public void SwapBuffers(uint cmd)
 		{

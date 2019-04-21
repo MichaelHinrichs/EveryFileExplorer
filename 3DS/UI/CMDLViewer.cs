@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using _3DS.NintendoWare.GFX;
 using System.Drawing.Imaging;
 using LibEveryFileExplorer._3D;
@@ -16,7 +16,7 @@ using System.IO;
 
 namespace _3DS.UI
 {
-	public partial class CMDLViewer : UserControl
+	public partial class CMDLViewer : GLControl
 	{
 		CGFX Resource;
 		CMDL Model;
@@ -46,9 +46,8 @@ namespace _3DS.UI
 		private void MDL0Viewer_Load(object sender, EventArgs e)
 		{
 			simpleOpenGlControl1.InitializeContexts();
-			Gl.ReloadFunctions();
 			//Gl.glEnable(Gl.GL_LIGHTING);
-			Gl.glEnable(Gl.GL_RESCALE_NORMAL);
+			GL.Enable(EnableCap.RescaleNormal);
 			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			Gl.glEnable(Gl.GL_NORMALIZE);

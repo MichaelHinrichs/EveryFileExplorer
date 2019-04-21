@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NDS.GPU;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.GFX;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Collections;
@@ -52,11 +52,11 @@ namespace NDS.NitroSystem.G3D
 							if (!NodeVisible) { Offset++; break; }
 							byte matid = Data[Offset++];
 							MDL0.Model.MaterialSet.Material m = Model.materials.materials[matid];
-							Gl.glBindTexture(Gl.GL_TEXTURE_2D, matid + 1); //+ texoffset);
-							Gl.glMatrixMode(Gl.GL_TEXTURE);
-							Gl.glLoadIdentity();
-							Gl.glScalef(1f / m.origWidth, 1f / m.origHeight, 1f);
-							Gl.glMultMatrixf(m.GetMatrix());
+							GL.BindTexture(TextureTarget.Texture2D, matid + 1); //+ texoffset);
+                            GL.MatrixMode(MatrixMode.Texture);
+							GL.LoadIdentity();
+							GL.Scale(1f / m.origWidth, 1f / m.origHeight, 1f);
+							GL.MultMatrix(m.GetMatrix());
 
 							c.PolygonAttr(m.polyAttr);
 
@@ -82,9 +82,9 @@ namespace NDS.NitroSystem.G3D
 
 							c.MaterialColor1((uint)(emiss << 16 | m.specEmi & 0x8000 | spec));
 
-							Gl.glMatrixMode(Gl.GL_MODELVIEW);
-							Gl.glDisable(Gl.GL_TEXTURE_GEN_S);
-							Gl.glDisable(Gl.GL_TEXTURE_GEN_T);
+							GL.MatrixMode(MatrixMode.Modelview);
+                            GL.Disable(EnableCap.TextureGenS);
+                            GL.Disable(EnableCap.TextureGenT);
 							break;
 						}
 					case 5://SHP
@@ -117,7 +117,7 @@ namespace NDS.NitroSystem.G3D
 							int RestID = ((cmd >> 6 & 0x1) == 1) ? Data[Offset++] : -1;
 							if (RestID != -1) c.RestoreMatrix((uint)RestID);
 							float[] proj = new float[16];
-							Gl.glGetFloatv(Gl.GL_MODELVIEW_MATRIX, proj);
+							GL.GetFloat(GetPName.ModelviewMatrix, proj);
 
 							Matrix44 m = c.GetCurPosMtx();
 							m[3, 0] = m[3, 1] = m[3, 2] = 0;
@@ -146,9 +146,9 @@ namespace NDS.NitroSystem.G3D
 							int RestID = ((cmd >> 6 & 0x1) == 1) ? Data[Offset++] : -1;
 							if (RestID != -1) c.RestoreMatrix((uint)RestID);
 							float[] proj = new float[16];
-							Gl.glGetFloatv(Gl.GL_MODELVIEW_MATRIX, proj);
+                            GL.GetFloat(GetPName.ModelviewMatrix, proj);
 
-							/*
+                            /*
 							Matrix33 mtx = new Matrix33();
 							mtx[0, 0] = proj[0];
 							mtx[2, 0] = proj[2];
@@ -163,7 +163,7 @@ namespace NDS.NitroSystem.G3D
 							c.MultMatrix33(mtx);//c.LoadMatrix44(mtx);
 							 * */
 
-							Matrix44 m = c.GetCurPosMtx();
+                            Matrix44 m = c.GetCurPosMtx();
 							m[3, 0] = m[3, 1] = m[3, 2] = 0;
 
 							Matrix44 mtx = c.GetCurPosMtx();
@@ -223,19 +223,19 @@ namespace NDS.NitroSystem.G3D
 							if (NodeVisible)
 							{
 								float[] proj = new float[16];
-								Gl.glGetFloatv(Gl.GL_MODELVIEW_MATRIX, proj);
+                                GL.GetFloat(GetPName.ModelviewMatrix, proj);
 
-								Gl.glMatrixMode(Gl.GL_TEXTURE);
+                                GL.MatrixMode(MatrixMode.Texture);
 								//Gl.glLoadIdentity();
 								MDL0.Model.MaterialSet.Material m = Model.materials.materials[matid];
-								Gl.glScalef(m.origWidth * 0.5f, m.origHeight  * - 0.5f, 1);
-								Gl.glTranslatef(m.origWidth * 0.5f, m.origHeight * 0.5f, 0);
+                                GL.Scale(m.origWidth * 0.5f, m.origHeight  * - 0.5f, 1);
+								GL.Translate(m.origWidth * 0.5f, m.origHeight * 0.5f, 0);
 								//Gl.glTexCoord2f(m.origWidth * 0.5f, m.origHeight * 0.5f);
 								//Gl.glScalef(m.origWidth, m.origHeight, 1f);
 
 								if ((m.flag & MDL0.Model.MaterialSet.Material.NNS_G3D_MATFLAG.NNS_G3D_MATFLAG_EFFECTMTX) != 0)
 								{
-									Gl.glMultMatrixf(m.effectMtx);
+									GL.MultMatrix(m.effectMtx);
 								}
 
 								Matrix44 mvm = new Matrix44(proj);
@@ -250,14 +250,14 @@ namespace NDS.NitroSystem.G3D
 								mvm[13] = 0;
 								mvm[14] = 0;
 
-								Gl.glMultMatrixf((float[])mvm);
+                                GL.MultMatrix((float[])mvm);
 
-								Gl.glMatrixMode(Gl.GL_MODELVIEW);
+								GL.MatrixMode(MatrixMode.Modelview);
 
-								Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
-								Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
-								Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
-								Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
+								GL.TexGen(TextureCoordName.S, TextureGenParameter.TextureGenMode, (int)TextureGenMode.SphereMap);
+                                GL.TexGen(TextureCoordName.T, TextureGenParameter.TextureGenMode, (int)TextureGenMode.SphereMap);
+                                GL.Enable(EnableCap.TextureGenS);
+                                GL.Enable(EnableCap.TextureGenT);
 							}
 							break;
 						}

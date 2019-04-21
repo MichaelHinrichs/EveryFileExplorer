@@ -34,6 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -267,6 +273,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NintendoWare\GFX\Shaders\CGFXFrag.c" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
     <None Include="Resources\lighthouse-shine.png" />
     <None Include="Resources\light-bulb.png" />
     <None Include="Resources\weather-cloud.png" />

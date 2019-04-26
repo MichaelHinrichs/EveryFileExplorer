@@ -8,7 +8,6 @@ using System.IO;
 using LibEveryFileExplorer.GameData;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Collections;
-using Tao.OpenGl;
 using MarioKart.UI;
 using LibEveryFileExplorer.GFX;
 using LibEveryFileExplorer.Math;

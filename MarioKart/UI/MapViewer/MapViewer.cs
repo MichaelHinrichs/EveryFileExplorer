@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.GameData;
 using LibEveryFileExplorer.Collections;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using System.Reflection;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Math;
@@ -19,7 +19,7 @@ namespace MarioKart.UI.MapViewer
 	{
 		public List<RenderGroup> Groups { get; private set; }
 
-		public Object[] SelectedEntries { get; set; }
+		public object[] SelectedEntries { get; set; }
 
 		public delegate void Init3DEventHandler();
 		public event Init3DEventHandler Init3D;
@@ -97,20 +97,20 @@ namespace MarioKart.UI.MapViewer
 		private void MapViewer_Load(object sender, EventArgs e)
 		{
 			simpleOpenGlControl1.InitializeContexts();
-			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			Gl.glDepthFunc(Gl.GL_ALWAYS);
-			Gl.glEnable(Gl.GL_LOGIC_OP);
-			Gl.glDisable(Gl.GL_CULL_FACE);
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			Gl.glEnable(Gl.GL_LINE_SMOOTH);
-			Gl.glEnable(Gl.GL_BLEND);
+			GL.Enable(EnableCap.ColorMaterial);
+			GL.Enable(EnableCap.DepthTest);
+			GL.DepthFunc(DepthFunction.Always);
+			GL.Enable(EnableCap.IndexLogicOp);
+			GL.Disable(EnableCap.CullFace);
+			GL.Enable(EnableCap.Texture2D);
+			GL.Enable(EnableCap.LineSmooth);
+			GL.Enable(EnableCap.Blend);
 
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+			GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-			if (Init3D != null) Init3D();
+            Init3D?.Invoke();
 
-			init = true;
+            init = true;
 			Render();
 			Render();
 		}
@@ -130,32 +130,32 @@ namespace MarioKart.UI.MapViewer
 
 		private void RenderStart()
 		{
-			Gl.glMatrixMode(Gl.GL_PROJECTION);
-			Gl.glLoadIdentity();
-			Gl.glViewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
+			GL.MatrixMode(MatrixMode.Projection);
+			GL.LoadIdentity();
+			GL.Viewport(0, 0, simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
 
 			RectangleF r = GetDisplayRect(true);
-			Gl.glOrtho(
+			GL.Ortho(
 				r.Left, r.Right,
 				r.Bottom, r.Top,
 				-8192, 8192);
 
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glLoadIdentity();
-			Gl.glClearColor(1, 1, 1, 1f);
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			Gl.glColor4f(1, 1, 1, 1);
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0);
-			Gl.glColor4f(1, 1, 1, 1);
-			Gl.glDisable(Gl.GL_CULL_FACE);
-			Gl.glEnable(Gl.GL_ALPHA_TEST);
-			Gl.glEnable(Gl.GL_BLEND);
-			Gl.glEnable(Gl.GL_POINT_SMOOTH);
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+			GL.MatrixMode(MatrixMode.Modelview);
+			GL.LoadIdentity();
+			GL.ClearColor(1, 1, 1, 1f);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+			GL.Color4(1, 1, 1, 1);
+			GL.Enable(EnableCap.Texture2D);
+			GL.BindTexture(TextureTarget.Texture2D, 0);
+			GL.Color4(1, 1, 1, 1);
+			GL.Disable(EnableCap.CullFace);
+			GL.Enable(EnableCap.AlphaTest);
+			GL.Enable(EnableCap.Blend);
+			GL.Enable(EnableCap.PointSmooth);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-			Gl.glAlphaFunc(Gl.GL_ALWAYS, 0f);
-			Gl.glLoadIdentity();
+			GL.AlphaFunc(AlphaFunction.Always, 0f);
+			GL.LoadIdentity();
 		}
 
 		public void Render()
@@ -163,37 +163,37 @@ namespace MarioKart.UI.MapViewer
 			if (!init) return;
 			RenderStart();
 
-			Gl.glEnable(Gl.GL_POLYGON_SMOOTH);
+			GL.Enable(EnableCap.PolygonSmooth);
 
 			if (RenderCollision != null)
 			{
-				Gl.glDepthFunc(Gl.GL_LEQUAL);
+				GL.DepthFunc(DepthFunction.Lequal);
 				RenderCollision(false);
-				Gl.glDepthFunc(Gl.GL_ALWAYS);
+				GL.DepthFunc(DepthFunction.Always);
 			}
 			RenderGroups();
 
 			if(drawSelRect)
 			{
-				Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
-				Gl.glDisable(Gl.GL_POINT_SMOOTH);
-				Gl.glDisable(Gl.GL_LINE_SMOOTH);
+				GL.Disable(EnableCap.PolygonSmooth);
+				GL.Disable(EnableCap.PointSmooth);
+				GL.Disable(EnableCap.LineSmooth);
 
-				Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
-				Gl.glColor4f(0, 0.6f, 0.8f, 0.5f);
-				Gl.glRectf(SelRect.Left, SelRect.Top, SelRect.Right, SelRect.Bottom);
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+				GL.Color4(0, 0.6f, 0.8f, 0.5f);
+				GL.Rect(SelRect.Left, SelRect.Top, SelRect.Right, SelRect.Bottom);
 
-				Gl.glEnable(Gl.GL_POLYGON_OFFSET_FILL);
-				Gl.glPolygonOffset(0.5f, 1);
+				GL.Enable(EnableCap.PolygonOffsetFill);
+				GL.PolygonOffset(0.5f, 1);
 				
-				Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_LINE);
-				Gl.glLineWidth(1.0f);
+				GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+				GL.LineWidth(1.0f);
 
-				Gl.glColor4f(0, 0.6f, 0.8f, 1f);
+				GL.Color4(0, 0.6f, 0.8f, 1f);
 
-				Gl.glRectf(SelRect.Left + 0.5f, SelRect.Top + 0.5f, SelRect.Right - 0.3f, SelRect.Bottom - 0.3f);
-				Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
-			}
+				GL.Rect(SelRect.Left + 0.5f, SelRect.Top + 0.5f, SelRect.Right - 0.3f, SelRect.Bottom - 0.3f);
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            }
 
 			simpleOpenGlControl1.Refresh();
 		}
@@ -209,15 +209,15 @@ namespace MarioKart.UI.MapViewer
 			if (!init) return null;
 			RenderStart();
 
-			Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
-			Gl.glDisable(Gl.GL_POINT_SMOOTH);
+			GL.Disable(EnableCap.PolygonSmooth);
+			GL.Disable(EnableCap.PointSmooth);
 
 			int NrBits = MathUtil.GetNearest2Power(Groups.Count);
 			RenderGroups(true, NrBits);
 			byte[] pic = new byte[4];
-			Gl.glReadPixels(Position.X, (int)simpleOpenGlControl1.Height - Position.Y, 1, 1, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, pic);
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			Render();
+			GL.ReadPixels(Position.X, (int)simpleOpenGlControl1.Height - Position.Y, 1, 1, PixelFormat.Bgra, PixelType.UnsignedByte, pic);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            Render();
 			uint v = IOUtil.ReadU32LE(pic, 0);
 			if ((int)v == -1) return null;
 			v &= 0xFFFFFF;
@@ -228,14 +228,14 @@ namespace MarioKart.UI.MapViewer
 		{
 			if (!init || RenderCollision == null) return -1;
 			RenderStart();
-			Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
-			Gl.glDisable(Gl.GL_POINT_SMOOTH);
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			GL.Disable(EnableCap.PolygonSmooth);
+            GL.Disable(EnableCap.PointSmooth);
+            GL.DepthFunc(DepthFunction.Lequal);
 			RenderCollision(true);
-			Gl.glDepthFunc(Gl.GL_ALWAYS);
+			GL.DepthFunc(DepthFunction.Always);
 			byte[] pic = new byte[4];
-			Gl.glReadPixels(Position.X, (int)simpleOpenGlControl1.Height - Position.Y, 1, 1, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, pic);
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			GL.ReadPixels(Position.X, (int)simpleOpenGlControl1.Height - Position.Y, 1, 1, PixelFormat.Bgra, PixelType.UnsignedByte, pic);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 			Render();
 			return (int)(IOUtil.ReadU32LE(pic, 0) & 0xFFFFFF);
 		}

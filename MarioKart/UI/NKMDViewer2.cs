@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using System.Drawing.Imaging;
 using LibEveryFileExplorer._3D;
 using LibEveryFileExplorer;
@@ -192,22 +192,22 @@ namespace MarioKart.UI
 			foreach (Object b in s)
 			{
 				Bitmap b2 = ((Bitmap)((System.Collections.DictionaryEntry)b).Value);
-				BitmapData bd = b2.LockBits(new Rectangle(0, 0, b2.Width, b2.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-				Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE);
+				BitmapData bd = b2.LockBits(new Rectangle(0, 0, b2.Width, b2.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+				GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (int)TextureEnvMode.Modulate);
 				if ((String)((System.Collections.DictionaryEntry)b).Key != "start")
 				{
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, BitConverter.ToUInt16(BitConverter.GetBytes(ushort.Parse(((String)((System.Collections.DictionaryEntry)b).Key).Split('_')[1], System.Globalization.NumberStyles.HexNumber)).Reverse().ToArray(), 0));
+					GL.BindTexture(TextureTarget.Texture2D, BitConverter.ToUInt16(BitConverter.GetBytes(ushort.Parse(((String)((System.Collections.DictionaryEntry)b).Key).Split('_')[1], System.Globalization.NumberStyles.HexNumber)).Reverse().ToArray(), 0));
 				}
 				else
 				{
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, -1);
+					GL.BindTexture(TextureTarget.Texture2D, -1);
 				}
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA8, b2.Width, b2.Height, 0, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+				GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, b2.Width, b2.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bd.Scan0);
 				b2.UnlockBits(bd);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_CLAMP);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_CLAMP);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Clamp);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Clamp);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 			}
 		}
 
@@ -223,13 +223,13 @@ namespace MarioKart.UI
 
 				Color c = MKDS.KCL.GetColor(p.CollisionType);
 				if (Picking && c.A != 0) c = Color.FromArgb(i + 1 | 0xFF << 24);
-				Gl.glColor4f(c.R / 255f, c.G / 255f, c.B / 255f, c.A / 255f);
-				Gl.glBegin(Gl.GL_TRIANGLES);
-				//Gl.glNormal3f(t.Normal.X, t.Normal.Y, t.Normal.Z);
-				Gl.glVertex3f(t.PointA.X, t.PointA.Z, t.PointA.Y);
-				Gl.glVertex3f(t.PointB.X, t.PointB.Z, t.PointB.Y);
-				Gl.glVertex3f(t.PointC.X, t.PointC.Z, t.PointC.Y);
-				Gl.glEnd();
+				GL.Color4(c.R / 255f, c.G / 255f, c.B / 255f, c.A / 255f);
+				GL.Begin(PrimitiveType.Triangles);
+				//GL.Normal3(t.Normal.X, t.Normal.Y, t.Normal.Z);
+				GL.Vertex3(t.PointA.X, t.PointA.Z, t.PointA.Y);
+				GL.Vertex3(t.PointB.X, t.PointB.Z, t.PointB.Y);
+				GL.Vertex3(t.PointC.X, t.PointC.Z, t.PointC.Y);
+				GL.End();
 				i++;
 			}
 		}

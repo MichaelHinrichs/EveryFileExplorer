@@ -6,7 +6,7 @@ using System.IO;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
@@ -240,21 +240,21 @@ namespace _3DS.NintendoWare.LYT1
 				public TevColorOp[] ColorOperators;
 				public TevMode ColorMode;
 				public TevScale ColorScale;
-				public Boolean ColorSavePrevReg;
+				public bool ColorSavePrevReg;
 
 				public byte ColorUnknown;
 				public TevSource[] AlphaSources;
 				public TevAlphaOp[] AlphaOperators;
 				public TevMode AlphaMode;
 				public TevScale AlphaScale;
-				public Boolean AlphaSavePrevReg;
+				public bool AlphaSavePrevReg;
 
 				public UInt32 ConstColors;
 			}
 			public AlphaCompare AlphaTest;
 			public class AlphaCompare
 			{
-				public enum AlphaFunction
+				public enum MatAlphaFunction
 				{
 					Never = 0,
 					Less = 1,
@@ -267,30 +267,30 @@ namespace _3DS.NintendoWare.LYT1
 				}
 				public AlphaCompare(EndianBinaryReader er)
 				{
-					AlphaFunc = (AlphaFunction)er.ReadUInt32();
+					AlphaFunc = (MatAlphaFunction)er.ReadUInt32();
 					Reference = er.ReadSingle();
 				}
-				public AlphaFunction AlphaFunc;
+				public MatAlphaFunction AlphaFunc;
 				public Single Reference;
 
-				private readonly int[] GlAlphaFunc =
+                private readonly AlphaFunction[] GlAlphaFunc =
 				{
-					Gl.GL_NEVER,
-					Gl.GL_LESS,
-					Gl.GL_LEQUAL,
-					Gl.GL_EQUAL,
-					Gl.GL_NOTEQUAL,
-					Gl.GL_GEQUAL,
-					Gl.GL_GREATER,
-					Gl.GL_ALWAYS
+                    AlphaFunction.Never,
+                    AlphaFunction.Less,
+                    AlphaFunction.Lequal,
+                    AlphaFunction.Equal,
+                    AlphaFunction.Notequal,
+                    AlphaFunction.Gequal,
+                    AlphaFunction.Greater,
+                    AlphaFunction.Always,
 				};
 
 				public void Apply()
 				{
-					Gl.glEnable(Gl.GL_ALPHA_TEST);
-					Gl.glAlphaFunc(GlAlphaFunc[(int)AlphaFunc], Reference);
-					Gl.glEnable(Gl.GL_ALPHA_TEST);
-				}
+					GL.Enable(EnableCap.AlphaTest);
+					GL.AlphaFunc(GlAlphaFunc[(int)AlphaFunc], Reference);
+                    GL.Enable(EnableCap.AlphaTest);
+                }
 			}
 			public BlendMode ColorBlendMode;
 			public BlendMode AlphaBlendMode;
@@ -359,51 +359,39 @@ namespace _3DS.NintendoWare.LYT1
 				public BlendDestination DestinationFactor;
 				public BlendLogicOp LogicOperator;
 
-				private readonly int[] GlBlendEq =
+				private readonly BlendEquationMode[] GlBlendEq =
 				{
-					0,
-					Gl.GL_FUNC_ADD,
-					Gl.GL_FUNC_SUBTRACT,
-					Gl.GL_FUNC_REVERSE_SUBTRACT,
-					Gl.GL_MIN,
-					Gl.GL_MAX
+                    0,
+                    BlendEquationMode.FuncAdd,
+                    BlendEquationMode.FuncSubtract,
+                    BlendEquationMode.FuncReverseSubtract,
+                    BlendEquationMode.Min,
+                    BlendEquationMode.Max,
 				};
 
-				private readonly int[] GlBlendSrc =
+				private readonly BlendingFactor[] GlBlend =
 				{
-					Gl.GL_ZERO,
-					Gl.GL_ONE,
-					Gl.GL_DST_COLOR,
-					Gl.GL_ONE_MINUS_DST_COLOR,
-					Gl.GL_SRC_ALPHA,
-					Gl.GL_ONE_MINUS_SRC_ALPHA,
-					Gl.GL_DST_ALPHA,
-					Gl.GL_ONE_MINUS_DST_ALPHA
-				};
-
-				private readonly int[] GlBlendDst =
-				{
-					Gl.GL_ZERO,
-					Gl.GL_ONE,
-					Gl.GL_SRC_COLOR,
-					Gl.GL_ONE_MINUS_SRC_COLOR,
-					Gl.GL_SRC_ALPHA,
-					Gl.GL_ONE_MINUS_SRC_ALPHA,
-					Gl.GL_DST_ALPHA,
-					Gl.GL_ONE_MINUS_DST_ALPHA
+                    BlendingFactor.Zero,
+                    BlendingFactor.One,
+                    BlendingFactor.DstColor,
+                    BlendingFactor.OneMinusDstColor,
+                    BlendingFactor.SrcAlpha,
+                    BlendingFactor.OneMinusSrcAlpha,
+                    BlendingFactor.DstAlpha,
+                    BlendingFactor.OneMinusDstAlpha,
 				};
 
 				public void Apply()
 				{
-					if (BlendOperator == BlendOp.None) Gl.glDisable(Gl.GL_BLEND);
+					if (BlendOperator == BlendOp.None) GL.Disable(EnableCap.Blend);
 					else
 					{
-						Gl.glEnable(Gl.GL_BLEND);
-						Gl.glBlendEquation(GlBlendEq[(int)BlendOperator]);
-						Gl.glBlendFunc(GlBlendSrc[(int)SourceFactor], GlBlendDst[(int)DestinationFactor]);
-						Gl.glEnable(Gl.GL_BLEND);
-					}
-				}
+                        GL.Enable(EnableCap.Blend);
+                        GL.BlendEquation(GlBlendEq[(int)BlendOperator]);
+						GL.BlendFunc(GlBlend[(int)SourceFactor], GlBlend[(int)DestinationFactor]);
+                        GL.Enable(EnableCap.Blend);
+                    }
+                }
 			}
 
 			public CLYTShader GlShader { get; private set; }
@@ -419,19 +407,19 @@ namespace _3DS.NintendoWare.LYT1
 				if (AlphaTest != null) AlphaTest.Apply();
 				else
 				{
-					Gl.glEnable(Gl.GL_ALPHA_TEST);
-					Gl.glAlphaFunc(Gl.GL_ALWAYS, 0);
-					Gl.glEnable(Gl.GL_ALPHA_TEST);
-				}
-				if (ColorBlendMode != null) ColorBlendMode.Apply();
+                    GL.Enable(EnableCap.AlphaTest);
+                    GL.AlphaFunc(AlphaFunction.Always, 0);
+                    GL.Enable(EnableCap.AlphaTest);
+                }
+                if (ColorBlendMode != null) ColorBlendMode.Apply();
 				else
 				{
-					Gl.glEnable(Gl.GL_BLEND);
-					Gl.glBlendEquation(Gl.GL_FUNC_ADD);
-					Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
-					Gl.glEnable(Gl.GL_BLEND);
-				}
-			}
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendEquation(BlendEquationMode.FuncAdd);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Enable(EnableCap.Blend);
+                }
+            }
 
 			public override string ToString()
 			{

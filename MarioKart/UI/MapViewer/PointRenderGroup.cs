@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection;
 using LibEveryFileExplorer.GameData;
 using System.Drawing;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.Collections;
 
 namespace MarioKart.UI.MapViewer
@@ -28,37 +28,37 @@ namespace MarioKart.UI.MapViewer
 
 		public override void Render(object[] Selection, bool Picking, int PickingId)
 		{
-			Gl.glPointSize((Picking ? 6f : 5));
+			GL.PointSize((Picking ? 6f : 5));
 
-			Gl.glBegin(Gl.GL_POINTS);
-			if (!Picking) Gl.glColor3f(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
+            GL.Begin(PrimitiveType.Points);
+            if (!Picking) GL.Color3(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
 			int objidx = 1;
 			foreach (var o in GameDataSection.Entries)
 			{
 				if (Picking)
 				{
 					Color c = Color.FromArgb(objidx | PickingId);
-					Gl.glColor4f(c.R / 255f, c.G / 255f, c.B / 255f, 1);
+					GL.Color4(c.R / 255f, c.G / 255f, c.B / 255f, 1);
 					objidx++;
 				}
 				Vector3 Position = GetPointPosition(o);
-				Gl.glVertex2f(Position.X, Position.Z);
+				GL.Vertex2(Position.X, Position.Z);
 
 				if (!Picking && Selection != null && Selection.Contains(o))
 				{
-					Gl.glEnd();
-					Gl.glPointSize(2f);
-					Gl.glBegin(Gl.GL_POINTS);
-					Gl.glColor3f(1, 1, 1);
-					Gl.glVertex2f(Position.X, Position.Z);
-					Gl.glEnd();
-					Gl.glPointSize((Picking ? 6f : 5));
-					Gl.glBegin(Gl.GL_POINTS);
-					Gl.glColor3f(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
+					GL.End();
+					GL.PointSize(2f);
+					GL.Begin(PrimitiveType.Points);
+					GL.Color3(1, 1, 1);
+					GL.Vertex2(Position.X, Position.Z);
+					GL.End();
+					GL.PointSize((Picking ? 6f : 5));
+                    GL.Begin(PrimitiveType.Points);
+                    GL.Color3(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
 				}
 
 			}
-			Gl.glEnd();
+			GL.End();
 		}
 
 		private Vector3 GetPointPosition(T Entry)

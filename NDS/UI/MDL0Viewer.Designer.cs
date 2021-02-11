@@ -1,4 +1,7 @@
-﻿namespace NDS.UI
+﻿using LibEveryFileExplorer._3D;
+using OpenTK.Graphics.OpenGL;
+
+namespace NDS.UI
 {
 	partial class MDL0Viewer
 	{
@@ -28,7 +31,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.simpleOpenGlControl1 = new Tao.Platform.Windows.SimpleOpenGlControl();
+			this.simpleOpenGlControl1 = new OpenTK.SimpleOpenGlControl();
 			this.SuspendLayout();
 			// 
 			// simpleOpenGlControl1
@@ -63,6 +66,6 @@
 
 		#endregion
 
-		private Tao.Platform.Windows.SimpleOpenGlControl simpleOpenGlControl1;
+		private OpenTK.SimpleOpenGlControl simpleOpenGlControl1;
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
 using _3DS.GPU.PICA;
@@ -21,33 +21,33 @@ namespace _3DS.NintendoWare.GFX
 
 		public void Enable()
 		{
-			Gl.glUseProgram(program);
+            GL.UseProgram(program);
 			//setup uniforms
 			/*for (int i = 0; i < 3; i++)
 			{
 				String ss = "color_register" + i;
-				Gl.glUniform4f(Gl.glGetUniformLocation(program, ss), g_color_registers[i][0], g_color_registers[i][1], g_color_registers[i][2], g_color_registers[i][3]);
+				GL.glUniform4f(GL.glGetUniformLocation(program, ss), g_color_registers[i][0], g_color_registers[i][1], g_color_registers[i][2], g_color_registers[i][3]);
 			}
 			for (int i = 0; i < 1; i++)
 			{
 				String ss = "matColor";
-				Gl.glUniform4f(Gl.glGetUniformLocation(program, ss), MatColor[0], MatColor[1], MatColor[2], MatColor[3]);
+				GL.glUniform4f(GL.glGetUniformLocation(program, ss), MatColor[0], MatColor[1], MatColor[2], MatColor[3]);
 			}
 			for (int i = 0; i < 4; i++)
 			{
 				String ss = "color_const" + i;
-				Gl.glUniform4f(Gl.glGetUniformLocation(program, ss), g_color_consts[i][0], g_color_consts[i][1], g_color_consts[i][2], g_color_consts[i][3]);
+				GL.glUniform4f(GL.glGetUniformLocation(program, ss), g_color_consts[i][0], g_color_consts[i][1], g_color_consts[i][2], g_color_consts[i][3]);
 			}*/
 			// TODO: cache value of GetUniformLocation
-			//Gl.glUniform4fv(Gl.glGetUniformLocation(program, "registers"), 3, new float[] { g_color_registers[0][0], g_color_registers[0][1], g_color_registers[0][2], g_color_registers[0][3], g_color_registers[1][0], g_color_registers[1][1], g_color_registers[1][2], g_color_registers[1][3], g_color_registers[2][0], g_color_registers[2][1], g_color_registers[2][2], g_color_registers[2][3] });
+			//GL.glUniform4fv(GL.glGetUniformLocation(program, "registers"), 3, new float[] { g_color_registers[0][0], g_color_registers[0][1], g_color_registers[0][2], g_color_registers[0][3], g_color_registers[1][0], g_color_registers[1][1], g_color_registers[1][2], g_color_registers[1][3], g_color_registers[2][0], g_color_registers[2][1], g_color_registers[2][2], g_color_registers[2][3] });
 		}
 		public void Disable()
 		{
-			//Gl.glDeleteProgram(program);
-			//Gl.glDeleteShader(vertex_shader);
-			//Gl.glDeleteShader(fragment_shader);
+			//GL.glDeleteProgram(program);
+			//GL.glDeleteShader(vertex_shader);
+			//GL.glDeleteShader(fragment_shader);
 			// TODO: cache value of GetUniformLocation
-			//Gl.glUniform4fv(Gl.glGetUniformLocation(program, "registers"), 3, g_color_registers[0]);
+			//GL.glUniform4fv(GL.glGetUniformLocation(program, "registers"), 3, g_color_registers[0]);
 		}
 
 		//Use default lighting?
@@ -86,14 +86,14 @@ namespace _3DS.NintendoWare.GFX
 			vert_ss.AppendLine("}");
 
 			// create/compile vertex shader
-			vertex_shader = Gl.glCreateShader(Gl.GL_VERTEX_SHADER);
+			vertex_shader = GL.CreateShader(ShaderType.VertexShader);
 
 			{
 				var vert_src_str = vert_ss.ToString();
-				Gl.glShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
+				GL.ShaderSource(vertex_shader, 1, new string[] { vert_src_str }, new int[] { vert_src_str.Length });
 			}
 
-			Gl.glCompileShader(vertex_shader);
+			GL.CompileShader(vertex_shader);
 
 
 			string[] constant = 
@@ -369,23 +369,23 @@ namespace _3DS.NintendoWare.GFX
 			//std::cout << frag_ss.str() << '\n';
 
 			// create/compile fragment shader
-			fragment_shader = Gl.glCreateShader(Gl.GL_FRAGMENT_SHADER);
+			fragment_shader = GL.CreateShader(ShaderType.FragmentShader);
 			{
 				var frag_src_str = frag_ss.ToString();
-				Gl.glShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
+				GL.ShaderSource(fragment_shader, 1, new String[] { frag_src_str }, new int[] { frag_src_str.Length });
 			}
 
 			//}	// done generating fragment shader
 
-			Gl.glCompileShader(fragment_shader);
+			GL.CompileShader(fragment_shader);
 
 			// check compile status of both shaders
 			//{
 			int vert_compiled = 0;
 			int frag_compiled = 0;
 
-			Gl.glGetShaderiv(vertex_shader, Gl.GL_COMPILE_STATUS, out vert_compiled);
-			Gl.glGetShaderiv(fragment_shader, Gl.GL_COMPILE_STATUS, out frag_compiled);
+			GL.GetShader(vertex_shader, ShaderParameter.CompileStatus, out vert_compiled);
+			GL.GetShader(fragment_shader, ShaderParameter.CompileStatus, out frag_compiled);
 
 			if (vert_compiled == 0)
 			{
@@ -398,27 +398,27 @@ namespace _3DS.NintendoWare.GFX
 			}
 
 			// create program, attach shaders
-			program = Gl.glCreateProgram();
-			Gl.glAttachShader(program, vertex_shader);
-			Gl.glAttachShader(program, fragment_shader);
+			program = GL.CreateProgram();
+			GL.AttachShader(program, vertex_shader);
+			GL.AttachShader(program, fragment_shader);
 
 			// link program, check link status
-			Gl.glLinkProgram(program);
+			GL.LinkProgram(program);
 			int link_status;
-			Gl.glGetProgramiv(program, Gl.GL_LINK_STATUS, out link_status);
+			GL.GetProgram(program, GetProgramParameterName.LinkStatus, out link_status);
 
 			if (link_status == 0)
 			{
 				//std::cout << "Failed to link program!\n";
 			}
 
-			Gl.glUseProgram(program);
+			GL.UseProgram(program);
 
 			// set uniforms
 			for (uint i = 0; i != sampler_count; ++i)
 			{
 				String ss = "textures" + i;
-				Gl.glUniform1i(Gl.glGetUniformLocation(program, ss), (int)i);
+				GL.Uniform1(GL.GetUniformLocation(program, ss), (int)i);
 			}
 		}
 

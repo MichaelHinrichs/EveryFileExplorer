@@ -74,10 +74,6 @@ namespace LegoPirates.UI
 
 		IMAADPCMDecoder AudioConverter = null;
 
-		int aa = 0;
-		int bb = 0;
-		bool first = true;
-
 		Queue<Bitmap> Frames = new Queue<Bitmap>();
 
 		private void FMV_FormClosing(object sender, FormClosingEventArgs e)
@@ -96,7 +92,7 @@ namespace LegoPirates.UI
 			Video.Close();
 		}
 		bool stop = false;
-		bool stopped = false;
+		
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
 			while (!stop)

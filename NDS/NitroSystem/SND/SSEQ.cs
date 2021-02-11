@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -15,48 +15,65 @@ namespace NDS.NitroSystem.SND
             EndianBinaryReader er = new EndianBinaryReader(new MemoryStream(Data), Endianness.LittleEndian);
             try
             {
-                Header = new SSEQHeader(er);
+                Signature = new SSEQSignature(er);
+                DATA = new DATAChunkHeader(er);
             }
             finally
             {
                 er.Close();
             }
         }
-        public Form GetDialog()
+        public System.Windows.Forms.Form GetDialog()
         {
             return new Form();
+            //return new SSEQViewer(this);
         }
 
-        public SSEQHeader Header;
-        public class SSEQHeader
+        public SSEQSignature Signature;
+        public class SSEQSignature
         {
-            public SSEQHeader(EndianBinaryReader er)
+            public SSEQSignature()
+            {
+                Signature = "SSEQ";
+                HeaderSize = 0x8;
+            }
+
+            public SSEQSignature(EndianBinaryReader er)
             {
                 Signature = er.ReadString(Encoding.ASCII, 4);
                 if (Signature != "SSEQ") throw new SignatureNotCorrectException(Signature, "SSEQ", er.BaseStream.Position - 4);
-                Endianness = er.ReadUInt16();
                 HeaderSize = er.ReadUInt16();
                 Version = er.ReadUInt32();
-                FileSize = er.ReadUInt32();
-                FileTableOffset = er.ReadUInt32();
-                FileTableLength = er.ReadUInt32();
-                FileDataOffset = er.ReadUInt32();
             }
             public String Signature;
-            public UInt16 Endianness;
             public UInt16 HeaderSize;
             public UInt32 Version;
-            public UInt32 FileSize;
-            public UInt32 FileTableOffset;
-            public UInt32 FileTableLength;
-            public UInt32 FileDataOffset;
+        }
+
+        public DATAChunkHeader DATA;
+        public class DATAChunkHeader
+        {
+            public DATAChunkHeader()
+            {
+                Signature = "DATA";
+                HeaderSize = 0x4;
+            }
+
+            public DATAChunkHeader(EndianBinaryReader er)
+            {
+                Signature = er.ReadString(Encoding.ASCII, 4);
+                HeaderSize = er.ReadUInt16();
+            }
+            public String Signature;
+            public UInt16 HeaderSize;
+            public UInt32 Version;
         }
 
         public class SSEQIdentifier : FileFormatIdentifier
         {
             public override string GetCategory()
             {
-                return "SSEQ";
+                return null;
             }
 
             public override string GetFileDescription()

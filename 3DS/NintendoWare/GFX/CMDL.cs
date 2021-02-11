@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer._3D;
 using LibEveryFileExplorer.Collections;
@@ -302,7 +302,7 @@ namespace _3DS.NintendoWare.GFX
 		public UInt32 Unknown2;//userdata nr entries
 		public UInt32 Unknown3;//userdata dict offset
 		public UInt32 Flags;
-		public Boolean IsBranchVisible;
+		public bool IsBranchVisible;
 		public UInt32 NrChildren;
 		public UInt32 Unknown7;//children
 		public UInt32 NrAnimationGroupDescriptions;
@@ -748,7 +748,7 @@ namespace _3DS.NintendoWare.GFX
 				er.Write((uint)(Visible ? 1 : 0));
 			}
 			public UInt32 NameOffset;
-			public Boolean Visible;
+			public bool Visible;
 
 			public String Name;
 
@@ -1338,40 +1338,41 @@ namespace _3DS.NintendoWare.GFX
 					if (blendmode != 3) IOUtil.WriteU32LE(Result, 32, 1);
 					else IOUtil.WriteU32LE(Result, 32, BlendLogicOpTransform[BlendOperation.Command4]);
 
+                    // TODO: Verify if this array is appropriate
 					if (blendmode == 0)
 					{
-						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlFactor[6]);
-						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlFactor[7]);
+						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlSrcFactor[6]);
+						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlSrcFactor[7]);
 						IOUtil.WriteU32LE(Result, 44, (uint)BlendOperationCtr.GlEquation[0]);
-						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlFactor[1]);
-						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlFactor[0]);
+						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlSrcFactor[1]);
+						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlSrcFactor[0]);
 						IOUtil.WriteU32LE(Result, 56, (uint)BlendOperationCtr.GlEquation[0]);
 					}
 					else if (blendmode == 1)
 					{
-						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 16) & 0xF]);
-						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 20) & 0xF]);
+						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 16) & 0xF]);
+						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 20) & 0xF]);
 						IOUtil.WriteU32LE(Result, 44, (uint)BlendOperationCtr.GlEquation[(BlendOperation.Command3 >> 0) & 0xFF]);
-						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlFactor[1]);
-						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlFactor[0]);
+						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlSrcFactor[1]);
+						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlSrcFactor[0]);
 						IOUtil.WriteU32LE(Result, 56, (uint)BlendOperationCtr.GlEquation[0]);
 					}
 					else if (blendmode == 2)
 					{
-						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 16) & 0xF]);
-						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 20) & 0xF]);
+						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 16) & 0xF]);
+						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 20) & 0xF]);
 						IOUtil.WriteU32LE(Result, 44, (uint)BlendOperationCtr.GlEquation[(BlendOperation.Command3 >> 0) & 0xFF]);
-						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 24) & 0xF]);
-						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlFactor[(BlendOperation.Command3 >> 28) & 0xF]);
+						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 24) & 0xF]);
+						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlSrcFactor[(BlendOperation.Command3 >> 28) & 0xF]);
 						IOUtil.WriteU32LE(Result, 56, (uint)BlendOperationCtr.GlEquation[(BlendOperation.Command3 >> 8) & 0xFF]);
 					}
 					else
 					{
-						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlFactor[6]);
-						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlFactor[7]);
+						IOUtil.WriteU32LE(Result, 36, (uint)BlendOperationCtr.GlSrcFactor[6]);
+						IOUtil.WriteU32LE(Result, 40, (uint)BlendOperationCtr.GlSrcFactor[7]);
 						IOUtil.WriteU32LE(Result, 44, (uint)BlendOperationCtr.GlEquation[0]);
-						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlFactor[1]);
-						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlFactor[0]);
+						IOUtil.WriteU32LE(Result, 48, (uint)BlendOperationCtr.GlSrcFactor[1]);
+						IOUtil.WriteU32LE(Result, 52, (uint)BlendOperationCtr.GlSrcFactor[0]);
 						IOUtil.WriteU32LE(Result, 56, (uint)BlendOperationCtr.GlEquation[0]);
 					}
 					IOUtil.WriteU32LE(Result, 60, StencilOperation.Command1);
@@ -1473,32 +1474,52 @@ namespace _3DS.NintendoWare.GFX
 					public UInt32 Command5;
 					public UInt32 Command6;
 
-					public static readonly int[] GlFactor =
+                    // TODO: Verify and remove the not needed src and dst parameters
+					public static readonly BlendingFactorSrc[] GlSrcFactor =
 					{
-						Gl.GL_ZERO,
-						Gl.GL_ONE,
-						Gl.GL_SRC_COLOR,
-						Gl.GL_ONE_MINUS_SRC_COLOR,
-						Gl.GL_DST_COLOR,
-						Gl.GL_ONE_MINUS_DST_COLOR,
-						Gl.GL_SRC_ALPHA,
-						Gl.GL_ONE_MINUS_SRC_ALPHA,
-						Gl.GL_DST_ALPHA,
-						Gl.GL_ONE_MINUS_DST_ALPHA,
-						Gl.GL_CONSTANT_COLOR,
-						Gl.GL_ONE_MINUS_CONSTANT_COLOR,
-						Gl.GL_CONSTANT_ALPHA,
-						Gl.GL_ONE_MINUS_CONSTANT_ALPHA,
-						Gl.GL_SRC_ALPHA_SATURATE
+                        BlendingFactorSrc.Zero,
+                        BlendingFactorSrc.One,
+                        BlendingFactorSrc.SrcColor,
+                        BlendingFactorSrc.OneMinusSrcColor,
+                        BlendingFactorSrc.DstColor,
+                        BlendingFactorSrc.OneMinusDstColor,
+                        BlendingFactorSrc.SrcAlpha,
+                        BlendingFactorSrc.OneMinusSrcAlpha,
+                        BlendingFactorSrc.DstAlpha,
+                        BlendingFactorSrc.OneMinusDstAlpha,
+                        BlendingFactorSrc.ConstantColor,
+                        BlendingFactorSrc.OneMinusConstantColor,
+                        BlendingFactorSrc.ConstantAlpha,
+                        BlendingFactorSrc.OneMinusConstantAlpha,
+                        BlendingFactorSrc.SrcAlphaSaturate
 					};
 
-					public static readonly int[] GlEquation =
+                    public static readonly BlendingFactorDest[] GlDstFactor =
+{
+                        BlendingFactorDest.Zero,
+                        BlendingFactorDest.One,
+                        BlendingFactorDest.SrcColor,
+                        BlendingFactorDest.OneMinusSrcColor,
+                        BlendingFactorDest.DstColor,
+                        BlendingFactorDest.OneMinusDstColor,
+                        BlendingFactorDest.SrcAlpha,
+                        BlendingFactorDest.OneMinusSrcAlpha,
+                        BlendingFactorDest.DstAlpha,
+                        BlendingFactorDest.OneMinusDstAlpha,
+                        BlendingFactorDest.ConstantColor,
+                        BlendingFactorDest.OneMinusConstantColor,
+                        BlendingFactorDest.ConstantAlpha,
+                        BlendingFactorDest.OneMinusConstantAlpha,
+                        BlendingFactorDest.SrcAlphaSaturate
+                    };
+
+                    public static readonly BlendEquationMode[] GlEquation =
 					{
-						Gl.GL_FUNC_ADD,
-						Gl.GL_FUNC_SUBTRACT,
-						Gl.GL_FUNC_REVERSE_SUBTRACT,
-						Gl.GL_MIN,
-						Gl.GL_MAX
+                        BlendEquationMode.FuncAdd,
+                        BlendEquationMode.FuncSubtract,
+                        BlendEquationMode.FuncReverseSubtract,
+                        BlendEquationMode.Min,
+                        BlendEquationMode.Max,
 					};
 
 					public void GlApply()
@@ -1511,15 +1532,15 @@ namespace _3DS.NintendoWare.GFX
 						uint CF = (Command3 >> 0) & 0xFF;
 						if (((Command1 >> 8) & 0xFF) == 1)
 						{
-							Gl.glEnable(Gl.GL_BLEND);
-							Gl.glBlendColor(BlendColor.X, BlendColor.Y, BlendColor.Z, BlendColor.W);
-							Gl.glBlendFuncSeparate(GlFactor[CS], GlFactor[CD], GlFactor[AS], GlFactor[AD]);
-							Gl.glBlendEquationSeparate(GlEquation[CF], GlEquation[AF]);
-							Gl.glEnable(Gl.GL_BLEND);
+							GL.Enable(EnableCap.Blend);
+							GL.BlendColor(BlendColor.X, BlendColor.Y, BlendColor.Z, BlendColor.W);
+							GL.BlendFuncSeparate(GlSrcFactor[CS], GlDstFactor[CD], GlSrcFactor[AS], GlDstFactor[AD]);
+							GL.BlendEquationSeparate(GlEquation[CF], GlEquation[AF]);
+							GL.Enable(EnableCap.Blend);
 						}
 						else
 						{
-							Gl.glDisable(Gl.GL_BLEND);
+							GL.Disable(EnableCap.Blend);
 						}
 					}
 				}
@@ -1959,7 +1980,7 @@ namespace _3DS.NintendoWare.GFX
 					public UInt32 FresnelConfig;
 					public UInt32 BumpTextureIndex;
 					public UInt32 BumpMode;
-					public Boolean IsBumpRenormalize;
+					public bool IsBumpRenormalize;
 				}
 
 				public FragmentLightingTableCtr FragmentLightingTable;
@@ -2245,31 +2266,31 @@ namespace _3DS.NintendoWare.GFX
 					}
 					public UInt32 Command1;
 					public UInt32 Command2;
-					private readonly int[] GlAlphaFunc =
+					private readonly AlphaFunction[] GlAlphaFunc =
 							{
-								Gl.GL_NEVER,
-								Gl.GL_ALWAYS,
-								Gl.GL_EQUAL,
-								Gl.GL_NOTEQUAL,
-								Gl.GL_LESS,
-								Gl.GL_LEQUAL,
-								Gl.GL_GREATER,
-								Gl.GL_GEQUAL
+                                AlphaFunction.Never,
+                                AlphaFunction.Always,
+                                AlphaFunction.Equal,
+                                AlphaFunction.Notequal,
+                                AlphaFunction.Less,
+                                AlphaFunction.Lequal,
+                                AlphaFunction.Greater,
+                                AlphaFunction.Gequal
 							};
 					public void GlApply()
 					{
 						if ((Command1 & 1) == 1)
 						{
-							Gl.glEnable(Gl.GL_ALPHA_TEST);
+							GL.Enable(EnableCap.AlphaTest);
 							uint func = (Command1 >> 4) & 0xF;
 							uint reference = Command1 >> 8;
-							Gl.glAlphaFunc(GlAlphaFunc[func], (reference - 0.5f) / 255f);
-							Gl.glEnable(Gl.GL_ALPHA_TEST);
-						}
-						else Gl.glDisable(Gl.GL_ALPHA_TEST);
-					}
+							GL.AlphaFunc(GlAlphaFunc[func], (reference - 0.5f) / 255f);
+                            GL.Enable(EnableCap.AlphaTest);
+                        }
+                        else GL.Disable(EnableCap.AlphaTest);
+                    }
 
-					private readonly uint[] ReverseFunc =
+                    private readonly uint[] ReverseFunc =
 					{
 						0, 1, 4, 7, 2, 3, 6, 5
 					};
@@ -2399,7 +2420,7 @@ namespace _3DS.NintendoWare.GFX
 			public UInt32 ShapeIndex;
 			public UInt32 MaterialIndex;
 			public UInt32 OwnerModelOffset;
-			public Boolean IsVisible;
+			public bool IsVisible;
 			public Byte RenderPriority;
 			public Int16 MeshNodeVisibilityIndex;
 			public UInt32 Unknown8;
@@ -2812,7 +2833,7 @@ namespace _3DS.NintendoWare.GFX
 						}
 						public UInt32 FormatType;
 						public Byte PrimitiveMode;
-						public Boolean IsVisible;
+						public bool IsVisible;
 						public UInt32 FaceDataLength;
 						public UInt32 FaceDataOffset;
 						public UInt32 BufferObject;

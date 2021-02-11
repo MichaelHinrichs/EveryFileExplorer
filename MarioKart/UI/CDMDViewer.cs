@@ -325,7 +325,7 @@ namespace MarioKart.UI
 						Gl.glPushMatrix();
 						Gl.glTranslatef(o.Position.X, o.Position.Z, 0);
 
-						Gl.glRotatef(o.Rotation.Y, 0, 0, 1);
+						Gl.Rotate(o.Rotation.Y, 0, 0, 1);
 
 						Gl.glScalef(mult, mult, 1);
 

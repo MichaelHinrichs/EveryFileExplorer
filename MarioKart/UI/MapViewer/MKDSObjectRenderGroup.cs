@@ -52,7 +52,7 @@ namespace MarioKart.UI.MapViewer
 					Gl.glPushMatrix();
 					Gl.glTranslatef(o.Position.X, o.Position.Z, 0);
 
-					Gl.glRotatef(o.Rotation.Y, 0, 0, 1);
+					Gl.Rotate(o.Rotation.Y, 0, 0, 1);
 
 					int[] viewport = new int[4];
 					float[] pm = new float[16];

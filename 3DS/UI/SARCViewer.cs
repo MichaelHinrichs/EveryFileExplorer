@@ -96,7 +96,8 @@ namespace _3DS.UI
 
 		private void menuReplace_Click(object sender, EventArgs e)
 		{
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK
+			openFileDialog1.FileName = System.IO.Path.GetFileName(fileBrowser1.SelectedPath);
+			if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK
 				   && openFileDialog1.FileName.Length > 0)
 			{
 				var file = Root.GetFileByPath(fileBrowser1.SelectedPath);

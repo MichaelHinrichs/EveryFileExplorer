@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,7 +41,9 @@ namespace _3DS
 			return "Simple Archive (*.sarc)|*.sarc";
 		}
 
-		public byte[] Write()
+        public readonly string[] MK7_szs_extensions = { "_map.bclim", "_map2.bclim", ".div", ".kcl", ".kmp", ".bcmdl", ".bclgt", ".bcfog", "_ch0.bclgt", "_ch1.bclgt", "_ch2.bclgt", "_ch3.bclgt", "_ch4.bclgt", "_ch5.bclgt" };
+
+        public byte[] Write()
 		{
 			MemoryStream m = new MemoryStream();
 			EndianBinaryWriter er = new EndianBinaryWriter(m, Endianness.LittleEndian);
@@ -56,6 +58,8 @@ namespace _3DS
 			er.Close();
 			return result;
 		}
+
+        public string SarcFilename = null;
 
 		public SARCHeader Header;
 		public class SARCHeader
@@ -228,21 +232,43 @@ namespace _3DS
 			return res;
 		}
 
+        public bool checkHashExists(uint Hash)
+        {
+            foreach(var v in SFat.Entries)
+            {
+                if (v.FileNameHash == Hash) return true;
+            }
+            return false;
+        }
+
 		public SFSDirectory ToFileSystem()
 		{
 			SFSDirectory Root = new SFSDirectory("/", true);
-			foreach (var v in SFat.Entries)
+            foreach (var v in SFat.Entries)
 			{
 				var q = new SFSFile((int)v.FileNameHash, string.Format("0x{0:X8}", v.FileNameHash), Root);
+                bool NameFound = false;
 				if (SARCHashTable.DefaultHashTable != null)
 				{
 					var vv = SARCHashTable.DefaultHashTable.GetEntryByHash(v.FileNameHash);
-					if (vv != null) q.FileName = vv.Name;
+                    if (vv != null) { q.FileName = vv.Name; NameFound = true; }
 				}
+                if (SarcFilename != null && !NameFound)
+                {
+                    var SarcName = System.IO.Path.GetFileNameWithoutExtension(SarcFilename);
+                    foreach (var ext in MK7_szs_extensions)
+                    {
+                        string vv = SarcName + ext;
+                        if (v.FileNameHash == GetHashFromName(vv))
+                        {
+                            q.FileName = vv;
+                        }
+                    }
+                }
 				q.Data = GetFileDataByHash(v.FileNameHash);
 				Root.Files.Add(q);
 			}
-			return Root;
+            return Root;
 		}
 
 		public void FromFileSystem(SFSDirectory Root)
@@ -251,12 +277,15 @@ namespace _3DS
 			SFat = new SFAT();
 			SFat.NrEntries = (ushort)Root.Files.Count;
 			uint DataStart = 0;
-			foreach (var v in Root.Files)
+            Root.Files.Sort(delegate (SFSFile a, SFSFile b) {
+                uint hasha = (uint)a.FileID;
+                uint hashb = (uint)b.FileID;
+                return hasha.CompareTo(hashb);
+            });
+            foreach (var v in Root.Files)
 			{
 				while ((DataStart % 128) != 0) DataStart++;
-				uint hash;
-				if (v.FileName == string.Format("0x{0:X8}", v.FileID)) hash = (uint)v.FileID;
-				else hash = GetHashFromName(v.FileName);
+                uint hash = (uint)v.FileID;
 				SFat.Entries.Add(new SFAT.SFATEntry() { FileDataStart = DataStart, FileDataEnd = (uint)(DataStart + v.Data.Length), FileNameHash = hash, FileNameOffset = 0 });
 				DataStart += (uint)v.Data.Length;
 			}
@@ -274,13 +303,13 @@ namespace _3DS
 			Header.FileSize += (uint)Data.Length;
 		}
 
-		public class SARCIdentifier : FileFormatIdentifier
-		{
-			public override string GetCategory()
-			{
-				return Category_Archives;
-			}
-
+        public class SARCIdentifier : FileFormatIdentifier
+        {
+            public override string GetCategory()
+            {
+            return Category_Archives;
+            }
+			
 			public override string GetFileDescription()
 			{
 				return "Simple Archive (SARC)";

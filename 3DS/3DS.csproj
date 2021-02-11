@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>_3DS</RootNamespace>
     <AssemblyName>3DS</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -43,24 +46,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tao.DevIl, Version=1.6.8.3, Culture=neutral, PublicKeyToken=7ec4053013524957, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MKDS Course Modifier\MKDS Course Modifier\bin\x86\Debug_new\Tao.DevIl.dll</HintPath>
-    </Reference>
     <Reference Include="Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MKDS Course Modifier\MKDS Course Modifier\bin\x86\Debug_new\Tao.OpenGl.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>C:\Program Files (x86)\TaoFramework\bin\Tao.OpenGl.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MKDS Course Modifier\MKDS Course Modifier\bin\x86\Debug_new\Tao.Platform.Windows.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>C:\Program Files (x86)\TaoFramework\bin\Tao.Platform.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bnr.cs" />
     <Compile Include="BYML.cs" />
+    <Compile Include="CBMD.cs" />
+    <Compile Include="CTPK.cs" />
     <Compile Include="GPU\PICA\FragmentLightSource.cs" />
+    <Compile Include="Moflex.cs" />
+    <Compile Include="MSBT.cs" />
     <Compile Include="N3DSPlugin.cs" />
     <Compile Include="NintendoWare\FONT\CFNT.cs" />
     <Compile Include="NintendoWare\GFX\BoundingVolume.cs" />
@@ -85,12 +87,15 @@
     <Compile Include="NintendoWare\LYT1\pic1.cs" />
     <Compile Include="NintendoWare\LYT1\txt1.cs" />
     <Compile Include="NintendoWare\LYT1\wnd1.cs" />
+    <Compile Include="NintendoWare\SND\CGRP.cs" />
     <Compile Include="NintendoWare\SND\CSAR.cs" />
+    <Compile Include="NintendoWare\SND\CSEQ.cs" />
     <Compile Include="NintendoWare\SND\CSTM.cs" />
     <Compile Include="NintendoWare\LYT1\DARC.cs" />
     <Compile Include="DVLB.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GPU\Textures.cs" />
+    <Compile Include="NintendoWare\SND\CWAV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -134,6 +139,12 @@
     <Compile Include="UI\CLYTViewer.Designer.cs">
       <DependentUpon>CLYTViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CSEQViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CSEQViewer.Designer.cs">
+      <DependentUpon>CSEQViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\CSTMViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +168,12 @@
     </Compile>
     <Compile Include="UI\CMDLViewer.Designer.cs">
       <DependentUpon>CMDLViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SARCFileAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SARCFileAdd.Designer.cs">
+      <DependentUpon>SARCFileAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SAHTViewer.cs">
       <SubType>Form</SubType>
@@ -231,6 +248,9 @@
     <EmbeddedResource Include="UI\CLYTViewer.resx">
       <DependentUpon>CLYTViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\CSEQViewer.resx">
+      <DependentUpon>CSEQViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\CSTMViewer.resx">
       <DependentUpon>CSTMViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,11 +263,15 @@
     <EmbeddedResource Include="UI\CMDLViewer.resx">
       <DependentUpon>CMDLViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SARCFileAdd.resx">
+      <DependentUpon>SARCFileAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SAHTViewer.resx">
       <DependentUpon>SAHTViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SARCViewer.resx">
       <DependentUpon>SARCViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SMDHViewer.resx">
       <DependentUpon>SMDHViewer.cs</DependentUpon>
@@ -267,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NintendoWare\GFX\Shaders\CGFXFrag.c" />
+    <None Include="Resources\plus.png" />
     <None Include="Resources\lighthouse-shine.png" />
     <None Include="Resources\light-bulb.png" />
     <None Include="Resources\weather-cloud.png" />

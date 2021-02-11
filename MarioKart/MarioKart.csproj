@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MarioKart</RootNamespace>
     <AssemblyName>MarioKart</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,13 +32,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MKDS Course Modifier\MKDS Course Modifier\bin\x86\Debug_new\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MKDS Course Modifier\MKDS Course Modifier\bin\x86\Debug_new\Tao.OpenGl.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\TaoFramework\bin\Tao.OpenGl.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3DS\bin\Debug\Tao.Platform.Windows.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\TaoFramework\bin\Tao.Platform.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +62,10 @@
     <Compile Include="MK64\LevelScript.cs" />
     <Compile Include="MK64\MIO0.cs" />
     <Compile Include="MK64\MK64.cs" />
+    <Compile Include="MK7\BCTR.cs" />
     <Compile Include="MK7\CDAB.cs" />
+    <Compile Include="MK7\BSEQ.cs" />
+    <Compile Include="MK7\KCLInformations.cs" />
     <Compile Include="MK7\KMP\CAME.cs" />
     <Compile Include="MK7\KMP\CDMD.cs" />
     <Compile Include="MK7\KCL.cs" />
@@ -114,6 +117,12 @@
     </Compile>
     <Compile Include="UI\CDMDViewer.Designer.cs">
       <DependentUpon>CDMDViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KclWorking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\KclWorking.Designer.cs">
+      <DependentUpon>KclWorking.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\MapViewer\MKDSObjectRenderGroup.cs" />
     <Compile Include="UI\MapViewer\MKDSRouteLineRenderGroup.cs" />
@@ -183,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CDMDViewer.resx">
       <DependentUpon>CDMDViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\KclWorking.resx">
+      <DependentUpon>KclWorking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MKDSRouteViewer.resx">
       <DependentUpon>MKDSRouteViewer.cs</DependentUpon>
@@ -313,6 +325,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MKDS\NKM\KTPM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\config_bctr.png" />
+    <Content Include="Resources\config_bss.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

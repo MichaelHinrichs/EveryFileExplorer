@@ -72,12 +72,10 @@ namespace MarioKart
 					er.Write((uint)(0x80000000 | (relleafstartpos - NodeBaseOffsets.Dequeue() - 2)));
 					long curpos = er.BaseStream.Position;
 					er.BaseStream.Position = leafstartpos;
-					foreach (var v in n.Triangles)
-					{
-						er.Write((ushort)(v + 1));
-					}
-					er.Write((ushort)0);
-					relleafstartpos += (uint)(n.Triangles.Length * 2) + 2;
+					foreach (ushort v in n.Triangles)
+						er.Write(v);
+                    er.Write(ushort.MaxValue);
+                    relleafstartpos += (uint)(n.Triangles.Length * 2) + 2;
 					leafstartpos = er.BaseStream.Position;
 					er.BaseStream.Position = curpos;
 				}
@@ -357,7 +355,14 @@ namespace MarioKart
 			}*/
 		}
 
-		public static KCLOctree FromTriangles(Triangle[] Triangles, KCLHeader Header, int MaxRootSize = 2048, int MinRootSize = 128, int MinCubeSize = 32, int MaxNrTris = 10)//35)
+        public static int next_exponent(float value)
+        {
+            if ((double)value <= 1.0)
+                return 0;
+            return (int)System.Math.Ceiling(System.Math.Log((double)value, 2.0));
+        }
+
+        public static KCLOctree FromTriangles(Triangle[] Triangles, KCLHeader Header, int MaxRootSize = 2048, int MinRootSize = 128, int MinCubeSize = 32, int MaxNrTris = 10)//35)
 		{
 			Header.Unknown1 = 30;
 			Header.Unknown2 = 25;
@@ -391,14 +396,15 @@ namespace MarioKart
 				index++;
 			}
 			//in real mkds, 25 is subtracted from the min pos
-			min -= new Vector3(25, 25, 25);
 			//TODO: after that, from some of the components (may be more than one) 30 is subtracted aswell => How do I know from which ones I have to do that?
 
-			//Assume the same is done for max:
-			max += new Vector3(25, 25, 25);
-			//TODO: +30
-			Header.OctreeOrigin = min;
-			Vector3 size = max - min;
+            min -= new Vector3(50f, 80f, 50f);
+            max += new Vector3(50f, 50f, 50f);
+
+            //TODO: +30
+            Header.OctreeOrigin = min;
+            Header.OctreeMax = max;
+            Vector3 size = max - min;
 			float mincomp = Math.Min(Math.Min(size.X, size.Y), size.Z);
 			int CoordShift = MathUtil.GetNearest2Power(mincomp);
 			if (CoordShift > MathUtil.GetNearest2Power(MaxRootSize)) CoordShift = MathUtil.GetNearest2Power(MaxRootSize);
@@ -416,8 +422,11 @@ namespace MarioKart
 			Header.XMask = 0xFFFFFFFF << MathUtil.GetNearest2Power(size.X);
 			Header.YMask = 0xFFFFFFFF << MathUtil.GetNearest2Power(size.Y);
 			Header.ZMask = 0xFFFFFFFF << MathUtil.GetNearest2Power(size.Z);
+            Header.n_x = (float)KCLOctree.next_exponent(max.X - min.X);
+            Header.n_y = (float)KCLOctree.next_exponent(max.Y - min.Y);
+            Header.n_z = (float)KCLOctree.next_exponent(max.Z - min.Z);
 
-			KCLOctree k = new KCLOctree();
+            KCLOctree k = new KCLOctree();
 			k.RootNodes = new KCLOctreeNode[NrX * NrY * NrZ];
 			int i = 0;
 			for (int z = 0; z < NrZ; z++)

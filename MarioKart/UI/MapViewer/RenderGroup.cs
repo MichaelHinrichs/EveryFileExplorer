@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Collections;
 
 namespace MarioKart.UI.MapViewer
 {
-	public abstract class RenderGroup
+    public abstract class RenderGroup
 	{
 		//public abstract bool Createable { get; }
 		public abstract bool Interactable { get; }

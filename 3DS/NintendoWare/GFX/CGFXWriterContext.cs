@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
-using System.IO;
-using System.Drawing;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Collections;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CGFXWriterContext
+    public class CGFXWriterContext
 	{
 		private Dictionary<long, byte[]> IMAGBlockEntries = new Dictionary<long, byte[]>();
 		private Dictionary<long, string> StringTableEntries = new Dictionary<long, string>();

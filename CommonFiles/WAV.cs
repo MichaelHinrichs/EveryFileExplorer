@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -9,7 +7,7 @@ using LibEveryFileExplorer.IO;
 
 namespace CommonFiles
 {
-	public class WAV : FileFormat<WAV.WAVIdentifier>, IWriteable
+    public class WAV : FileFormat<WAV.WAVIdentifier>, IWriteable
 	{
 		/// <summary>
 		/// Generates a WAV file with the given <paramref name="Data"/> and params.

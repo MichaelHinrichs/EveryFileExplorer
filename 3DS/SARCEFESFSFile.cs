@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Files.SimpleFileSystem;
+﻿using LibEveryFileExplorer.Files.SimpleFileSystem;
 
 namespace _3DS
 {
-	public class SARCEFESFSFile : EFESFSFile
+    public class SARCEFESFSFile : EFESFSFile
 	{
 		public SARCEFESFSFile(SFSFile File)
 			: base(File) { }

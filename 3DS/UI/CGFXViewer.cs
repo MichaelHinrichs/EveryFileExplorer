@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Tao.OpenGl;
-using LibEveryFileExplorer._3D;
-using System.Drawing.Imaging;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer;
-using System.Runtime.InteropServices;
 using _3DS.NintendoWare.GFX;
 
 namespace _3DS.UI
 {
-	public partial class CGFXViewer : Form
+    public partial class CGFXViewer : Form
 	{
 		ImageList ImageL;
 		CMDLViewer ModViewer = null;

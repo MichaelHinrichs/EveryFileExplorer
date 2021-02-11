@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Collections;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MK7.KMP
 {
-	public class POTI
+    public class POTI
 	{
 		public POTI()
 		{

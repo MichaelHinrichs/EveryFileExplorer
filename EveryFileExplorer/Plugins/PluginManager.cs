@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Reflection;
 
 namespace EveryFileExplorer.Plugins
 {
-	public class PluginManager
+    public class PluginManager
 	{
 		public Plugin[] Plugins { get; private set; }
 		public PluginManager()
@@ -30,7 +28,7 @@ namespace EveryFileExplorer.Plugins
 				{
 					ass = Assembly.LoadFile(s);
 				}
-				catch (NotSupportedException e)
+				catch (NotSupportedException)
 				{
 					MessageBox.Show("Unblock " + AssemblyName.GetAssemblyName(s) + " from external sources!");
 				}

@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using _3DS.NintendoWare.FONT;
 using LibEveryFileExplorer.GFX;
 
 namespace _3DS.UI
 {
-	public partial class CFNTViewer : Form
+    public partial class CFNTViewer : Form
 	{
 		CFNT Font;
 		BitmapFont f;

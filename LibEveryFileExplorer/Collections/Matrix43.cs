@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer.Collections
 {
-	public struct Matrix43
+    public struct Matrix43
 	{
 		public static readonly Matrix43 Identity = new Matrix43(new float[] { 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 });
 

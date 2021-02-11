@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Collections;
+﻿using LibEveryFileExplorer.Collections;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class Util
+    public class Util
 	{
 		public static Matrix44 G3DPivotToMatrix(float[] ab, int pv, int neg)
 		{

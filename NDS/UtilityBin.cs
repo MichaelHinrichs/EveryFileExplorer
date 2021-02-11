@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using NDS.Nitro;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
@@ -13,7 +11,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS
 {
-	public class UtilityBin : FileFormat<UtilityBin.UtilityBinIdentifier>, IViewable, IWriteable
+    public class UtilityBin : FileFormat<UtilityBin.UtilityBinIdentifier>, IViewable, IWriteable
 	{
 		public UtilityBin(byte[] Data)
 		{

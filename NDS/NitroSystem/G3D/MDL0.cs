@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using NDS.GPU;
 using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class MDL0
+    public class MDL0
 	{
 		public MDL0()
 		{

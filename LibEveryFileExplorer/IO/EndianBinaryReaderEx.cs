@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Reflection;
 using LibEveryFileExplorer.IO.Serialization;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 
 namespace LibEveryFileExplorer.IO
 {
-	public class EndianBinaryReaderEx : EndianBinaryReader
+    public class EndianBinaryReaderEx : EndianBinaryReader
 	{
 		public EndianBinaryReaderEx(Stream baseStream)
 			: base(baseStream) { }

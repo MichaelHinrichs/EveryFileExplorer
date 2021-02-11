@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer.Files;
@@ -12,9 +7,8 @@ using LibEveryFileExplorer;
 
 namespace GCNWii.UI
 {
-	public partial class U8Viewer : Form
+    public partial class U8Viewer : Form
 	{
-		U8 Archive;
 		SFSDirectory Root;
 		public U8Viewer(U8 Archive)
 		{

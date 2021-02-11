@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace CommonFiles.Maya
 {
-	public class MayaASCIIWriter
+    public class MayaASCIIWriter
 	{
 		private StringWriter mWriter;
 

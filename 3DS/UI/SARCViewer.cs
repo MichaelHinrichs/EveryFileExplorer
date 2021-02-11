@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer.Files;
@@ -12,7 +7,7 @@ using LibEveryFileExplorer;
 
 namespace _3DS.UI
 {
-	public partial class SARCViewer : Form, IChildReactive
+    public partial class SARCViewer : Form, IChildReactive
 	{
 		SARC Archive;
 		SFSDirectory Root;

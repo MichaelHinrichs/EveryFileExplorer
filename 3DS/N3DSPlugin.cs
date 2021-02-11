@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.Script;
 using _3DS.NintendoWare.GFX;
@@ -10,7 +7,7 @@ using CommonFiles;
 
 namespace _3DS
 {
-	public class N3DSPlugin : EFEPlugin
+    public class N3DSPlugin : EFEPlugin
 	{
 		public override void OnLoad()
 		{

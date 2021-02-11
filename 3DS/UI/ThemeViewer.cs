@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Linq;
-using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
-using _3DS.UI;
-using _3DS.GPU;
-using LibEveryFileExplorer.IO;
 using System.Timers;
+using System.Windows.Forms;
+using _3DS.GPU;
 
 namespace _3DS.UI
 {

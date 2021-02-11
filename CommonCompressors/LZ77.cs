@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Compression;
 using System.Runtime.InteropServices;
 
 namespace CommonCompressors
 {
-	public unsafe class LZ77 : CompressionFormat<LZ77.LZ77Identifier>, ICompressable
+    public unsafe class LZ77 : CompressionFormat<LZ77.LZ77Identifier>, ICompressable
 	{
 		public unsafe byte[] Compress(byte[] Data)
 		{

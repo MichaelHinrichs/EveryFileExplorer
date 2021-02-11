@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -11,7 +9,7 @@ using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class CLIM : FileFormat<CLIM.CLIMIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
+    public class CLIM : FileFormat<CLIM.CLIMIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
 	{
 		public CLIM()
 		{

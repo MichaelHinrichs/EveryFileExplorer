@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
 using LibEveryFileExplorer;
@@ -15,7 +11,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class OBJI : GameDataSection<OBJI.OBJIEntry>
+    public class OBJI : GameDataSection<OBJI.OBJIEntry>
 	{
 		public OBJI() { Signature = "OBJI"; }
 		public OBJI(EndianBinaryReaderEx er)

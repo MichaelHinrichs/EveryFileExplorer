@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using Tao.OpenGl;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class CLYTShader
+    public class CLYTShader
 	{
 		public int[] Textures;
 		private mat1.MaterialEntry Material;

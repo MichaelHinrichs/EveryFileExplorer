@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
-using LibEveryFileExplorer.Collections;
-using System.Windows.Forms;
-using LibEveryFileExplorer;
-using System.ComponentModel;
-using LibEveryFileExplorer.ComponentModel;
 using System.Drawing;
 using LibEveryFileExplorer.GFX;
 using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class STAG
+    public class STAG
 	{
 		public STAG()
 		{

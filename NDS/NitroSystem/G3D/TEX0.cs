@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using NDS.GPU;
 using System.Drawing;
 using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class TEX0
+    public class TEX0
 	{
 		public TEX0()
 		{

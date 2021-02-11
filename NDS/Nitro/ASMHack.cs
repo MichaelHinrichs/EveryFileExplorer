@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
@@ -9,7 +6,7 @@ using System.Diagnostics;
 
 namespace NDS.Nitro
 {
-	public class ASMHack
+    public class ASMHack
 	{
 		public void Insert(String Path, ARM9 Arm9)
 		{

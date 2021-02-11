@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Files;
+﻿using LibEveryFileExplorer.Files;
 using System.Drawing;
 
 namespace _3DS
 {
-	public class DVLB : FileFormat<DVLB.DVLBIdentifier>
+    public class DVLB : FileFormat<DVLB.DVLBIdentifier>
 	{
 		public class DVLBIdentifier : FileFormatIdentifier
 		{

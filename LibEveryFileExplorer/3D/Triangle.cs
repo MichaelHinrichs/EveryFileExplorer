@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.Collections;
+﻿using LibEveryFileExplorer.Collections;
 
 namespace LibEveryFileExplorer._3D
 {
-	public class Triangle
+    public class Triangle
 	{
 		public Triangle(Vector3 A, Vector3 B, Vector3 C)
 		{

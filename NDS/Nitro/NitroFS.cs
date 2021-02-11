@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer.IO;
 
 namespace NDS.Nitro
 {
-	public class FileAllocationEntry
+    public class FileAllocationEntry
 	{
 		public FileAllocationEntry(UInt32 Offset, UInt32 Size)
 		{

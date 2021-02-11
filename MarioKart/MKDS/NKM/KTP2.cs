@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
 using LibEveryFileExplorer;
@@ -15,7 +11,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class KTP2 : GameDataSection<KTP2.KTP2Entry>
+    public class KTP2 : GameDataSection<KTP2.KTP2Entry>
 	{
 		public KTP2() { Signature = "KTP2"; }
 		public KTP2(EndianBinaryReaderEx er)

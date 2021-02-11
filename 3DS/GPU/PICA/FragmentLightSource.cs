@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Collections;
 
 namespace _3DS.GPU.PICA
 {
-	public class FragmentLightSource
+    public class FragmentLightSource
 	{
 		public Vector4 Ambient = new Vector4(0, 0, 0, 1);
 		public Vector4 Diffuse = new Vector4(1, 1, 1, 1);//default white for light0, black for others

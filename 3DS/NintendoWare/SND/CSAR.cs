@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -11,7 +9,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace _3DS.NintendoWare.SND
 {
-	public class CSAR : FileFormat<CSAR.CSARIdentifier>, IViewable
+    public class CSAR : FileFormat<CSAR.CSARIdentifier>, IViewable
 	{
 		public CSAR(byte[] Data)
 		{

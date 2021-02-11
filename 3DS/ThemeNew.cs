@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.IO.Serialization;
@@ -11,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _3DS
 {
-	public class ThemeNew : FileFormat<ThemeNew.ThemeIdentifier>//, IViewable
+    public class ThemeNew : FileFormat<ThemeNew.ThemeIdentifier>//, IViewable
 	{
 		public ThemeNew(byte[] Data)
 		{
@@ -27,7 +24,6 @@ namespace _3DS
 				if (Header.TopBGTexture0Offset != 0)
 				{
 					er.BaseStream.Position = Header.TopBGTexture0Offset;
-					Bitmap b;
 					switch (Header.TopBGType)
 					{
 						case ThemeHeader.BGType.Wallpaper:
@@ -53,7 +49,6 @@ namespace _3DS
 				if (Header.TopBGTexture1Offset != 0)
 				{
 					er.BaseStream.Position = Header.TopBGTexture1Offset;
-					Bitmap b;
 					switch (Header.TopBGType)
 					{
 						case ThemeHeader.BGType.Wallpaper:
@@ -81,7 +76,6 @@ namespace _3DS
 				if (Header.BottomBGTextureOffset != 0)
 				{
 					er.BaseStream.Position = Header.BottomBGTextureOffset;
-					Bitmap b;
 					switch (Header.BottomBGType)
 					{
 						case ThemeHeader.BGType.Wallpaper:

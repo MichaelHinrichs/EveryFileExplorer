@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 using System.Drawing;
 
 namespace LibEveryFileExplorer.Files
 {
-	internal interface FileFormatBase { }
+    internal interface FileFormatBase { }
 
 	public abstract class FileFormat<T> : FileFormatBase where T : FileFormatIdentifier, new()
 	{

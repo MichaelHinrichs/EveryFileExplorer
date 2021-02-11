@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CANM
+    public class CANM
 	{
 		public CANM(EndianBinaryReader er)
 		{

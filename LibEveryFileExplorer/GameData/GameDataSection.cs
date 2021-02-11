@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using LibEveryFileExplorer.IO;
 
 namespace LibEveryFileExplorer.GameData
 {
-	public abstract class GameDataSection<T> where T : GameDataSectionEntry
+    public abstract class GameDataSection<T> where T : GameDataSectionEntry
 	{
 		public String Signature;
 		public UInt32 NrEntries;

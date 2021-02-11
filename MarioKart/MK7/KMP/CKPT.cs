@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using System.IO;
 using LibEveryFileExplorer.GameData;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MK7.KMP
 {
-	public class CKPT : GameDataSection<CKPT.CKPTEntry>
+    public class CKPT : GameDataSection<CKPT.CKPTEntry>
 	{
 		public CKPT() { Signature = "TPKC"; }
 		public CKPT(EndianBinaryReaderEx er)

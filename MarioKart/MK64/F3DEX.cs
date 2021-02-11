@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MarioKart.MK64
+﻿namespace MarioKart.MK64
 {
-	public class F3DEX
+    public class F3DEX
 	{
 		public enum F3DEXCommand : byte
 		{

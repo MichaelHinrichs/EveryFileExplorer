@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.ComponentModel;
@@ -23,15 +22,13 @@ using @uint = System.UInt64;
 using unsignedByte = System.Byte;
 using unsignedInt = System.UInt32;
 using URIFragmentType = System.String;
-using VersionType = System.String;
 using System.Drawing;
 using System.Globalization;
 using LibEveryFileExplorer.Files;
-using System.Windows.Forms;
 
 namespace CommonFiles
 {
-	public class DAE : FileFormat<DAE.DAEIdentifier>, IWriteable
+    public class DAE : FileFormat<DAE.DAEIdentifier>, IWriteable
 	{
 		public DAE()
 		{

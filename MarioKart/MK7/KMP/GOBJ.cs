@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using System.IO;
 using LibEveryFileExplorer.GameData;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.Math;
 using LibEveryFileExplorer.IO;
@@ -14,7 +10,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MK7.KMP
 {
-	public class GOBJ : GameDataSection<GOBJ.GOBJEntry>
+    public class GOBJ : GameDataSection<GOBJ.GOBJEntry>
 	{
 		public GOBJ() { Signature = "JBOG"; }
 		public GOBJ(EndianBinaryReaderEx er)

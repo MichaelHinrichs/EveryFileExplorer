@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Tao.OpenGl;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class BasicShader
+    public class BasicShader
 	{
 		public void Enable()
 		{

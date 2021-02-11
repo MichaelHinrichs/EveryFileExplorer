@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
 using LibEveryFileExplorer.IO;
 using System.Windows.Forms;
-using LibEveryFileExplorer._3D;
 using CommonFiles;
-using Tao.OpenGl;
-using LibEveryFileExplorer.Collections;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CGFX : FileFormat<CGFX.CGFXIdentifier>, IFileCreatable, IViewable, IWriteable
+    public class CGFX : FileFormat<CGFX.CGFXIdentifier>, IFileCreatable, IViewable, IWriteable
 	{
 		public CGFX()
 		{

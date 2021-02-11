@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Math;
 
 namespace NDS.SND
 {
-	public class IMAADPCMEncoder
+    public class IMAADPCMEncoder
 	{
 		public IMAADPCMEncoder() { }
 

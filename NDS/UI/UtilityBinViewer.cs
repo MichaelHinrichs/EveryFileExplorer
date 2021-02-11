@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.Files;
-using NDS.NitroSystem.FND;
 
 namespace NDS.UI
 {
-	public partial class UtilityBinViewer : Form, IChildReactive
+    public partial class UtilityBinViewer : Form, IChildReactive
 	{
 		UtilityBin Archive;
 		SFSDirectory Root;

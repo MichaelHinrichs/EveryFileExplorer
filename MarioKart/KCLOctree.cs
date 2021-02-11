@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.IO;
 using LibEveryFileExplorer._3D;
 using LibEveryFileExplorer.Collections;
-using CommonFiles;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.Math;
 
 namespace MarioKart
 {
-	public class KCLOctree
+    public class KCLOctree
 	{
 		public KCLOctree() { }
 		public KCLOctree(EndianBinaryReader er, int NrNodes)

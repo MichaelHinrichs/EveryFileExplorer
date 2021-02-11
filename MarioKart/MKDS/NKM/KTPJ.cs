@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using LibEveryFileExplorer;
 using System.ComponentModel;
-using LibEveryFileExplorer.ComponentModel;
 using LibEveryFileExplorer.Math;
 using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class KTPJ : GameDataSection<KTPJ.KTPJEntry>
+    public class KTPJ : GameDataSection<KTPJ.KTPJEntry>
 	{
 		public KTPJ() { Signature = "KTPJ"; }
 		public KTPJ(EndianBinaryReader er, UInt16 Version)

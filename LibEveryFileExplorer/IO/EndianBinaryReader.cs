@@ -1,12 +1,11 @@
 ﻿using System.Text;
-using System.Runtime.InteropServices;
 using LibEveryFileExplorer.Collections;
 using System;
 using System.IO;
 
 namespace LibEveryFileExplorer.IO
 {
-	public class EndianBinaryReader : IDisposable
+    public class EndianBinaryReader : IDisposable
 	{
 		private bool disposed;
 		private byte[] buffer;

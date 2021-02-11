@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using System.Drawing;
 using Tao.OpenGl;
 using LibEveryFileExplorer.IO;
@@ -13,7 +11,7 @@ using CommonFiles;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class CMDL
+    public class CMDL
 	{
 		public CMDL(String Name)
 		{
@@ -274,10 +272,10 @@ namespace _3DS.NintendoWare.GFX
 			if (Skeleton != null)
 			{
 				throw new NotImplementedException();
-				long curpos = er.BaseStream.Position;
-				er.BaseStream.Position = skeletonoffs;
-				er.Write((uint)(curpos - skeletonoffs));
-				er.BaseStream.Position = curpos;
+				//long curpos = er.BaseStream.Position;
+				//er.BaseStream.Position = skeletonoffs;
+				//er.Write((uint)(curpos - skeletonoffs));
+				//er.BaseStream.Position = curpos;
 				//Skeleton.Write(er, c);
 			}
 
@@ -3645,7 +3643,6 @@ namespace _3DS.NintendoWare.GFX
 			o.Content.library_effects = new DAE.library_effects();
 			if (Resource.Data.Textures != null && Resource.Data.Textures.Length > 0) o.Content.library_images = new DAE.library_images();
 			int id = 2;
-			int i = 0;
 			foreach (var matt in m.Materials)
 			{
 				var mat2 = new DAE.material();
@@ -4001,7 +3998,6 @@ namespace _3DS.NintendoWare.GFX
 					{
 						er.WriteArgument("-s", cnt * 3);
 						er.WriteArgument("\".ed[0:" + ((cnt * 3) - 1) + "]\"");
-						int idx = 0;
 						foreach (var q in vv.PrimitiveSets[0].Primitives[0].IndexStreams)
 						{
 							Vector3[] defs = q.GetFaceData();

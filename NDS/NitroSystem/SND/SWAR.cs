@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.IO;
@@ -9,7 +6,7 @@ using LibEveryFileExplorer.IO.Serialization;
 
 namespace NDS.NitroSystem.SND
 {
-	public class SWAR : FileFormat<SWAR.SWARIdentifier>//, IViewable
+    public class SWAR : FileFormat<SWAR.SWARIdentifier>//, IViewable
 	{
 		public SWARHeader Header;
 		public class SWARHeader

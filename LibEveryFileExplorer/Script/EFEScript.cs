@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
-using System.Globalization;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Reflection;
-using System.CodeDom;
-using System.Windows.Forms;
 
 namespace LibEveryFileExplorer.Script
 {
-	public class EFEScript
+    public class EFEScript
 	{
 		private static Dictionary<String, Delegate> Commands = new Dictionary<String, Delegate>();
 

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer.Files;
@@ -13,9 +8,8 @@ using _3DS.NintendoWare.LYT1;
 
 namespace _3DS.UI
 {
-	public partial class DARCViewer : Form
+    public partial class DARCViewer : Form
 	{
-		DARC Archive;
 		SFSDirectory Root;
 		public DARCViewer(DARC Archive)
 		{

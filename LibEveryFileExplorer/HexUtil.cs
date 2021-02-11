@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer
 {
-	public class HexUtil
+    public class HexUtil
 	{
 		public static String GetHexReverse(sbyte Value)
 		{

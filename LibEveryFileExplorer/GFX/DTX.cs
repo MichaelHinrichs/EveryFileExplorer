@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace LibEveryFileExplorer.GFX
 {
-	public class DTX
+    public class DTX
 	{
 		public static uint[] DecodeDTX1(ushort Color0, ushort Color1, uint Data)
 		{

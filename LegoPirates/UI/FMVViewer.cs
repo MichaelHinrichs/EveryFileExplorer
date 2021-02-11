@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using NDS.SND;
 using LibEveryFileExplorer.IO;
 
 namespace LegoPirates.UI
 {
-	public partial class FMVViewer : Form
+    public partial class FMVViewer : Form
 	{
 		NAudio.Wave.BufferedWaveProvider AudioBuffer;
 		NAudio.Wave.WaveOut Player;
@@ -73,11 +69,6 @@ namespace LegoPirates.UI
 		}
 
 		IMAADPCMDecoder AudioConverter = null;
-
-		int aa = 0;
-		int bb = 0;
-		bool first = true;
-
 		Queue<Bitmap> Frames = new Queue<Bitmap>();
 
 		private void FMV_FormClosing(object sender, FormClosingEventArgs e)
@@ -96,7 +87,6 @@ namespace LegoPirates.UI
 			Video.Close();
 		}
 		bool stop = false;
-		bool stopped = false;
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
 			while (!stop)

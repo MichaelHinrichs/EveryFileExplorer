@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
@@ -12,7 +10,7 @@ using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MKDS
 {
-	public class KCL : FileFormat<KCL.KCLIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
+    public class KCL : FileFormat<KCL.KCLIdentifier>, IConvertable, IFileCreatable, IViewable, IWriteable
 	{
 		public KCL()
 		{
@@ -441,13 +439,6 @@ namespace MarioKart.MKDS
 						}
 						break;
 					}
-				case 9:
-					{
-						switch (BasicEffect)
-						{
-						}
-						break;
-					}
 				case 0xA:
 					{
 						switch (BasicEffect)
@@ -479,25 +470,9 @@ namespace MarioKart.MKDS
 						}
 						break;
 					}
-				case 0xD:
-					{
-						switch (BasicEffect)
-						{
-							//case 4: return Color.FromArgb(0, 32, 0);
-						}
-						break;
-					}
 				case 0x0F:
 					{
 						return Color.FromArgb(255, 0, 127);
-					}
-				case 0x10:
-					{
-						switch (BasicEffect)
-						{
-
-						}
-						break;
 					}
 				case 0x11:
 					{
@@ -533,14 +508,6 @@ namespace MarioKart.MKDS
 						switch (BasicEffect)
 						{
 							case 4: return Color.DarkGreen;
-						}
-						break;
-					}
-				case 0x16:
-					{
-						switch (BasicEffect)
-						{
-
 						}
 						break;
 					}

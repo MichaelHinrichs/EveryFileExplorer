@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace LibEveryFileExplorer.GFX
 {
-	public class PaletteUtil
+    public class PaletteUtil
 	{
 		//Very slow for big images!
 		public static uint[] GeneratePalette(uint[] Colors, int NrOutputColors, int NrOutputBits = 8, bool FirstTransparent = false)

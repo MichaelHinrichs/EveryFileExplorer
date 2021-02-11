@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Collections;
 
 namespace MarioKart
 {
-	public abstract class KCLHeader
+    public abstract class KCLHeader
 	{
 		public UInt32 VerticesOffset;
 		public UInt32 NormalsOffset;

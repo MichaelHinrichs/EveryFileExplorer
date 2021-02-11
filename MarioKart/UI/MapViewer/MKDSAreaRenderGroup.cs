@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MarioKart.MKDS.NKM;
+﻿using MarioKart.MKDS.NKM;
 using System.Drawing;
 using Tao.OpenGl;
 using LibEveryFileExplorer.Collections;
 
 namespace MarioKart.UI.MapViewer
 {
-	public class MKDSAreaRenderGroup : RenderGroup
+    public class MKDSAreaRenderGroup : RenderGroup
 	{
 		AREA Areas;
 

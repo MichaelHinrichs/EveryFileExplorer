@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using LibEveryFileExplorer.IO;
-using System.IO;
 using CommonFiles;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
-using LibEveryFileExplorer._3D;
 
 namespace MarioKart.MK64
 {
-	public class LevelScript
+    public class LevelScript
 	{
 		public enum LevelScriptCommand : byte
 		{

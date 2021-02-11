@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files.SimpleFileSystem;
 using LibEveryFileExplorer;
@@ -13,7 +8,7 @@ using GCNWii.JSystem;
 
 namespace GCNWii.UI
 {
-	public partial class RARCViewer : Form, IChildReactive
+    public partial class RARCViewer : Form, IChildReactive
 	{
 		RARC Archive;
 		SFSDirectory Root;

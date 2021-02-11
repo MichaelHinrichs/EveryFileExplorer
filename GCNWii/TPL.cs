@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GCNWii.GPU;
 using System.IO;
 using LibEveryFileExplorer.Files;
@@ -12,7 +9,7 @@ using LibEveryFileExplorer.IO;
 
 namespace GCNWii
 {
-	public class TPL : FileFormat<TPL.TPLIdentifier>, IViewable
+    public class TPL : FileFormat<TPL.TPLIdentifier>, IViewable
 	{
 		public TPL(byte[] Data)
 		{

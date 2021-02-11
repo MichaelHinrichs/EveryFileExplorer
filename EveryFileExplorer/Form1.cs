@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LibEveryFileExplorer.Files;
 using EveryFileExplorer.Plugins;
-using EveryFileExplorer.Files;
 using LibEveryFileExplorer;
-using System.Runtime.InteropServices;
 using System.Reflection;
 using LibEveryFileExplorer.Compression;
 using LibEveryFileExplorer.Projects;
@@ -20,7 +15,7 @@ using System.Diagnostics;
 
 namespace EveryFileExplorer
 {
-	public partial class Form1 : Form
+    public partial class Form1 : Form
 	{
 		public Form1()
 		{
@@ -175,7 +170,7 @@ namespace EveryFileExplorer
 				{
 					result = c.Decompress(File.ReadAllBytes(openFileDialog1.FileName));
 				}
-				catch (Exception ee)
+				catch (Exception)
 				{
 					MessageBox.Show("An error occured while trying to decompress! The file might not be in this compression type or not compressed at all!");
 					return;

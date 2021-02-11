@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using GCNWii.GPU;
@@ -12,7 +9,7 @@ using LibEveryFileExplorer.IO;
 
 namespace GCNWii.JSystem
 {
-	public class BTI : FileFormat<BTI.BTIIdentifier>, IConvertable, IViewable
+    public class BTI : FileFormat<BTI.BTIIdentifier>, IConvertable, IViewable
 	{
 		public BTI(byte[] Data)
 		{

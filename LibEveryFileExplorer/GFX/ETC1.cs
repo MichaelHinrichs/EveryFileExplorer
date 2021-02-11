@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace LibEveryFileExplorer.GFX
 {
-	public class ETC1
+    public class ETC1
 	{
 		private static readonly int[,] ETC1Modifiers = 
 		{	

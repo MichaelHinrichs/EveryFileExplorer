@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using LibEveryFileExplorer.Files;
@@ -11,7 +9,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.NitroSystem.G3D
 {
-	public class NSBTX : FileFormat<NSBTX.NSBTXIdentifier>, IViewable
+    public class NSBTX : FileFormat<NSBTX.NSBTXIdentifier>, IViewable
 	{
 		public NSBTX(byte[] Data)
 		{

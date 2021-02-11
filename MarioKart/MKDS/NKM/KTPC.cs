@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.GameData;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using LibEveryFileExplorer;
 using System.ComponentModel;
-using LibEveryFileExplorer.ComponentModel;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MKDS.NKM
 {
-	public class KTPC : GameDataSection<KTPC.KTPCEntry>
+    public class KTPC : GameDataSection<KTPC.KTPCEntry>
 	{
 		public KTPC() { Signature = "KTPC"; }
 		public KTPC(EndianBinaryReaderEx er)

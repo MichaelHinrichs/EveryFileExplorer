@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace LibEveryFileExplorer.UI
 {
-	public class ListViewNF : System.Windows.Forms.ListView
+    public class ListViewNF : System.Windows.Forms.ListView
 	{
 		public ListViewNF()
 		{

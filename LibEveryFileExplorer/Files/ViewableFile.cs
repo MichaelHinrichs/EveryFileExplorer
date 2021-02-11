@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LibEveryFileExplorer.Files;
 
 namespace LibEveryFileExplorer.Files
 {
-	public class ViewableFile
+    public class ViewableFile
 	{
 		public ViewableFile(EFEFile File, Type Format, bool CreateNew = false)
 		{

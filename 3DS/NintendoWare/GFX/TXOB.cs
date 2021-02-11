@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using _3DS.GPU;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.GFX
 {
-	public class TXOB
+    public class TXOB
 	{
 		public TXOB()
 		{

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
 using System.IO;
@@ -296,9 +293,7 @@ namespace _3DS
 
 			UInt32 version;
 			UInt32 flag;
-			byte[] cwav6ExtraData;
 			UInt32 cwavSize;
-			byte[] cwav4ExtraData;
         }
 
         public ThemeHeader header;

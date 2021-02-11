@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.IO;
 using System.IO;
 
 namespace NDS.Nitro
 {
-	public class ARM9
+    public class ARM9
 	{
 		private UInt32 RamAddress;
 

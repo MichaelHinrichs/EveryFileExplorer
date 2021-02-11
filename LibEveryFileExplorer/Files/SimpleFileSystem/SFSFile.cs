@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LibEveryFileExplorer.Files.SimpleFileSystem
 {
-	public class SFSFile
+    public class SFSFile
 	{
 		public SFSFile(Int32 Id, String Name, SFSDirectory Parent)
 		{

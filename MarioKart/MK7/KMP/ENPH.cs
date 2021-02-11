@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using LibEveryFileExplorer.Collections;
 using System.Windows.Forms;
-using System.IO;
 using LibEveryFileExplorer.GameData;
-using LibEveryFileExplorer.Files;
 using LibEveryFileExplorer;
 using LibEveryFileExplorer.IO;
 using LibEveryFileExplorer.IO.Serialization;
 
 namespace MarioKart.MK7.KMP
 {
-	public class ENPH : GameDataSection<ENPH.ENPHEntry>
+    public class ENPH : GameDataSection<ENPH.ENPHEntry>
 	{
 		public ENPH() { Signature = "HPNE"; }
 		public ENPH(EndianBinaryReaderEx er)

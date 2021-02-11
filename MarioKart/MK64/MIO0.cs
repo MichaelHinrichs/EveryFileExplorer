@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LibEveryFileExplorer.IO;
+﻿using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MK64
 {
-	public class MIO0
+    public class MIO0
 	{
 		public static byte[] Decompress(byte[] Compressed)
 		{

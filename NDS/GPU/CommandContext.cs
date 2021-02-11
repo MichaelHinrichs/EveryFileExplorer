@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using Tao.OpenGl;
 using LibEveryFileExplorer.GFX;
@@ -10,7 +8,7 @@ using LibEveryFileExplorer.IO;
 
 namespace NDS.GPU
 {
-	public class CommandContext
+    public class CommandContext
 	{
 		public CommandContext()
 		{

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -9,7 +7,7 @@ using LibEveryFileExplorer.IO;
 
 namespace MarioKart.MK7
 {
-	public class ObjFlow : FileFormat<ObjFlow.ObjFlowIdentifier>, IViewable
+    public class ObjFlow : FileFormat<ObjFlow.ObjFlowIdentifier>, IViewable
 	{
 		public ObjFlow(byte[] Data)
 		{

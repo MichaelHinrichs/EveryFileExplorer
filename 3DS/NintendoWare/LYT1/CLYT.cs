@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Files;
 using System.Drawing;
@@ -12,7 +11,7 @@ using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class CLYT : FileFormat<CLYT.CLYTIdentifier>, IViewable
+    public class CLYT : FileFormat<CLYT.CLYTIdentifier>, IViewable
 	{
 		public CLYT(byte[] Data)
 		{

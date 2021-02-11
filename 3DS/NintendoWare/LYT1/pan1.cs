@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using LibEveryFileExplorer.Collections;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using Tao.OpenGl;
 using System.Windows.Forms;
 using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class pan1
+    public class pan1
 	{
 		[Flags]
 		public enum PaneFlags : byte

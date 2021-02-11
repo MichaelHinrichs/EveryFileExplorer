@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Tao.OpenGl;
 using NDS.NitroSystem.G3D;
 
 namespace NDS.UI
 {
-	public partial class MDL0Viewer : UserControl
+    public partial class MDL0Viewer : UserControl
 	{
 		MDL0.Model Model;
 		public MDL0Viewer(MDL0.Model Model)

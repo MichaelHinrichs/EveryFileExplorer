@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using LibEveryFileExplorer.Files;
 using System.Drawing;
 using LibEveryFileExplorer.Collections;
 using Tao.OpenGl;
@@ -11,7 +7,7 @@ using LibEveryFileExplorer.IO;
 
 namespace _3DS.NintendoWare.LYT1
 {
-	public class mat1
+    public class mat1
 	{
 		public mat1(EndianBinaryReader er)
 		{

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LibEveryFileExplorer.GameData;
 using System.Windows.Forms;
 
 namespace LibEveryFileExplorer.UI
 {
-	public delegate void SelectedEventHandler(IGameDataSectionViewer Viewer, object[] Entries);
+    public delegate void SelectedEventHandler(IGameDataSectionViewer Viewer, object[] Entries);
 
 	public interface IGameDataSectionViewer
 	{

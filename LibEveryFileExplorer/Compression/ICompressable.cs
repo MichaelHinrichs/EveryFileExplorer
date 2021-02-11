@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEveryFileExplorer.Compression
+﻿namespace LibEveryFileExplorer.Compression
 {
-	public interface ICompressable
+    public interface ICompressable
 	{
 		byte[] Compress(byte[] Data);
 	}

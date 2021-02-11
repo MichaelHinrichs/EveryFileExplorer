@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibEveryFileExplorer.GFX
+﻿namespace LibEveryFileExplorer.GFX
 {
-	public class ColorFormat
+    public class ColorFormat
 	{
 		public readonly int AShift, ASize, RShift, RSize, GShift, GSize, BShift, BSize;
 

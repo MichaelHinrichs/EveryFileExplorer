@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,7 +45,12 @@
   <ItemGroup>
     <Compile Include="GPU\R600Tiling.cs" />
     <Compile Include="GPU\Textures.cs" />
+    <Compile Include="NintendoWare\FONT\FFNT.cs" />
+    <Compile Include="NintendoWare\LYT2\FLAN.cs" />
     <Compile Include="NintendoWare\LYT2\FLIM.cs" />
+    <Compile Include="NintendoWare\LYT2\FLYT.cs" />
+    <Compile Include="NintendoWare\SND\FSAR.cs" />
+    <Compile Include="NintendoWare\SND\FWAV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,9 +65,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NintendoWare\FONT\" />
     <Folder Include="NintendoWare\GFX\" />
-    <Folder Include="NintendoWare\SND\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\3DS\3DS.csproj">
@@ -85,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\zone.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -26,7 +26,7 @@ namespace LibEveryFileExplorer.IO
             if (!baseStream.CanWrite) throw new ArgumentException("baseStream");
 
             BaseStream = baseStream;
-            Endianness = endianness;
+            Endianness = Endianness.LittleEndian;
         }
 
         ~EndianBinaryWriter()

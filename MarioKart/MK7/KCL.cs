@@ -18,9 +18,12 @@ namespace MarioKart.MK7
 		{
 			Header = new MK7KCLHeader();
 		}
-		public KCL(byte[] Data)
+
+        public static int globalTriC;
+
+        public KCL(byte[] Data)
 		{
-			EndianBinaryReader er = new EndianBinaryReader(new MemoryStream(Data), Endianness.LittleEndian);
+            EndianBinaryReader er = new EndianBinaryReader(new MemoryStream(Data), Endianness.LittleEndian);
 			try
 			{
 				Header = new MK7KCLHeader(er);
@@ -59,7 +62,7 @@ namespace MarioKart.MK7
 
 		public string GetSaveDefaultFileFilter()
 		{
-			return "Mario Kart 7 Collision (*.kcl)|*.kcl";
+			return "Mario Kart 8 Collision (*.kcl)|*.kcl";
 		}
 
 		public byte[] Write()
@@ -87,7 +90,7 @@ namespace MarioKart.MK7
 			while ((er.BaseStream.Position % 4) != 0) er.Write((byte)0);
 			curpos = er.BaseStream.Position;
 			er.BaseStream.Position = 8;
-			er.Write((uint)(curpos - 0x10));
+			er.Write((uint)(curpos));
 			er.BaseStream.Position = curpos;
 			foreach (KCLPlane p in Planes) p.Write(er);
 			curpos = er.BaseStream.Position;
@@ -95,9 +98,34 @@ namespace MarioKart.MK7
 			er.Write((uint)curpos);
 			er.BaseStream.Position = curpos;
 			Octree.Write(er);
-			byte[] result = m.ToArray();
-			er.Close();
-			return result;
+            byte[] result = m.ToArray();
+            er.Close();
+
+            EndianBinaryWriter bw = new EndianBinaryWriter(File.Create("test.kcl"));
+            bw.BaseStream.Seek(0, 0);
+            bw.Endianness = Endianness.BigEndian; //Write sig in right order
+            bw.Write(0x02020000);
+            bw.Endianness = Endianness.LittleEndian;
+            bw.Write((UInt32)0x38);
+            bw.Write((UInt32)0x58);
+            bw.Write((UInt32)1);
+            bw.WriteVector3(Header.OctreeOrigin);
+            bw.WriteVector3(Header.OctreeMax);
+            bw.Write((UInt32)Header.n_x);
+            bw.Write((UInt32)Header.n_y);
+            bw.Write((UInt32)Header.n_z);
+            bw.Write((UInt32)8);
+            for (int i = 0; i < 8; i++) bw.Write((UInt32)0x80000000);
+            bw.Write((UInt32)0x5C);
+            bw.BaseStream.Write(result, 0, (int)result.Length);
+            bw.BaseStream.Seek(0, 0);
+            byte[] newFile = new byte[bw.BaseStream.Length];
+            bw.BaseStream.Read(newFile, 0, (int)bw.BaseStream.Length);
+            result = newFile.ToArray();
+            bw.Close();
+            File.Delete("test.kcl");
+
+            return result;
 		}
 
 		public string GetConversionFileFilters()
@@ -264,6 +292,8 @@ namespace MarioKart.MK7
 				er.Write(NormalBIndex);
 				er.Write(NormalCIndex);
 				er.Write(CollisionType);
+                er.Write((UInt32)globalTriC);
+                globalTriC++;
 			}
 			public Single Length;
 			public UInt16 VertexIndex;
@@ -311,17 +341,17 @@ namespace MarioKart.MK7
 		{
 			public override string GetCategory()
 			{
-				return "Mario Kart 7";
+				return "Mario Kart 8";
 			}
 
 			public override string GetFileDescription()
 			{
-				return "Mario Kart 7 Collision (KCL)";
+				return "Mario Kart 8 Collision (KCL)";
 			}
 
 			public override string GetFileFilter()
 			{
-				return "Mario Kart 7 Collision (*.kcl)|*.kcl";
+				return "Mario Kart 8 Collision (*.kcl)|*.kcl";
 			}
 
 			public override Bitmap GetIcon()
@@ -339,5 +369,5 @@ namespace MarioKart.MK7
 				return FormatMatch.No;
 			}
 		}
-	}
+    }
 }

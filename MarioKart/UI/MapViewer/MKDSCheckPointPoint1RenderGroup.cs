@@ -5,7 +5,7 @@ using System.Text;
 using MarioKart.MKDS.NKM;
 using LibEveryFileExplorer.Collections;
 using System.Drawing;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 
 namespace MarioKart.UI.MapViewer
 {
@@ -25,22 +25,22 @@ namespace MarioKart.UI.MapViewer
 
 		public override void Render(object[] Selection, bool Picking, int PickingId)
 		{
-			Gl.glPointSize((Picking ? 6f : 5));
+			GL.PointSize((Picking ? 6f : 5));
 
-			Gl.glBegin(Gl.GL_POINTS);
-			if (!Picking) Gl.glColor3f(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
+			GL.Begin(PrimitiveType.Points);
+			if (!Picking) GL.Color3(PointColor.R / 255f, PointColor.G / 255f, PointColor.B / 255f);
 			int objidx = 1;
 			foreach (var o in Checkpoints.Entries)
 			{
 				if (Picking)
 				{
 					Color c = Color.FromArgb(objidx | PickingId);
-					Gl.glColor4f(c.R / 255f, c.G / 255f, c.B / 255f, 1);
+					GL.Color4(c.R / 255f, c.G / 255f, c.B / 255f, 1);
 					objidx++;
 				}
-				Gl.glVertex2f(o.Point1.X, o.Point1.Y);
+				GL.Vertex2(o.Point1.X, o.Point1.Y);
 			}
-			Gl.glEnd();
+			GL.End();
 		}
 
 		public override object GetEntry(int Index)

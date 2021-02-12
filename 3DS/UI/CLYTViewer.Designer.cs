@@ -41,7 +41,7 @@
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-			this.simpleOpenGlControl1 = new Tao.Platform.Windows.SimpleOpenGlControl();
+			this.simpleOpenGlControl1 = new OpenTK.SimpleOpenGlControl();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.mainMenu1 = new LibEveryFileExplorer.UI.MainMenu(this.components);
 			this.treeView4 = new System.Windows.Forms.TreeView();
@@ -286,7 +286,7 @@
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.PropertyGrid propertyGrid1;
-		private Tao.Platform.Windows.SimpleOpenGlControl simpleOpenGlControl1;
+		private OpenTK.SimpleOpenGlControl simpleOpenGlControl1;
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private LibEveryFileExplorer.UI.MainMenu mainMenu1;
 		private System.Windows.Forms.TabPage tabPage3;

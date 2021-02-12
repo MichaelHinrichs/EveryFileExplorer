@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMDLViewer));
-			this.simpleOpenGlControl1 = new Tao.Platform.Windows.SimpleOpenGlControl();
+			this.simpleOpenGlControl1 = new OpenTK.SimpleOpenGlControl();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -98,7 +98,7 @@
 
 		#endregion
 
-		private Tao.Platform.Windows.SimpleOpenGlControl simpleOpenGlControl1;
+		private OpenTK.SimpleOpenGlControl simpleOpenGlControl1;
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;

@@ -82,7 +82,7 @@ namespace EveryFileExplorer
 			{
 				assembly = Assembly.LoadFrom(assemblyPath);
 			}
-			catch (NotSupportedException e)
+			catch (NotSupportedException /*e*/)
 			{
 				MessageBox.Show("Unblock " + AssemblyName.GetAssemblyName(assemblyPath) + " from external sources!");
 			}

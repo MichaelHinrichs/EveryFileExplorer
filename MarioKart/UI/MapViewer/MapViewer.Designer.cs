@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.simpleOpenGlControl1 = new Tao.Platform.Windows.SimpleOpenGlControl();
+			this.simpleOpenGlControl1 = new OpenTK.SimpleOpenGlControl();
 			this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
@@ -117,7 +117,7 @@
 
 		#endregion
 
-		private Tao.Platform.Windows.SimpleOpenGlControl simpleOpenGlControl1;
+		private OpenTK.SimpleOpenGlControl simpleOpenGlControl1;
 		private System.Windows.Forms.VScrollBar vScrollBar1;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.HScrollBar hScrollBar1;

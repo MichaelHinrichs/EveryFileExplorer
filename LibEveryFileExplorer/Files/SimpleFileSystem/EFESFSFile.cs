@@ -43,5 +43,13 @@ namespace LibEveryFileExplorer.Files.SimpleFileSystem
 			if (a.File == File) return true;
 			return false;
 		}
-	}
+
+        public override int GetHashCode()
+        {
+            if (this.Parent != null)
+                return this.File.GetHashCode() ^ this.Parent.GetHashCode() ^ this.Name.GetHashCode();
+
+            return this.File.GetHashCode() ^ this.Name.GetHashCode();
+        }
+    }
 }

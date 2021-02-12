@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer._3D;
 using System.Drawing.Imaging;
 using NDS.NitroSystem.G3D;
@@ -154,13 +154,13 @@ namespace NDS.UI
 
 		private void UploadTex(Bitmap b, MDL0.Model.MaterialSet.Material m, int Id)
 		{
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Id);
-			Gl.glColor3f(1, 1, 1);
-			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-			Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA8, b.Width, b.Height, 0, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, d.Scan0);
+            GL.BindTexture(TextureTarget.Texture2D, Id);
+            GL.Color3(1, 1, 1);
+			BitmapData d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, b.Width, b.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, d.Scan0);
 			b.UnlockBits(d);
-			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 			bool repeatS = (m.texImageParam >> 16 & 0x1) == 1;
 			bool repeatT = (m.texImageParam >> 17 & 0x1) == 1;
 			bool flipS = (m.texImageParam >> 18 & 0x1) == 1;
@@ -168,31 +168,31 @@ namespace NDS.UI
 			int S;
 			if (repeatS && flipS)
 			{
-				S = Gl.GL_MIRRORED_REPEAT;
+				S = (int)TextureWrapMode.MirroredRepeat;
 			}
 			else if (repeatS)
 			{
-				S = Gl.GL_REPEAT;
+				S = (int)TextureWrapMode.Repeat;
 			}
 			else
 			{
-				S = Gl.GL_CLAMP;
+				S = (int)TextureWrapMode.Clamp;
 			}
 			int T;
 			if (repeatT && flipT)
 			{
-				T = Gl.GL_MIRRORED_REPEAT;
+				T = (int)TextureWrapMode.MirroredRepeat;
 			}
 			else if (repeatT)
 			{
-				T = Gl.GL_REPEAT;
+				T = (int)TextureWrapMode.Repeat;
 			}
 			else
 			{
-				T = Gl.GL_CLAMP;
+				T = (int)TextureWrapMode.Clamp;
 			}
-			Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, S);
-			Gl.glTexParameterf(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, T);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, S);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, T);
 		}
 
 		private void CGFX_Resize(object sender, EventArgs e)

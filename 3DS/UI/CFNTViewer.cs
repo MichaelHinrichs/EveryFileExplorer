@@ -13,11 +13,11 @@ namespace _3DS.UI
 {
 	public partial class CFNTViewer : Form
 	{
-		CFNT Font;
+		//CFNT Font;
 		BitmapFont f;
 		public CFNTViewer(CFNT Font)
 		{
-			this.Font = Font;
+			//this.Font = Font;
 			f = Font.GetBitmapFont();
 			InitializeComponent();
 			pictureBox1.Image = f.PrintToBitmap(textBox1.Text, new BitmapFont.FontRenderSettings());

@@ -9,7 +9,7 @@ using LibEveryFileExplorer.IO;
 using System.Windows.Forms;
 using LibEveryFileExplorer._3D;
 using CommonFiles;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using LibEveryFileExplorer.Collections;
 
 namespace _3DS.NintendoWare.GFX

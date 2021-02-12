@@ -46,5 +46,10 @@ namespace LibEveryFileExplorer.Files
 			if (a.Path == Path) return true;
 			return false;
 		}
-	}
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode() ^ this.Data.GetHashCode();
+        }
+    }
 }

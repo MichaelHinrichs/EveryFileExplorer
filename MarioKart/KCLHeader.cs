@@ -14,7 +14,11 @@ namespace MarioKart
 		public UInt32 OctreeOffset;
 		public Single Unknown1;
 		public Vector3 OctreeOrigin;
-		public UInt32 XMask;
+        public Vector3 OctreeMax;
+        public Single n_x;
+        public Single n_y;
+        public Single n_z;    
+        public UInt32 XMask;
 		public UInt32 YMask;
 		public UInt32 ZMask;
 		public UInt32 CoordShift;
